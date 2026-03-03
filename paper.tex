@@ -914,12 +914,12 @@ In particular, the $G_d$-orbits in $\Gamma_d$ are parameterized by the
 multiplicity data of indecomposable $A$-modules, i.e.\ by the set
 $\mathcal M_d^+(A)$.
 \end{proposition}
-\section{Stratification of vanishing cyclic conditions}
-While the indecomposable representation of $\Gamma$ are parameterized by the $M(i,\ell)$ from the previous modules over Nakayama algebras we are actually interested in decomposing:
+\section{Stratification of vanishing cyclic conditions with fixed target map}
+While the indecomposable representation of $\Gamma_{d,\sigma}$ are parameterized by the $M(i,\ell)$ from the previous modules over Nakayama algebras we are actually interested in stratifying:
 \begin{equation*}
-    \Gamma_{\sigma} := \left\{(\phi_1,\ldots,\phi_{L+1})\in \mathrm{Rep}_d(C_{L+1})\;\middle|\; \phi_{l-1}\cdots\phi_1\,\phi_{L+1}\,\phi_L\cdots\phi_{l+1} = 0,\; \phi_{L+1}=\sigma\right\}.
+    \Gamma_{d,\sigma} := \left\{(\phi_0,\ldots,\phi_{L})\in \mathrm{Rep}_d(C_{L+1})\;\middle|\; \phi_{l-1}\cdots\phi_1\,\phi_{0}\,\phi_L\cdots\phi_{l+1} = 0,\; \phi_{0}=\sigma\right\}.
 \end{equation*}
-where the map $\sigma\in \mathrm{Hom}(V_L,V_0)$ is fixed (in DLN it is $\Sigma_{XY}U_Q$).
+where the map $\sigma\in \mathrm{Hom}(V_L,V_0)$ is fixed (for a DLN it is the map $\Sigma_{XY}U_Q$).
 The map
 \begin{equation*}
     d\mu_{l,\sigma} := \phi_{l-1}\cdots\phi_1\,\sigma\,\phi_L\cdots\phi_{l+1}
@@ -946,7 +946,7 @@ d\mu_{l,\sigma}(\phi):=\phi_{l-1}\cdots \phi_1\,\sigma\,\phi_L\cdots \phi_{l+1}\
 with the convention that an empty product is the identity.
 Then, for all $g\in G_\sigma$ and all $l$,
 \[
-d\mu_{l,\sigma}(g\cdot \phi)= g_l\,\mu_{l,\sigma}(\phi)\,g_{l+1}^{-1}.
+d\mu_{l,\sigma}(g\cdot \phi)= g_l\,d\mu_{l,\sigma}(\phi)\,g_{l+1}^{-1}.
 \]
 In particular, the subset $\Gamma_\sigma:=\bigcap_{l=1}^L d\mu_{l,\sigma}^{-1}(0)$ is $G_\sigma$-invariant.
 \end{proposition}
@@ -960,16 +960,16 @@ $\sigma$ because $g\in G_\sigma$.
 For all modules in $\Gamma_\sigma$ Krull-Schmidt applies (as a category of $A$-modules where $A$ is finite dimensional). We want to parameterize the orbits of $\Gamma_\sigma$ under the action of $G_\sigma$ and study their geometry (e.g. codimension).
 \begin{lemma}[Intersection of a $G_d$--orbit with a fixed--arrow fiber]
 \label{lem:orbit_fiber_intersection}
-Let $L\ge 2$ and let $V_0,\dots,V_L$ be finite--dimensional vector spaces over an algebraically closed field $\Bbbk$.  
+Let $L\ge 2$ and let $V_0,\dots,V_L$ be finite--dimensional vector spaces over a field $\Bbbk$.  
 Set
 \[
 G_d \;:=\; \prod_{i=0}^L GL(V_i).
 \]
-Let $\Gamma_d$ be an affine variety equipped with an algebraic action of $G_d$.  
-Assume there exists a morphism
-\[
-F:\Gamma_d \longrightarrow \Hom(V_L,V_0)
-\]
+Consider the morphism
+\begin{align*}
+    F: \ & \Gamma_{d,L+1} \longrightarrow \Hom(V_L,V_0) \\
+    & (\phi_0,\ldots,\phi_L) \longmapsto \phi_0.
+\end{align*}
 satisfying the equivariance property
 \begin{equation}
 \label{eq:equivariance}
@@ -980,105 +980,22 @@ F(g\cdot x) \;=\; g_0\,F(x)\,g_L^{-1}
 
 Fix $\sigma\in \Hom(V_L,V_0)$ and define the fiber
 \[
-\Gamma_\sigma \;:=\; F^{-1}(\sigma).
+\Gamma_{d,\sigma} \;:=\; F^{-1}(\sigma).
 \]
-Define the stabilizer subgroup
+Consider the stabilizer subgroup of $G_d$
 \[
 G_\sigma \;:=\; \{ g=(g_0,\dots,g_L)\in G_d \mid g_0\,\sigma\,g_L^{-1}=\sigma \}.
 \]
-Let $\mathcal O\subset \Gamma_d$ be a single $G_d$--orbit.  
-Then either $\mathcal O\cap\Gamma_\sigma=\varnothing$, or else for every
-$x\in\mathcal O\cap\Gamma_\sigma$ one has
+Let $\mathcal O\subset \Gamma_{d,L+1}$ be a single $G_d$--orbit.  
+Then either $\mathcal O\cap\Gamma_{d,\sigma}=\varnothing$, or else for every
+$x\in\mathcal O\cap\Gamma_{d,\sigma}$ one has
 \[
-\mathcal O\cap\Gamma_\sigma \;=\; G_\sigma\cdot x .
+\mathcal O_{\sigma}:=\mathcal O\cap\Gamma_{d,\sigma} \;=\; G_\sigma\cdot x .
 \]
-In particular, whenever $\mathcal O\cap\Gamma_\sigma\neq\varnothing$, this
+In particular, whenever $\mathcal O\cap\Gamma_{d,\sigma}\neq\varnothing$, this
 intersection consists of a single $G_\sigma$--orbit.
 \end{lemma}
-
-\begin{proof}
-We proceed in several steps.
-
-\medskip\noindent
-\textbf{Step 1: $\Gamma_\sigma$ is stable under the action of $G_\sigma$.}
-
-Let $x\in\Gamma_\sigma$, so by definition $F(x)=\sigma$.  
-Let $g\in G_\sigma$. Using the equivariance property \eqref{eq:equivariance},
-\[
-F(g\cdot x)
-\;=\;
-g_1\,F(x)\,g_L^{-1}
-\;=\;
-g_1\,\sigma\,g_L^{-1}.
-\]
-Since $g\in G_\sigma$, we have $g_1\,\sigma\,g_L^{-1}=\sigma$, and hence
-$F(g\cdot x)=\sigma$. Therefore $g\cdot x\in\Gamma_\sigma$.  
-This shows that $\Gamma_\sigma$ is invariant under the action of $G_\sigma$ and,
-in particular,
-\[
-G_\sigma\cdot x \subseteq \Gamma_\sigma
-\qquad
-\text{for all } x\in\Gamma_\sigma .
-\tag{$\ast$}
-\]
-
-\medskip\noindent
-\textbf{Step 2: If $x\in\mathcal O\cap\Gamma_\sigma$, then
-$G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_\sigma$.}
-
-Let $x\in\mathcal O\cap\Gamma_\sigma$.  
-Since $\mathcal O$ is a $G_d$--orbit, it is stable under the action of $G_d$ and
-hence under the subgroup $G_\sigma\subseteq G_d$. Thus $G_\sigma\cdot x\subseteq
-\mathcal O$.  
-By $(\ast)$, $G_\sigma\cdot x\subseteq \Gamma_\sigma$.  
-Combining these two inclusions gives
-\[
-G_\sigma\cdot x \subseteq \mathcal O\cap\Gamma_\sigma .
-\tag{$\ast\ast$}
-\]
-
-\medskip\noindent
-\textbf{Step 3: Any two points of $\mathcal O\cap\Gamma_\sigma$ differ by the
-action of $G_\sigma$.}
-
-Assume $x,y\in\mathcal O\cap\Gamma_\sigma$.  
-Because $x$ and $y$ lie in the same $G_d$--orbit $\mathcal O$, there exists
-$g=(g_1,\dots,g_L)\in G_d$ such that
-\[
-y = g\cdot x .
-\]
-Applying $F$ and using \eqref{eq:equivariance}, we obtain
-\[
-F(y)
-\;=\;
-F(g\cdot x)
-\;=\;
-g_1\,F(x)\,g_L^{-1}.
-\]
-Since $x,y\in\Gamma_\sigma$, we have $F(x)=F(y)=\sigma$. Therefore
-\[
-\sigma = g_1\,\sigma\,g_L^{-1}.
-\]
-By definition of $G_\sigma$, this implies $g\in G_\sigma$. Hence
-$y=g\cdot x\in G_\sigma\cdot x$, and we conclude that
-\[
-\mathcal O\cap\Gamma_\sigma \subseteq G_\sigma\cdot x .
-\tag{$\ast\ast\ast$}
-\]
-
-\medskip\noindent
-\textbf{Step 4: Conclusion.}
-
-If $\mathcal O\cap\Gamma_\sigma=\varnothing$, there is nothing to prove.
-Otherwise choose any $x\in\mathcal O\cap\Gamma_\sigma$.  
-Inclusion $(\ast\ast)$ gives $G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_\sigma$,
-while inclusion $(\ast\ast\ast)$ gives the reverse inclusion. Therefore
-\[
-\mathcal O\cap\Gamma_\sigma = G_\sigma\cdot x .
-\]
-This proves that whenever the intersection is not empty, it consists of a single
-$G_\sigma$--orbit. The lemma follows.
-\end{proof}
+We prove this lemma in the appendix \ref{proof-lem:orbit_fiber_intersection}.
 \begin{proposition}[Rank label for Nakayama orbits and the fiber non-emptiness criterion over $\mathbb{R}$]
 \label{prop:rank_label_and_nonemptiness_real}
 Fix $L\ge 2$ and finite-dimensional real vector spaces $V_1,\dots,V_L$.
@@ -3030,4 +2947,89 @@ Acting on $\phi_S$ via the hidden subgroup $G_h$ yields:
     \nabla_l L(g\phi_S) = g_l^t\nabla_l L(\phi_S) g_{l-1}^t = 0
 \end{equation*}
 Since $\nabla_l L(\phi_S) = 0$ for all $l$.
+\subsection*{Stratification of vanishing cyclic condition with fixed target map}
+We prove lemma \ref{lem:orbit_fiber_intersection}:
+\begin{proof}\label{proof-lem:orbit_fiber_intersection}
+We proceed in several steps.
+
+\medskip\noindent
+\textbf{Step 1: $\Gamma_{d,\sigma}$ is stable under the action of $G_\sigma$.}
+
+Let $x\in\Gamma_\sigma$, so by definition $F(x)=\sigma$.  
+Let $g\in G_\sigma$. Using the equivariance property \eqref{eq:equivariance},
+\[
+F(g\cdot x)
+\;=\;
+g_1\,F(x)\,g_L^{-1}
+\;=\;
+g_1\,\sigma\,g_L^{-1}.
+\]
+Since $g\in G_\sigma$, we have $g_1\,\sigma\,g_L^{-1}=\sigma$, and hence
+$F(g\cdot x)=\sigma$. Therefore $g\cdot x\in\Gamma_\sigma$.  
+This shows that $\Gamma_\sigma$ is invariant under the action of $G_\sigma$ and,
+in particular,
+\[
+G_\sigma\cdot x \subseteq \Gamma_\sigma
+\qquad
+\text{for all } x\in\Gamma_\sigma .
+\tag{$\ast$}
+\]
+
+\medskip\noindent
+\textbf{Step 2: If $x\in\mathcal O\cap\Gamma_\sigma$, then
+$G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_\sigma$.}
+
+Let $x\in\mathcal O\cap\Gamma_\sigma$.  
+Since $\mathcal O$ is a $G_d$--orbit, it is stable under the action of $G_d$ and
+hence under the subgroup $G_\sigma\subseteq G_d$. Thus $G_\sigma\cdot x\subseteq
+\mathcal O$.  
+By $(\ast)$, $G_\sigma\cdot x\subseteq \Gamma_\sigma$.  
+Combining these two inclusions gives
+\[
+G_\sigma\cdot x \subseteq \mathcal O\cap\Gamma_\sigma .
+\tag{$\ast\ast$}
+\]
+
+\medskip\noindent
+\textbf{Step 3: Any two points of $\mathcal O\cap\Gamma_\sigma$ differ by the
+action of $G_\sigma$.}
+
+Assume $x,y\in\mathcal O\cap\Gamma_\sigma$.  
+Because $x$ and $y$ lie in the same $G_d$--orbit $\mathcal O$, there exists
+$g=(g_1,\dots,g_L)\in G_d$ such that
+\[
+y = g\cdot x .
+\]
+Applying $F$ and using \eqref{eq:equivariance}, we obtain
+\[
+F(y)
+\;=\;
+F(g\cdot x)
+\;=\;
+g_1\,F(x)\,g_L^{-1}.
+\]
+Since $x,y\in\Gamma_\sigma$, we have $F(x)=F(y)=\sigma$. Therefore
+\[
+\sigma = g_1\,\sigma\,g_L^{-1}.
+\]
+By definition of $G_\sigma$, this implies $g\in G_\sigma$. Hence
+$y=g\cdot x\in G_\sigma\cdot x$, and we conclude that
+\[
+\mathcal O\cap\Gamma_\sigma \subseteq G_\sigma\cdot x .
+\tag{$\ast\ast\ast$}
+\]
+
+\medskip\noindent
+\textbf{Step 4: Conclusion.}
+
+If $\mathcal O\cap\Gamma_\sigma=\varnothing$, there is nothing to prove.
+Otherwise choose any $x\in\mathcal O\cap\Gamma_\sigma$.  
+Inclusion $(\ast\ast)$ gives $G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_\sigma$,
+while inclusion $(\ast\ast\ast)$ gives the reverse inclusion. Therefore
+\[
+\mathcal O\cap\Gamma_\sigma = G_\sigma\cdot x .
+\]
+This proves that whenever the intersection is not empty, it consists of a single
+$G_\sigma$--orbit. The lemma follows.
+\end{proof}
 \end{document}
