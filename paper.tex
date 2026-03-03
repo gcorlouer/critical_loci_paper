@@ -250,7 +250,7 @@ The proof of the latter proposition can be found appendix \ref{app:loci-cyclic}.
 If only hidden-layer changes of basis are allowed, replace $G$ by $G_h := \prod_{\ell=1}^{L-1} \mathrm{GL}(d_\ell, \mathbb{R})$ (i.e.\ fix $g_0, g_L$), and replace $H_r$ by $H_{r,h} := H_r \cap G_h$. All statements and the proof above remain valid verbatim with this replacement, with $\mathcal{Z}^{\circ}$ redefined using $\operatorname{Stab}_{G_h}$ in place of $\operatorname{Stab}_G$.
 \end{remark}
 \section{Cyclic quiver representations}
-A cyclic quiver is a quiver with at list one oriented cycle. In particular we will be interested in a quiver which is exactly one cycle here noted $C_n$.
+A cyclic quiver is a quiver with at least one oriented cycle. In this paper, we will be interested in a quiver which is exactly one cycle here noted $C_n$.
 \begin{definition}[Cyclic quiver]\label{def:cyclic-quiver}
 A \emph{cyclic quiver} (or \emph{oriented cycle}) on $n\ge 1$ vertices is the quiver
 $C_n$ with vertex set
@@ -259,7 +259,7 @@ $C_n$ with vertex set
 \]
 and arrow set
 \[
-    E=\{a_i: i\to i+1\mid i=0,\ldots,n-2\}\,\cup\,\{a_{n-1}: n-1\to 0\},
+    E=\{a_{i}: i-1\to i\mid i=1,\ldots,n-1\}\,\cup\,\{a_{0}: n-1\to 0\},
 \]
 i.e. the vertices are arranged in a directed cycle.
 \end{definition}
@@ -274,7 +274,7 @@ together with linear maps
 \[
     \phi_{i}: V_{i-1}\to V_{i} \quad (i=1,\ldots,n-1),
     \qquad
-    \phi_{n}: V_{n-1}\to V_{0},
+    \phi_{0}: V_{n-1}\to V_{0},
 \]
 i.e. a representation of the opposite quiver $C_n$.
 \end{definition}
@@ -290,49 +290,45 @@ Let $r$ be the rank of the student DLN and:
 \]
 and consider a representation of the opposite quiver $C_{L+1}$ given by linear maps
 \[
-    \phi_{l}: V_{l-1}\to V_{l} \quad (l=1,\ldots,L),
-    \qquad
-    \phi_{L+1}: V_{L}\to V_{0},
+    \phi_{l}: V_{l-1}\to V_{l} \quad (l=1,\ldots,L)\quad \text{mod L+1}
 \]
 where indices are understood cyclically.
 
-For $\phi=(\phi_1,\ldots,\phi_{L+1})\in \mathrm{Rep}_d(C_{L+1})$, define for
+For $\phi=(\phi_0,\ldots,\phi_{L})\in \mathrm{Rep}_d(C_{L+1})$, define for
 $l=1,\ldots,L$ the maps\footnote{And such that the linear compositions are compatible with the cyclic quiver}:
 \[
     d\mu_{l}(\phi)
     :=
     \phi_{l-1}\cdots\phi_{1}\,
-    \phi_{L+1}\,
-    \phi_{L}\cdots\phi_{l+1} \ \in\text{Hom}(V_l,V_{l-1})
+    \phi_{0}\,
+    \phi_{L}\cdots\phi_{l+1} \ \in\text{Hom}(V_l,V_{l-1}) \quad \text{mod L+1}
 \]
-with the convention $\phi_0=\mathrm{id}_{V_0}$.
 The maps $d\mu_l$ correspond to the components of the differential of the product map
-around the cycle. They correspond to a path of length $L$.
-
+around the cycle. Each map corresponds to a path of length $L$ along the cycle of length $L+1$.
 Define the closed subvariety
 \[
-\Gamma_d
+\Gamma_{d,L+1}      
 :=
 \Big\{
 \phi\in \mathrm{Rep}_d(C_{L+1})
 \;\Big|\;
 d\mu_l(\phi)=0
-\ \text{for all } l=1,\ldots,L
+\ \text{mod } L+1,
+\ \text{for all } l=0,\ldots,L
 \Big\}.
 \]
-
-Identifying $\phi_l=Z_l$ for $l=1,\ldots,L$, we now \emph{specialize the closing arrow}
+Identifying DLNs with their quiver representations via $\phi_l=Z_l$ for $l=0,\ldots,L$, we now \emph{specialize the closing arrow}
 \[
-    \phi_{L+1} := \Sigma_{XY}U_Q : V_L \to V_0.
+    \phi_{0} = \sigma:= \Sigma_{XY}U_Q : V_L \to V_0.
 \]
 For this specialization, the algebraic variety $\Gamma$ related to the critical loci of a DLN is:
 \[
-    \Gamma
+    \Gamma_{d,\sigma}
     :=
-    \Gamma_d\big|_{\phi_{L+1}=\Sigma_{XY}U_Q}
+    \Gamma_{d,L+1}\big|_{\sigma=\phi_{0}=\Sigma_{XY}U_Q}
 \]
 coincides with the space of cyclic representations satisfying the vanishing
-$d\mu$ relations and with the distinguished arrow $\phi_{L+1}$ fixed.
+$d\mu$ relations and with the distinguished arrow $\phi_{0}$ fixed.
 \end{proposition}
 
 \begin{figure}[t]
@@ -363,7 +359,7 @@ $d\mu$ relations and with the distinguished arrow $\phi_{L+1}$ fixed.
 \begin{proposition}[Equivariance of the cyclic composition maps]\label{prop:mu-equivariant}
 Let $C_{L+1}$ be the cyclic quiver on vertices $\{0,\ldots,L\}$, let $\mathrm{Rep}_{d}(C_{L+1})$ be its representation space with
 $V_l\cong\mathbb{R}^{d_l-r}$, and let
-\[\phi=(\phi_1,\ldots,\phi_L,\phi_{L+1})\in \Rep_d(C_{L+1}).\]
+\[\phi=(\phi_0,\ldots,\phi_L)\in \Rep_d(C_{L+1}).\]
 Define the base--change group
 \[
 G_d:=\prod_{l=0}^{L} \mathrm{GL}(V_l)
@@ -374,7 +370,7 @@ acting on $\mathrm{Rep}_{d}(C_{L+1})$ via
 \]
 For each $l=1,\ldots,L$, define
 \[
-d\mu_l(\phi) := \phi_{l-1}\cdots\phi_1\,\phi_{L+1}\,\phi_L\cdots\phi_{l+1}\in\mathrm{Hom}(V_{l+1},V_l),
+d\mu_l(\phi) := \phi_{l-1}\cdots\phi_1\,\phi_{0}\,\phi_L\cdots\phi_{l+1}\in\mathrm{Hom}(V_l,V_{l-1}), \quad \text{mod } L+1 
 \]
 with the convention that an empty product is the identity.
 Then, for all $g\in G_d$ and all $l=0,\ldots,L$,
@@ -390,18 +386,18 @@ Expand $d\mu_l(g\cdot\phi)$ as a product of the maps $(g\cdot\phi)_i$. Each fact
 \begin{proposition}[Orbit decomposition of $\Gamma_d$]\label{prop:GammaC-orbits}
 Let
 \[
-\Gamma_d:=\Big\{\phi\in \mathrm{Rep}_{d}(C_{L+1})\ \Big|\ d\mu_l(\phi)=0\ \text{for all }l=1,\ldots,L\Big\}.
+\Gamma_{d,L+1}:=\Big\{\phi\in \mathrm{Rep}_{d}(C_{L+1})\ \Big|\ d\mu_l(\phi)=0\ \text{for all }l=1,\ldots,L\Big\}.
 \]
-Then $\Gamma_d$ is $G_d$-invariant. In particular, $\Gamma_d$ decomposes as a disjoint union of $G_d$-orbits:
+Then $\Gamma_{d,L+1}$ is $G_d$-invariant. In particular, $\Gamma_{d,L+1}$ decomposes as a disjoint union of $G_d$-orbits:
 \[
-\Gamma_d = \bigsqcup_{\phi\in \Gamma_d} G_d\cdot \phi.
+\Gamma_{d,L+1} = \bigsqcup_{\phi\in \Gamma_{d,L+1}} G_d\cdot \phi.
 \]
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:mu-equivariant}, each map $d\mu_l$ is $G_d$-equivariant and hence the vanishing set $d\mu_l^{-1}(0)$ is $G_d$-stable. Intersecting over $l=1,\ldots,L$ shows that $\Gamma_d$ is $G_d$-stable. Any group action partitions a set into disjoint orbits, yielding the stated decomposition.
+By Proposition~\ref{prop:mu-equivariant}, each map $d\mu_l$ is $G_d$-equivariant and hence the vanishing set $d\mu_l^{-1}(0)$ is $G_d$-stable. Intersecting over $l=1,\ldots,L$ shows that $\Gamma_{d,L+1}$ is $G_d$-stable. Any group action partitions a set into disjoint orbits, yielding the stated decomposition.
 \end{proof}
-Note that $\Gamma_d\cong \Rep_d(C_{L+1})/< d\mu_l > $ is then finite dimensional and we can clasified indecomposable using indecomposable representations of Nakayama algebras.
+Note that $\Gamma_{d,L+1}\cong \Rep_d(C_{L+1})/< d\mu_l > $, we will that $\Gamma_{d,L+1}$ is then finite dimensional and we can classify indecomposable using indecomposable representations of Nakayama algebras.
 \subsection{Cyclic quiver as a bounded module}
 \begin{definition}[Path algebra]
 Let $Q$ be a quiver. The \emph{path algebra} $kQ$ is the $k$-vector space with basis given by all directed paths in $Q$ (including the trivial paths $e_i$ of length $0$ at each vertex $i$), with multiplication given by concatenation of composable paths and $0$ otherwise, extended by bilinearity.
