@@ -37,7 +37,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
-\title{Geometry of the critical loci of deep linear networks}
+\title{Combinatorics of the critical loci of deep linear networks}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -182,7 +182,7 @@ $W_\ell = g_\ell^{-1}\begin{pmatrix}I_r&0\\0&Z_\ell\end{pmatrix} g_{\ell-1}$ for
 \begin{equation*}
     \Omega_r := \{W\in \Omega| W_l \sim \begin{pmatrix} I_r & 0 \\
                                                       0.  & Z_l      
-                                        \end{pmatrix}, Z_l\in\mathbb{R}^{(d_l-r)\times(d_{l+1}-r)}\}
+                                        \end{pmatrix}, Z_l\in\mathbb{R}^{(d_l-r)\times(d_{l-1}-r)}\}
 \end{equation*}
 \end{definition}
 
@@ -226,22 +226,49 @@ Define
 with $\iota$ as in~(2) and the $G$-action as in~(1). Then:
 \begin{enumerate}
     \item $\Phi(G \times \mathcal{Z}) = \Omega_r$.
+
     \item $\Phi$ is $H_r$-invariant for the action~(5), hence descends to a well-defined map
     \[
-        \bar\Phi \colon G \times_{H_r} \mathcal{Z} \longrightarrow \Omega_r, \qquad \bar\Phi([g, Z]) = \Phi(g, Z).
+        \bar\Phi \colon G \times_{H_r} \mathcal{Z} \longrightarrow \Omega_r,
+        \qquad
+        \bar\Phi([g, Z]) = \Phi(g, Z).
     \]
     Moreover, $\bar\Phi$ is surjective.
+
     \item Define the \emph{principal stabilizer locus}
     \[
-        \mathcal{Z}^{\circ} := \bigl\{ Z \in \mathcal{Z} \;\big|\; \operatorname{Stab}_G(\iota(Z)) = H_r \bigr\},
+        \mathcal{Z}^{\circ}
+        :=
+        \bigl\{
+        Z \in \mathcal{Z}
+        \;\big|\;
+        \{\, g\in G \mid g\cdot \iota(Z)\in S_r \,\}
+        =
+        H_r
+        \bigr\}.
     \]
-    i.e.\ the set of $Z$ for which the only elements of $G$ mapping $\iota(Z)$ back into $S_r$ are the block-diagonal elements in $H_r$. Let $\Omega_r^{\circ} := \Phi(G \times \mathcal{Z}^{\circ})$. Then the restriction
+    Equivalently,
     \[
-        \bar\Phi \colon G \times_{H_r} \mathcal{Z}^{\circ} \xrightarrow{\;\sim\;} \Omega_r^{\circ}
+        Z\in\mathcal{Z}^{\circ}
+        \quad\Longleftrightarrow\quad
+        G\cdot \iota(Z)\cap S_r
+        =
+        H_r\cdot \iota(Z).
     \]
-    is a bijection. In particular, on the principal stabilizer locus,
+
+    Let $\Omega_r^{\circ} := \Phi(G \times \mathcal{Z}^{\circ})$.
+    Then the restriction
+    \[
+        \bar\Phi \colon
+        G \times_{H_r} \mathcal{Z}^{\circ}
+        \xrightarrow{\;\sim\;}
+        \Omega_r^{\circ}
+    \]
+    is a bijection. In particular, on the principal locus,
     \begin{equation}\tag{8}
-        \Omega_r^{\circ} \;\cong\; G \times_{H_r} \mathcal{Z}^{\circ}.
+        \Omega_r^{\circ}
+        \;\cong\;
+        G \times_{H_r} \mathcal{Z}^{\circ}.
     \end{equation}
 \end{enumerate}
 \end{proposition}
@@ -639,7 +666,7 @@ For $i\in Q_0$ and $0\le \ell\le L$, define a representation $M(i,\ell)$ of $Q$ 
 \[
 M(i,\ell)_j :=
 \begin{cases}
-k, & j\in\{i,i+1,\dots,i+\ell-1\}\ (\mathrm{mod}\ L + 1),\\
+k, & j\in\{i,i+1,\dots,i+\ell\}\ (\mathrm{mod}\ L + 1),\\
 0, & \text{otherwise},
 \end{cases}
 \]
@@ -741,7 +768,7 @@ Moreover, this decomposition is unique up to reordering and isomorphism of the i
 Equivalently, using the explicit indecomposables $M(i,\ell)$ from Proposition~\ref{prop:indecomp-cyclic-nakayama}, there exist uniquely determined multiplicities
 $m_{i,\ell}\in\mathbb{Z}_{\ge 0}$ such that
 \[
-M \ \cong\ \bigoplus_{i=0}^{L} \ \bigoplus_{\ell=1}^{L} \ M(i,\ell)^{\oplus m_{i,\ell}}.
+M \ \cong\ \bigoplus_{i=0}^{L} \ \bigoplus_{\ell=0}^{L} \ M(i,\ell)^{\oplus m_{i,\ell}}.
 \]
 \end{proposition}
 
@@ -998,17 +1025,9 @@ intersection consists of a single $G_\sigma$--orbit.
 We prove this lemma in the appendix \ref{proof-lem:orbit_fiber_intersection}.
 \begin{proposition}[Rank label for Nakayama orbits and the fiber non-emptiness criterion over $\mathbb{R}$]
 \label{prop:rank_label_and_nonemptiness_real}
-Fix $L\ge 2$ and finite-dimensional real vector spaces $V_1,\dots,V_L$.
-Let
+Consider the morphism of real varieties
 \[
-G_d \;:=\; \prod_{i=0}^L GL(V_i)
-\qquad\text{and}\qquad
-W \;:=\; \Hom_{\mathbb{R}}(V_L,V_0).
-\]
-Let $\Gamma_d$ be a real algebraic variety equipped with an algebraic action of $G_d$.
-Assume there is a morphism of real varieties
-\[
-F:\Gamma_d \longrightarrow W
+F:\Gamma_d \longrightarrow \Hom_{\mathbb{R}}(V_L,V_0)
 \]
 satisfying the equivariance identity
 \begin{equation}
@@ -1016,15 +1035,13 @@ satisfying the equivariance identity
 F\!\big((g_0,\dots,g_L)\cdot x\big)=g_0\,F(x)\,g_L^{-1}
 \qquad\text{for all } (g_0,\dots,g_L)\in G_d,\; x\in \Gamma_d .
 \end{equation}
-
 \medskip
 \noindent
-\textbf{Definition (Orbit label and rank label).}
-Assume $\Gamma_d$ admits a decomposition into $G_d$--orbits indexed by a parameter set $\Lambda$,
+Consider the stratification of $\Gamma_{d,\sigma}$ into $G_d$--orbits indexed by a parameter set $\Lambda$,
 \[
-\Gamma_d \;=\; \bigsqcup_{\lambda\in\Lambda}\, \mathcal O_\lambda,
+\Gamma_{d,\sigma} \;=\; \bigsqcup_{\lambda\in\Lambda}\, \mathcal O_\lambda,
 \]
-where $\mathcal O_\lambda$ denotes the $G_d$--orbit corresponding to $\lambda$ (in the applications of this paper, $\lambda$ encodes the Krull--Schmidt multiplicities of the Nakayama indecomposables).  
+where $\mathcal O_\lambda$ denotes the $G_d$--orbit corresponding to $\lambda$ (in the context of this paper, $\lambda$ corresponds to the Krull--Schmidt multiplicities of the Nakayama indecomposables).  
 For each $\lambda\in\Lambda$, define the integer
 \begin{equation}
 \label{eq:def_r_lambda}
@@ -2658,112 +2675,107 @@ $\varepsilon((i,\ell),(j,L+1))=0$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Appendix}
 \subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{prop:associated-bundle}
-\begin{proof}
-\textbf{Step~1 (Image equals $\Omega_r$).} By definition~(3),
-\[
-\Omega_r = \{g \cdot \iota(Z) : g \in G,\; Z \in \mathcal{Z}\}.
-\]
-But $\Phi(g, Z) = g \cdot \iota(Z)$ by~(7), hence $\Phi(G \times \mathcal{Z}) = \Omega_r$.
+\begin{proof}[Proof of Proposition~\ref{prop:associated-bundle}]
+We prove the three statements in order.
 
 \medskip
-\textbf{Step~2 ($H_r$-invariance).} Take $(g, Z) \in G \times \mathcal{Z}$ and $h \in H_r$. Using (5)--(6),
+\noindent
+\textbf{(1) Image of $\Phi$.}
+
+For any $(g,Z)\in G\times\mathcal Z$ we have by definition
 \[
-\Phi\bigl((g, Z) \cdot h\bigr) = \Phi\bigl(gh,\; h^{-1} \cdot Z\bigr) = (gh) \cdot \iota(h^{-1} \cdot Z).
+\Phi(g,Z)=g\cdot\iota(Z)\in G\cdot S_r=\Omega_r,
 \]
-By the group action property~(1),
-\[
-(gh) \cdot \iota(h^{-1} \cdot Z) = g \cdot \bigl(h \cdot \iota(h^{-1} \cdot Z)\bigr).
-\]
-Thus it suffices to show
-\begin{equation}\tag{9}
-h \cdot \iota(h^{-1} \cdot Z) = \iota(Z).
-\end{equation}
-Write $h_\ell = \begin{psmallmatrix} A & 0 \\ 0 & K_\ell \end{psmallmatrix}$ as in~(4). Then, using (1) and (2),
-\[
-\bigl(h \cdot \iota(h^{-1} \cdot Z)\bigr)_\ell
-= h_\ell \begin{pmatrix} I_r & 0 \\ 0 & (h^{-1} \cdot Z)_\ell \end{pmatrix} h_{\ell-1}^{-1}.
-\]
-Since $h_{\ell-1}^{-1} = \begin{psmallmatrix} A^{-1} & 0 \\ 0 & K_{\ell-1}^{-1} \end{psmallmatrix}$ and $(h^{-1} \cdot Z)_\ell = K_\ell^{-1} Z_\ell K_{\ell-1}$ from~(6), we compute the block product explicitly:
-\[
-\begin{pmatrix} A & 0 \\ 0 & K_\ell \end{pmatrix}
-\begin{pmatrix} I_r & 0 \\ 0 & K_\ell^{-1} Z_\ell K_{\ell-1} \end{pmatrix}
-\begin{pmatrix} A^{-1} & 0 \\ 0 & K_{\ell-1}^{-1} \end{pmatrix}.
-\]
-Multiplying the first two matrices gives
-\[
-\begin{pmatrix} A & 0 \\ 0 & K_\ell \end{pmatrix}
-\begin{pmatrix} I_r & 0 \\ 0 & K_\ell^{-1} Z_\ell K_{\ell-1} \end{pmatrix}
-= \begin{pmatrix} A & 0 \\ 0 & Z_\ell K_{\ell-1} \end{pmatrix},
-\]
-and multiplying by the third matrix yields
-\[
-\begin{pmatrix} A & 0 \\ 0 & Z_\ell K_{\ell-1} \end{pmatrix}
-\begin{pmatrix} A^{-1} & 0 \\ 0 & K_{\ell-1}^{-1} \end{pmatrix}
-= \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
-= \iota(Z)_\ell.
-\]
-This proves~(9), hence $\Phi((g, Z) \cdot h) = \Phi(g, Z)$ for all $h \in H_r$. Therefore $\Phi$ is $H_r$-invariant and descends to a well-defined map $\bar\Phi \colon G \times_{H_r} \mathcal{Z} \to \Omega_r$.
+so $\Phi(G\times\mathcal Z)\subseteq\Omega_r$.
+
+Conversely, if $W\in\Omega_r$, then by definition there exist
+$g\in G$ and $Z\in\mathcal Z$ such that
+$W=g\cdot\iota(Z)$.
+Hence $W=\Phi(g,Z)$ and therefore
+$\Phi(G\times\mathcal Z)=\Omega_r$.
 
 \medskip
-\textbf{Step~3 (Surjectivity of $\bar\Phi$).} By Step~1, every element of $\Omega_r$ has the form $\Phi(g, Z)$ for some $(g, Z)$. Thus every element of $\Omega_r$ is in the image of $\bar\Phi$.
+\noindent
+\textbf{(2) $H_r$-invariance.}
+
+Let $h\in H_r$. Using the definition of the action~(5),
+\[
+\Phi((g,Z)\cdot h)
+=
+\Phi(gh,h^{-1}\cdot Z)
+=
+gh\cdot\iota(h^{-1}\cdot Z).
+\]
+
+Since $h\in H_r$ stabilizes the slice $S_r=\iota(\mathcal Z)$,
+one has
+\[
+h\cdot\iota(h^{-1}\cdot Z)=\iota(Z).
+\]
+Therefore
+\[
+\Phi((g,Z)\cdot h)
+=
+g\cdot\iota(Z)
+=
+\Phi(g,Z),
+\]
+so $\Phi$ is $H_r$–invariant and hence descends to a map
+\[
+\bar\Phi:G\times_{H_r}\mathcal Z\to\Omega_r.
+\]
+
+Surjectivity follows from part (1).
 
 \medskip
-\textbf{Step~4 (Injectivity on the principal stabilizer locus).}
-Assume $\Phi([g, Z]) = \Phi([g', Z'])$ with $Z, Z' \in \mathcal{Z}^{\circ}$. Then $\Phi(g, Z) = \Phi(g', Z')$, i.e.
-\begin{equation}\tag{10}
-g \cdot \iota(Z) = g' \cdot \iota(Z').
-\end{equation}
-Let $h := g^{-1} g' \in G$. Applying $g^{-1}$ to~(10) and using the group action property gives
-\begin{equation}\tag{11}
-\iota(Z) = h \cdot \iota(Z').
-\end{equation}
-In particular, $h$ maps the point $\iota(Z') \in S_r$ to the point $\iota(Z) \in S_r$.
+\noindent
+\textbf{(3) Injectivity on the principal locus.}
 
-We now use the assumption that $Z' \in \mathcal{Z}^{\circ}$, i.e.\ $\operatorname{Stab}_G(\iota(Z')) = H_r$.  We claim that $h \in H_r$.  To see this, note that equation~(11) states that $h$ maps $\iota(Z')$ into $S_r$.  More precisely, we need to show that any $h \in G$ satisfying $h \cdot \iota(Z') \in S_r$ for some $Z' \in \mathcal{Z}^{\circ}$ must belong to $H_r$.
+Let $Z\in\mathcal Z^\circ$.
+Assume that
+\[
+\bar\Phi([g,Z])=\bar\Phi([g',Z']).
+\]
+By definition of $\bar\Phi$ this means
+\[
+g\cdot\iota(Z)=g'\cdot\iota(Z').
+\]
 
-Write $h \cdot \iota(Z') = \iota(Z)$ for some $Z \in \mathcal{Z}$. Consider the one-parameter family $Z'(t) := Z' + t\,\delta Z$ for an arbitrary displacement $\delta Z \in \mathcal{Z}$, and define $W(t) := h \cdot \iota(Z'(t))$.  Expanding component-wise,
+Setting $h=g^{-1}g'\in G$, we obtain
 \[
-W(t)_\ell = h_\ell \begin{pmatrix} I_r & 0 \\ 0 & Z'_\ell + t\,\delta Z_\ell \end{pmatrix} h_{\ell-1}^{-1}.
+\iota(Z)=h\cdot\iota(Z').
 \]
-At $t = 0$, this equals $\iota(Z)_\ell$ by~(11).  The derivative at $t = 0$ is
-\[
-\frac{d}{dt}\Big|_{t=0} W(t)_\ell = h_\ell \begin{pmatrix} 0 & 0 \\ 0 & \delta Z_\ell \end{pmatrix} h_{\ell-1}^{-1}.
-\]
-Write $h_\ell$ in blocks compatible with the decomposition $\mathbb{R}^{d_\ell} = \mathbb{R}^r \oplus \mathbb{R}^{d_\ell - r}$:
-\[
-h_\ell = \begin{pmatrix} A_\ell & B_\ell \\ C_\ell & K_\ell \end{pmatrix}, \qquad
-h_{\ell-1}^{-1} = \begin{pmatrix} \alpha_{\ell-1} & \beta_{\ell-1} \\ \gamma_{\ell-1} & \kappa_{\ell-1} \end{pmatrix}.
-\]
-A direct computation shows
-\[
-h_\ell \begin{pmatrix} 0 & 0 \\ 0 & \delta Z_\ell \end{pmatrix} h_{\ell-1}^{-1}
-= \begin{pmatrix} B_\ell\, \delta Z_\ell\, \gamma_{\ell-1} & B_\ell\, \delta Z_\ell\, \kappa_{\ell-1} \\ K_\ell\, \delta Z_\ell\, \gamma_{\ell-1} & K_\ell\, \delta Z_\ell\, \kappa_{\ell-1} \end{pmatrix}.
-\]
-Now, $\iota(Z)_\ell$ has the block form $\begin{psmallmatrix} I_r & 0 \\ 0 & Z_\ell \end{psmallmatrix}$, so for $W(t)$ to remain in $S_r$ (i.e.\ have the same block structure) to first order for \emph{all} choices of $\delta Z_\ell$, both off-diagonal blocks of the derivative must vanish for all $\delta Z_\ell$.  The $(1,2)$-block condition $B_\ell\, \delta Z_\ell\, \kappa_{\ell-1} = 0$ for all $\delta Z_\ell$ forces $B_\ell = 0$ or $\kappa_{\ell-1} = 0$; but $h_{\ell-1}$ is invertible, so $\kappa_{\ell-1} \neq 0$, hence $B_\ell = 0$.  Similarly, the $(2,1)$-block condition gives $\gamma_{\ell-1} = 0$, which (since $h_{\ell-1}^{-1}$ invertible and $B_{\ell-1} = 0$ by induction) forces $C_{\ell-1} = 0$ as well.
+In particular $h\cdot\iota(Z')\in S_r$.
 
-Applying this argument at every layer $\ell$ shows that each $h_\ell$ is block-diagonal:
+Since $Z'\in\mathcal Z^\circ$, by definition of the principal locus
 \[
-h_\ell = \begin{pmatrix} A_\ell & 0 \\ 0 & K_\ell \end{pmatrix},
+\{\,g\in G\mid g\cdot\iota(Z')\in S_r\,\}=H_r.
 \]
-i.e.\ $h \in H_r$.  (This is exactly the content of the principal stabilizer condition: at $Z' \in \mathcal{Z}^{\circ}$ the slice $S_r$ is ``transverse enough'' that only block-diagonal elements can map $\iota(Z')$ back into $S_r$.)
+Therefore $h\in H_r$.
 
-Having established $h \in H_r$, we now compute~(11) componentwise using~(1):
+Hence
 \[
-\iota(Z)_\ell = \bigl(h \cdot \iota(Z')\bigr)_\ell = h_\ell \begin{pmatrix} I_r & 0 \\ 0 & Z'_\ell \end{pmatrix} h_{\ell-1}^{-1}.
+(g',Z')=(gh,h^{-1}\cdot Z),
 \]
-Substituting $h_\ell = \begin{psmallmatrix} A & 0 \\ 0 & K_\ell \end{psmallmatrix}$ and $h_{\ell-1}^{-1} = \begin{psmallmatrix} A^{-1} & 0 \\ 0 & K_{\ell-1}^{-1} \end{psmallmatrix}$ and multiplying as in Step~2 yields
+which means that $(g',Z')$ lies in the $H_r$–orbit of $(g,Z)$
+under the action~(5).
+Thus
 \[
-\begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
-= \begin{pmatrix} I_r & 0 \\ 0 & K_\ell Z'_\ell K_{\ell-1}^{-1} \end{pmatrix},
+[g',Z']=[g,Z]
 \]
-so
-\begin{equation}\tag{12}
-Z_\ell = K_\ell\, Z'_\ell\, K_{\ell-1}^{-1} \quad\iff\quad Z'_\ell = K_\ell^{-1}\, Z_\ell\, K_{\ell-1}.
-\end{equation}
-But~(12) is exactly the relation $Z' = h^{-1} \cdot Z$ from~(6). Therefore $(g', Z') = (gh,\; h^{-1} \cdot Z)$, i.e.\ $(g', Z') = (g, Z) \cdot h$ in the right action~(5). Hence $[g', Z'] = [g, Z]$ in $G \times_{H_r} \mathcal{Z}^{\circ}$, proving injectivity on the principal stabilizer locus.
+in $G\times_{H_r}\mathcal Z^\circ$.
+
+This proves injectivity of $\bar\Phi$ on $G\times_{H_r}\mathcal Z^\circ$.
 
 \medskip
-\textbf{Step~5 (Conclusion).} Steps~3 and~4 show that $\bar\Phi$ restricted to $G \times_{H_r} \mathcal{Z}^{\circ}$ is bijective onto $\Omega_r^{\circ}$, hence~(8). The global map $\bar\Phi \colon G \times_{H_r} \mathcal{Z} \to \Omega_r$ is surjective but may fail to be injective at points where the stabilizer of $\iota(Z')$ in $G$ strictly contains $H_r$.
+
+Surjectivity onto $\Omega_r^\circ$ follows directly from the definition
+$\Omega_r^\circ=\Phi(G\times\mathcal Z^\circ)$.
+Hence the restriction
+\[
+\bar\Phi:G\times_{H_r}\mathcal Z^\circ\to\Omega_r^\circ
+\]
+is bijective.
 \end{proof}
 \subsection*{DLNs as Quiver Representations}
 \begin{definition}
