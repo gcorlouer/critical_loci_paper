@@ -125,6 +125,48 @@ Then $\Gamma$ is the subset of such representations satisfying the $L$ cyclic re
 with the convention that an empty product is the identity.
 If we include the condition that $$\phi_L...\phi_1=0$$ Then all paths of length $L$ are zero and we denote $\Gamma_d$ the set of paths representations satisfying this condition.
 \end{comment}
+\noindent
+Fix a depth $L\ge 2$, widths $(d_0,\dots,d_L)$, and an integer $0\le r\le \min_\ell d_\ell$.
+Let
+\[
+\Omega \;:=\; \prod_{\ell=1}^L \Mat_{d_\ell\times d_{\ell-1}}(\R)
+\]
+and let the base--change group
+\[
+G \;:=\; \prod_{\ell=0}^L GL(d_\ell,\R)
+\]
+act on $\Omega$ by
+\begin{equation}\label{eq:gauge-action-crit}
+(g\cdot W)_\ell \;:=\; g_\ell\, W_\ell\, g_{\ell-1}^{-1}.
+\end{equation}
+We also fix the data-dependent matrices appearing in the normal form of critical points (e.g.\ from the DLN second-order analysis):
+\[
+U_S\in \R^{d_L\times r},\qquad U_Q\in \R^{d_L\times(d_L-r)},\qquad
+\sigma \;:=\; \Sigma_{XY}U_Q \in \Hom(\R^{d_L-r},\R^{d_0-r}).
+\]
+(Here $\sigma$ is the distinguished ``closing arrow'' in the cyclic-quiver model.)
+
+\paragraph{Residual parameter space and constraints.}
+Define the residual space
+\[
+\mathcal Z \;:=\; \prod_{\ell=1}^L \Mat_{(d_\ell-r)\times(d_{\ell-1}-r)}(\R),
+\qquad Z=(Z_1,\dots,Z_L).
+\]
+Define the \emph{fiber constraint} (multiplication fiber at $0$)
+\begin{equation}\label{eq:Sigma0-dr}
+\Sigma^{d-r}_0 \;:=\; \{\,Z\in \mathcal Z : Z_L Z_{L-1}\cdots Z_1 = 0\,\}.
+\end{equation}
+Define the \emph{cyclic constraints with fixed closing arrow $\sigma$} by
+\begin{equation}\label{eq:Gamma-sigma}
+\Gamma_\sigma \;:=\;
+\Bigl\{\,Z\in\mathcal Z \;\Big|\;
+Z_{\ell-1}\cdots Z_1\,\sigma\, Z_L\cdots Z_{\ell+1}=0\ \text{ for all }\ell=1,\dots,L
+\Bigr\}.
+\end{equation}
+Finally set
+\begin{equation}\label{eq:X-def}
+\mathcal X_{r,\sigma} \;:=\; \Sigma^{d-r}_0 \cap \Gamma_\sigma \;\subset\; \mathcal Z.
+\end{equation}
 \begin{proposition}
 From the paper \cite{alchour}, we can write the set of rank $r$ critical points of a DLN as:
 \begin{equation*}
@@ -134,148 +176,139 @@ From the paper \cite{alchour}, we can write the set of rank $r$ critical points 
 \end{equation*}
 Which suggest that studying the geometry of the critical loci amounts to studying the geometry of $\Gamma_{d,XY}$.
 \end{proposition}
-\section{Critical loci and vanishing cyclic conditions}
-\begin{definition}[Block-rank stratum $\Omega_r$]\label{def:Omega_r}
-Fix integers $0\le r\le \min_{0\le \ell\le L} d_\ell$ and let
-\[
-\Omega \;:=\; \prod_{\ell=1}^L \Mat_{d_\ell\times d_{\ell-1}}(\R)
-\]
-be the parameter space of depth-$L$ linear networks.
-Let
-\[
-G \;:=\; \prod_{\ell=0}^L GL(d_\ell,\R)
-\]
-act on $\Omega$ by the standard change-of-basis (gauge) action
-\begin{equation}\label{eq:gauge-action}
-(g\cdot W)_\ell \;:=\; g_\ell\, W_\ell\, g_{\ell-1}^{-1},
-\qquad
-g=(g_0,\dots,g_L)\in G,\; W=(W_1,\dots,W_L)\in\Omega.
-\end{equation}
-For each $\ell$ define the residual matrix space
-\[
-\Mat^{(r)}_\ell \;:=\; \Mat_{(d_\ell-r)\times(d_{\ell-1}-r)}(\R),
-\qquad
-\mathcal Z \;:=\; \prod_{\ell=1}^L \Mat^{(r)}_\ell.
-\]
-Define the embedding $\iota:\mathcal Z\to\Omega$ by
-\begin{equation}\label{eq:iota-embed}
+%------------------------------------------------------------
+\section{Critical loci as a bundle over $\Gamma$}
+%------------------------------------------------------------
+\paragraph{A gauge-fixed slice of rank-$r$ critical points.}
+Define the map $\iota:\mathcal Z\to \Omega$ by putting residual blocks on the diagonal:
+\begin{equation}\label{eq:iota-Z}
 \iota(Z)_\ell \;:=\;
 \begin{pmatrix}
 I_r & 0\\
 0 & Z_\ell
 \end{pmatrix}
 \in \Mat_{d_\ell\times d_{\ell-1}}(\R),
-\qquad Z=(Z_1,\dots,Z_L)\in\mathcal Z,
+\qquad \ell=2,\dots,L-1,
 \end{equation}
-where the block decomposition uses $\R^{d_{\ell-1}}\cong \R^r\oplus \R^{d_{\ell-1}-r}$ in the domain and
-$\R^{d_\ell}\cong \R^r\oplus \R^{d_\ell-r}$ in the codomain.
-Define the slice
-\[
-S_r \;:=\; \iota(\mathcal Z)\;\subset\;\Omega.
-\]
-Finally, define
-\begin{equation}\label{eq:Omega_r-def}
-\Omega_r \;:=\; G\cdot S_r \;=\; \{\, g\cdot \iota(Z)\;:\; g\in G,\; Z\in\mathcal Z\,\}.
+and set the endpoints to match the standard DLN critical-point normal form:
+\begin{equation}\label{eq:endpoints-slice}
+\iota(Z)_L \;:=\; [\,U_S,\; U_Q Z_L\,]\in \Mat_{d_L\times d_{L-1}}(\R),
+\qquad
+\iota(Z)_1 \;:=\;
+\begin{pmatrix}
+U_S^\top \Sigma_{YX}\Sigma_X^{-1}\\
+Z_1
+\end{pmatrix}
+\in \Mat_{d_1\times d_0}(\R).
 \end{equation}
-Equivalently, $W\in\Omega_r$ iff there exist $g\in G$ and $Z\in\mathcal Z$ such that
-$W_\ell = g_\ell^{-1}\begin{pmatrix}I_r&0\\0&Z_\ell\end{pmatrix} g_{\ell-1}$ for all $\ell$ i.e. we have:
-\begin{equation*}
-    \Omega_r := \{W\in \Omega| W_l \sim \begin{pmatrix} I_r & 0 \\
-                                                      0.  & Z_l      
-                                        \end{pmatrix}, Z_l\in\mathbb{R}^{(d_l-r)\times(d_{l-1}-r)}\}
-\end{equation*}
-\end{definition}
+(Only the block structure matters for what follows; any equivalent fixed endpoint embedding works.)
+\noindent
+Define the \emph{gauge-fixed critical slice}
+\begin{equation}\label{eq:Scrit-def}
+\mathcal S_{r,\sigma} \;:=\; \iota(\mathcal X_{r,\sigma}) \;\subset\; \Omega .
+\end{equation}
 
-\medskip
-
-\begin{definition}[Stabilizer of the slice]\label{def:Hr}
-Let $H_r\le G$ be the stabilizer subgroup of the slice $S_r$, i.e.
+\paragraph{Hidden-layer gauge group and its slice stabilizer.}
+Let
 \[
-H_r \;:=\; \{\,h\in G : h\cdot S_r = S_r\,\}.
+G_h \;:=\; \prod_{\ell=1}^{L-1} GL(d_\ell,\R)
 \]
-Then $H_r$ is the subgroup of block-diagonal elements of the form
-\begin{equation}\label{eq:Hr-form}
-H_r \;=\;
-\left\{\;
-h=(h_0,\dots,h_L)\in G \;:\;
+act on $\Omega$ via \eqref{eq:gauge-action-crit} with $g_0=g_L=I$ (endpoints fixed).
+Define the subgroup $H_{r,\sigma}\le G_h$ consisting of those hidden reparametrizations that preserve the block decomposition
+$\R^{d_\ell}\cong \R^r\oplus \R^{d_\ell-r}$ for every hidden layer \emph{and} preserve the endpoint embeddings
+\eqref{eq:endpoints-slice}:
+\begin{equation}\label{eq:Hrsigma-def}
+H_{r,\sigma}
+\;:=\;
+\left\{
+h=(h_1,\dots,h_{L-1})\in G_h \;\middle|\;
 h_\ell=
 \begin{pmatrix}
 A & 0\\
 0 & K_\ell
-\end{pmatrix},\;
-A\in GL(r,\mathbb{R}),\;K_\ell\in GL(d_\ell-r,\mathbb{R})
+\end{pmatrix},
+\ A\in GL(r,\R),\ K_\ell\in GL(d_\ell-r,\R),
+\ \text{and } h\cdot \mathcal S_{r,\sigma}=\mathcal S_{r,\sigma}
 \right\}.
 \end{equation}
-\end{definition}
-
-\begin{proposition}[Associated bundle model for $\Omega_r$]\label{prop:associated-bundle}
-Let $\Omega_r$ be as in Definition~8.1, and let $H_r$ be as in Definition~8.2. Define an action of $H_r$ on $G \times \mathcal{Z}$ by
-\begin{equation}\tag{5}
-(g, Z) \cdot h := \bigl(gh,\; h^{-1} \cdot Z\bigr),
+(Equivalently: $H_{r,\sigma}$ is the setwise stabilizer of $\mathcal S_{r,\sigma}$ inside $G_h$).
+\noindent
+The induced action of $H_{r,\sigma}$ on $\mathcal Z$ is the residual base-change action:
+for $h_\ell=\begin{psmallmatrix}A&0\\0&K_\ell\end{psmallmatrix}$ we set
+\begin{equation}\label{eq:Hrsigma-on-Z}
+(h\cdot Z)_\ell \;:=\; K_\ell\, Z_\ell\, K_{\ell-1}^{-1}
+\qquad (\ell=2,\dots,L-1),
 \end{equation}
-where for $h \in H_r$ written as in~(4),
-\begin{equation}\tag{6}
-(h^{-1} \cdot Z)_\ell := K_\ell^{-1}\, Z_\ell\, K_{\ell-1}, \qquad \ell = 1, \dots, L,
+with the obvious endpoint conventions for $\ell=1$ and $\ell=L$ determined by the fixed endpoint embeddings
+\eqref{eq:endpoints-slice}.
+By construction, $\mathcal X_{r,\sigma}\subset \mathcal Z$ is $H_{r,\sigma}$-stable (this is exactly the meaning of
+$h\cdot \mathcal S_{r,\sigma}=\mathcal S_{r,\sigma}$).
+\begin{theorem}\label{thm:critical-bundle}
+Let $C_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in the normal form of the DLN second-order characterisation, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)$ such that
+\[
+W_L = [U_S,\, U_Q Z_L], \qquad
+W_\ell \sim \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
+\;(\ell = 2, \dots, L{-}1), \qquad
+W_1 = \begin{pmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{pmatrix},
+\qquad Z \in \Sigma_0^{d-r} \cap \Gamma_\sigma.
+\]
+Then the following hold.
+
+\medskip\noindent
+\textbf{(1) Orbit-saturation description.}
+\begin{equation}\tag{22}
+C_r = G_h \cdot S_{r,\sigma}.
 \end{equation}
-(and $A$ acts trivially on $\mathcal{Z}$). Let $G \times_{H_r} \mathcal{Z}$ denote the quotient of $G \times \mathcal{Z}$ by this right action.
 
-Define
-\begin{equation}\tag{7}
-\Phi \colon G \times \mathcal{Z} \to \Omega, \qquad \Phi(g, Z) := g \cdot \iota(Z),
+\medskip\noindent
+\textbf{(2) Associated bundle model (set-level).}
+Define $\Phi \colon G_h \times \mathcal X_{r,\sigma} \to \Omega$ by
+\begin{equation}\tag{23}
+\Phi(g, Z) := g \cdot \iota(Z),
 \end{equation}
-with $\iota$ as in~(2) and the $G$-action as in~(1). Then:
-\begin{enumerate}
-    \item $\Phi(G \times \mathcal{Z}) = \Omega_r$.
+Then $\Phi(G_h \times \mathcal X_{r,\sigma}) = C_r$ and $\Phi$ is invariant under the right action of $H_{r,\sigma}$ on $G_h \times \mathcal X_{r,\sigma}$ given by
+\begin{equation}\tag{24}
+(g, Z) \cdot h := (g h,\; h^{-1} \cdot Z).
+\end{equation}
+Hence $\Phi$ descends to a surjective map
+\[
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma} \longrightarrow C_r.
+\]
+Define the \emph{transporter into the slice} at a point $Z' \in \mathcal X_{r,\sigma}$ by
+\[
+\mathrm{Trans}_{G_h}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr)
+:= \bigl\{ g \in G_h : g \cdot \iota(Z') \in S_{r,\sigma} \bigr\}.
+\]
+Define the \emph{principal slice locus}
+\[
+\mathcal X_{r,\sigma}^{\circ} := \bigl\{ Z' \in \mathcal X_{r,\sigma} \;\big|\;
+\mathrm{Trans}_{G_h}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr) = H_{r,\sigma} \bigr\},
+\]
+and let $C_r^{\circ} := \Phi(G_h \times \mathcal X_{r,\sigma}^{\circ})$.
+Then the restriction
+\[
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma}^{\circ}
+\xrightarrow{\;\sim\;} C_r^{\circ}
+\]
+is an isomorphism.  In particular, on the principal slice locus one the identification:
+\begin{equation}\tag{25}
+C_r^{\circ} \;\cong\; G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma}^{\circ}
+\qquad\text{(on the principal slice locus).}
+\end{equation}
 
-    \item $\Phi$ is $H_r$-invariant for the action~(5), hence descends to a well-defined map
-    \[
-        \bar\Phi \colon G \times_{H_r} \mathcal{Z} \longrightarrow \Omega_r,
-        \qquad
-        \bar\Phi([g, Z]) = \Phi(g, Z).
-    \]
-    Moreover, $\bar\Phi$ is surjective.
-
-    \item Define the \emph{principal stabilizer locus}
-    \[
-        \mathcal{Z}^{\circ}
-        :=
-        \bigl\{
-        Z \in \mathcal{Z}
-        \;\big|\;
-        \{\, g\in G \mid g\cdot \iota(Z)\in S_r \,\}
-        =
-        H_r
-        \bigr\}.
-    \]
-    Equivalently,
-    \[
-        Z\in\mathcal{Z}^{\circ}
-        \quad\Longleftrightarrow\quad
-        G\cdot \iota(Z)\cap S_r
-        =
-        H_r\cdot \iota(Z).
-    \]
-
-    Let $\Omega_r^{\circ} := \Phi(G \times \mathcal{Z}^{\circ})$.
-    Then the restriction
-    \[
-        \bar\Phi \colon
-        G \times_{H_r} \mathcal{Z}^{\circ}
-        \xrightarrow{\;\sim\;}
-        \Omega_r^{\circ}
-    \]
-    is a bijection. In particular, on the principal locus,
-    \begin{equation}\tag{8}
-        \Omega_r^{\circ}
-        \;\cong\;
-        G \times_{H_r} \mathcal{Z}^{\circ}.
-    \end{equation}
-\end{enumerate}
-\end{proposition}
+\medskip\noindent
+\textbf{(3) Quotient of critical points by hidden gauge.}  On the same principal slice locus,
+\begin{equation}\tag{26}
+C_r^{\circ} / G_h \;\cong\; \mathcal X_{r,\sigma}^{\circ} / H_{r,\sigma}.
+\end{equation}
+\end{theorem}
+\noindent
 The proof of the latter proposition can be found appendix \ref{app:loci-cyclic}.
+\begin{comment}
 \begin{remark}[Hidden-layer gauge variant]
 If only hidden-layer changes of basis are allowed, replace $G$ by $G_h := \prod_{\ell=1}^{L-1} \mathrm{GL}(d_\ell, \mathbb{R})$ (i.e.\ fix $g_0, g_L$), and replace $H_r$ by $H_{r,h} := H_r \cap G_h$. All statements and the proof remain valid verbatim with this replacement, with $\mathcal{Z}^{\circ}$ redefined using $\operatorname{Stab}_{G_h}$ in place of $\operatorname{Stab}_G$.
 \end{remark}
+\end{comment}
 \section{Cyclic quiver representations}
 \subsection{Critical loci as cyclic quivers}
 A cyclic quiver is a quiver with at least one oriented cycle. In this paper, we will be interested in a quiver which is exactly one cycle here noted $C_n$.
@@ -744,7 +777,7 @@ A := kQ / \langle p_0,\dots,p_{L}\rangle.
 \]
 Then every finite-dimensional indecomposable left $A$-module is isomorphic to a unique module $M(i,\ell)$ with $i\in Q_0$ and $1\le \ell\le L$.
 Equivalently, every indecomposable $A$-module is of the form $P(i)/J^{\ell}P(i)$ for a unique pair $(i,\ell)$.
-In particular, $A$ has exactly $(L+1)L$ indecomposable modules up to isomorphism.
+In particular, $A$ has exactly $(L+1)^2$ indecomposable modules up to isomorphism.
 \end{proposition}
 
 \begin{proof}
@@ -755,7 +788,7 @@ Its composition length is some $\ell$ with $1\le \ell\le \ell(P(i))=L$, and unis
 By Lemma~\ref{lem:Miell-as-truncation}, this module is isomorphic to $M(i,\ell)$.
 
 Uniqueness follows because the top simple module determines $i$ and the length determines $\ell$.
-Counting pairs $(i,\ell)$ with $i\in Q_0$ and $1\le \ell\le L$ gives $(L+1)L$.
+Counting pairs $(i,\ell)$ with $i\in Q_0$ and $0\le \ell\le L$ gives $(L+1)^2$.
 \end{proof}
 More details about this can be found in the following lecture notes:
 \href{https://www.math.uni-bielefeld.de/~wcrawley/1920noncommalg2/NA2.pdf}{Noncommutative Algebra 2: Representations of finite-dimensional algebras} in particular theorem and corroloray section 1.6.
@@ -883,7 +916,7 @@ under which the $G_d$-action coincides with transport of structure on $A$-module
 The algebra $A$ is a finite-dimensional cyclic Nakayama algebra.  
 Its indecomposable finite-dimensional left modules are, up to isomorphism, the uniserial modules
 \[
-M(i,\ell), \qquad i \in \{0,\dots,L\}, \quad 1 \le \ell \le L,
+M(i,\ell), \qquad i \in \{0,\dots,L\}, \quad  0 \le \ell \le L,
 \]
 supported on $\ell$ consecutive vertices starting at $i$ (indices taken modulo $L+1$).
 
@@ -891,16 +924,16 @@ supported on $\ell$ consecutive vertices starting at $i$ (indices taken modulo $
 Every $A$-module $M$ of dimension vector $d$ admits a unique (up to permutation)
 Krull--Schmidt decomposition
 \[
-M \;\cong\; \bigoplus_{i=0}^{L}\;\bigoplus_{\ell=1}^{L} M(i,\ell)^{\oplus m_{i,\ell}},
+M \;\cong\; \bigoplus_{i=0}^{L}\;\bigoplus_{\ell=0}^{L} M(i,\ell)^{\oplus m_{i,\ell}},
 \]
 for uniquely determined multiplicities $m_{i,\ell} \in \mathbb{Z}_{\ge 0}$ satisfying the
 dimension constraints
 \[
 d_k \;=\;
-\sum_{i=0}^{L}\sum_{\ell=1}^{L}
+\sum_{i=0}^{L}\sum_{\ell=0}^{L}
 m_{i,\ell}\,
 \mathbf{1}\!\left\{
-k \in \{i,i+1,\dots,i+\ell-1\} \ (\mathrm{mod}\ L+1)
+k \in \{i,i+1,\dots,i+\ell\} \ (\mathrm{mod}\ L+1)
 \right\},
 \quad k=0,\dots,L.
 \]
@@ -1063,84 +1096,9 @@ r(\lambda)=\mathrm{rank}(\sigma).
 \end{equation}
 \end{enumerate}
 \end{proposition}
-
-\begin{proof}
-We prove (i) and (ii) in separate steps.
-
-\medskip\noindent
-\textbf{Step 1: A basic invariance identity for ranks under left--right change of bases.}
-Let $A\in GL(V_0)$, $B\in GL(V_L)$, and $T\in W=\Hom_{\mathbb{R}}(V_L,V_0)$.
-Consider the map $T':=A\,T\,B^{-1}\in W$.
-We have $\mathrm{rank}(T')=\mathrm{rank}(T)$.
-
-\medskip\noindent
-\textbf{Step 2: Proof of (i) (well-definedness of $r(\lambda)$).}
-Fix $\lambda\in\Lambda$ and choose two points $x,y\in \mathcal O_\lambda$.
-By definition of orbit, there exists $g=(g_0,\dots,g_L)\in G_d$ such that
-\[
-y=g\cdot x.
-\]
-Apply $F$ to both sides and use the equivariance identity \eqref{eq:equivariance_F}:
-\[
-F(y)=F(g\cdot x)=g_0\,F(x)\,g_L^{-1}.
-\]
-Now apply Step 1 with $A=g_0$, $B=g_L$, and $T=F(x)$. This yields
-\[
-\mathrm{rank}(F(y))=\mathrm{rank}(g_0\,F(x)\,g_L^{-1})=\mathrm{rank}(F(x)).
-\]
-Thus the rank of $F(\,\cdot\,)$ is constant along $\mathcal O_\lambda$, so the integer $r(\lambda)$
-defined by \eqref{eq:def_r_lambda} is independent of the choice of $x\in\mathcal O_\lambda$.
-This proves (i).
-
-\medskip\noindent
-\textbf{Step 3: A real classification fact for linear maps by rank.}
-Let $S,T\in W=\Hom_{\mathbb{R}}(V_L,V_1)$. We use the following statement:
-
-\smallskip\noindent
-\emph{Claim.} If $\mathrm{rank}(S)=\mathrm{rank}(T)$, then there exist $A\in GL(V_1)$ and $B\in GL(V_L)$ such that
-\begin{equation}
-\label{eq:rank_equivalence}
-S=A\,T\,B^{-1}.
-\end{equation}
-
-\medskip\noindent
-\textbf{Step 4: Proof of (ii), forward implication.}
-Assume $\mathcal O_\lambda\cap \Gamma_\sigma\neq \varnothing$.
-Choose $x\in \mathcal O_\lambda\cap \Gamma_\sigma$.
-By definition of $\Gamma_\sigma=F^{-1}(\sigma)$ we have $F(x)=\sigma$, hence
-\[
-\mathrm{rank}(\sigma)=\mathrm{rank}(F(x)).
-\]
-By definition of $r(\lambda)$ (and Step 2), $\mathrm{rank}(F(x))=r(\lambda)$ for any $x\in\mathcal O_\lambda$.
-Therefore $\mathrm{rank}(\sigma)=r(\lambda)$, proving the forward direction of \eqref{eq:nonemptiness}.
-
-\medskip\noindent
-\textbf{Step 5: Proof of (ii), reverse implication.}
-Assume $r(\lambda)=\mathrm{rank}(\sigma)$.
-Choose any $x_0\in\mathcal O_\lambda$.
-Then, by definition of $r(\lambda)$,
-\[
-\mathrm{rank}(F(x_0))=r(\lambda)=\mathrm{rank}(\sigma).
-\]
-By the claim in Step 3 (applied to $T=F(x_0)$ and $S=\sigma$), there exist
-$A\in GL(V_0)$ and $B\in GL(V_L)$ such that
-\[
-\sigma=A\,F(x_0)\,B^{-1}.
-\]
-Define $g=(g_0,\dots,g_L)\in G_d$ by setting
-\[
-g_0:=A,\qquad g_L:=B,\qquad g_i:=\mathrm{Id}_{V_i}\ \text{ for } i=1,\dots,L-1.
-\]
-Then $g\in G_d$ and, using equivariance \eqref{eq:equivariance_F},
-\[
-F(g\cdot x_0)=g_0\,F(x_0)\,g_L^{-1}=A\,F(x_0)\,B^{-1}=\sigma.
-\]
-Hence $g\cdot x_0\in \Gamma_\sigma$.
-Also, since $x_0\in\mathcal O_\lambda$ and $\mathcal O_\lambda$ is a $G_d$--orbit, we have $g\cdot x_0\in\mathcal O_\lambda$.
-Therefore $g\cdot x_0\in \mathcal O_\lambda\cap \Gamma_\sigma$, so $\mathcal O_\lambda\cap \Gamma_\sigma\neq\varnothing$.
-
-Combining Steps 4 and 5 yields \eqref{eq:nonemptiness}. This completes the proof.
-\end{proof}
+\noindent
+The proof of this proposition is given in the appendix \ref{proof:rank_label_and_nonemptiness_real}.
+\begin{comment}
 \begin{proposition}[Rank stratification of $\Gamma_{XY}$ by Nakayama types]
 \label{prop:GammaXY_orbit_decomposition}
 Let $d=(d_1,\dots,d_L)$ be a dimension vector and let
@@ -1207,6 +1165,7 @@ is a single $G_\sigma$--orbit.
 and each stratum in this decomposition is a single $G_\sigma$--orbit.
 \end{enumerate}
 \end{proposition}
+\end{comment}
 \begin{proposition}[Rank formula for the closing arrow in terms of Nakayama multiplicities]
 \label{prop:rank_formula_eps}
 Work over $\mathbb{R}$. Fix $L\ge 2$ and a dimension vector $d=(d_0,\dots,d_L)$.
@@ -1236,7 +1195,6 @@ which is well-defined by Proposition~\ref{prop:rank_label_and_nonemptiness_real}
 
 \medskip
 \noindent
-\textbf{Definition (support interval and activity indicator).}
 For an indecomposable $M(i,\ell)$, define its \emph{support interval} to be the cyclic set of vertices
 \[
 \Supp(i,\ell)\;:=\;\{\,i,\; i+1,\; \dots,\; i+\ell-1\,\}\subset \mathbb{Z}/(L+1)\mathbb{Z},
@@ -1256,128 +1214,14 @@ Define the indicator
 0, & \text{otherwise}.
 \end{cases}
 \]
-
+\noindent
 Then for every $\mathbf m=(m_{i,\ell})\in \mathcal M_d^+$ one has the formula
 \begin{equation}
 \label{eq:rank_formula_eps}
 r(\mathbf m)\;=\;\sum_{i=0}^L\sum_{\ell=1}^L\epsilon(i,\ell)\,m_{i,\ell}.
 \end{equation}
 \end{proposition}
-
-\begin{proof}
-Fix $\mathbf m=(m_{i,\ell})\in \mathcal M_d^+$.
-Choose any $\phi\in\mathcal O_{\mathbf m}$ and write $M:=M(\phi)$ for the corresponding Nakayama module.
-By definition of $\mathcal O_{\mathbf m}$, there exists an isomorphism of modules
-\begin{equation}
-\label{eq:KS_decomp}
-M \;\cong\;\bigoplus_{i,\ell} M(i,\ell)^{\oplus m_{i,\ell}}.
-\end{equation}
-We will compute $\rank(\phi_{L+1})=\rank(F(\phi))$ from this decomposition.
-
-\medskip\noindent
-\textbf{Step 1: Describe the vector spaces at vertices $0$ and $L$ using \eqref{eq:KS_decomp}.}
-
-For each vertex $j\in\{0,L\}$ the representation space is $V_j=M(j)$.
-Evaluating \eqref{eq:KS_decomp} at the vertex $j$ gives an isomorphism of real vector spaces
-\begin{equation}
-\label{eq:vertex_decomp}
-V_j
-\;=\;
-M(j)
-\;\cong\;
-\bigoplus_{i,\ell} M(i,\ell)(j)^{\oplus m_{i,\ell}}.
-\end{equation}
-For cyclic Nakayama indecomposables, $M(i,\ell)(j)$ is either $0$ or a $1$--dimensional real vector space
-(depending on whether $j\in \Supp(i,\ell)$). Therefore each summand in \eqref{eq:vertex_decomp} is either
-$0$ or $\mathbb{R}^{m_{i,\ell}}$.
-
-\medskip\noindent
-\textbf{Step 2: The closing arrow respects the direct-sum decomposition.}
-
-The linear map $\phi_{L+1}:V_L\to V_0$ is the structure map on the quiver arrow $L\to 0$.
-Because $M$ is a direct sum of submodules as in \eqref{eq:KS_decomp}, the action of every quiver arrow,
-and in particular the arrow $L\to 0$, decomposes as the direct sum of its actions on each direct summand.
-Concretely, after choosing identifications as in \eqref{eq:vertex_decomp} for $j=L$ and $j=0$,
-the map $\phi_{L+1}$ can be written as a block-diagonal direct sum
-\begin{equation}
-\label{eq:block_sum}
-\phi_{L+1}
-\;\cong\;
-\bigoplus_{i,\ell}
-\big(\phi_{L+1}\big)_{i,\ell},
-\end{equation}
-where
-\[
-\big(\phi_{L+1}\big)_{i,\ell}:\;
-M(i,\ell)(L)^{\oplus m_{i,\ell}}
-\longrightarrow
-M(i,\ell)(1)^{\oplus m_{i,\ell}}
-\]
-is the map induced by $L\to 1$ on the summand $M(i,\ell)^{\oplus m_{i,\ell}}$.
-
-\medskip\noindent
-\textbf{Step 3: Compute each block $\big(\phi_{L+1}\big)_{i,\ell}$.}
-
-Fix a pair $(i,\ell)$. There are two cases.
-
-\smallskip\noindent
-\emph{Case A: $\epsilon(i,\ell)=0$.}
-By definition, $\epsilon(i,\ell)=0$ means the arrow $L\to 1$ acts trivially on $M(i,\ell)$, i.e.\ the map
-\[
-M(i,\ell)(L)\to M(i,\ell)(1)
-\]
-is the zero map. Taking $m_{i,\ell}$ copies, the induced map
-\[
-\big(\phi_{L+1}\big)_{i,\ell}:\;
-M(i,\ell)(L)^{\oplus m_{i,\ell}}
-\to
-M(i,\ell)(1)^{\oplus m_{i,\ell}}
-\]
-is also the zero map. Hence
-\begin{equation}
-\label{eq:rank_block_zero}
-\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big)=0.
-\end{equation}
-
-\smallskip\noindent
-\emph{Case B: $\epsilon(i,\ell)=1$.}
-By definition, $\epsilon(i,\ell)=1$ means the arrow $L\to 1$ acts nontrivially on $M(i,\ell)$.
-For Nakayama indecomposables, both spaces $M(i,\ell)(L)$ and $M(i,\ell)(1)$ are then $1$--dimensional and
-the map between them is a nonzero linear map $\mathbb{R}\to \mathbb{R}$.
-Choose bases of these $1$--dimensional spaces; in these bases the map is multiplication by a nonzero scalar
-$a_{i,\ell}\in \mathbb{R}^\times$.
-On $m_{i,\ell}$ copies, the induced map is multiplication by the same scalar on each copy; in coordinates it is
-\[
-a_{i,\ell}\cdot I_{m_{i,\ell}}:\ \mathbb{R}^{m_{i,\ell}}\to \mathbb{R}^{m_{i,\ell}},
-\]
-which is invertible because $a_{i,\ell}\neq 0$. Therefore
-\begin{equation}
-\label{eq:rank_block_full}
-\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big)=m_{i,\ell}.
-\end{equation}
-
-\medskip\noindent
-\textbf{Step 4: Sum the ranks of the blocks.}
-
-By \eqref{eq:block_sum}, after choosing bases compatible with the decomposition,
-$\phi_{L+1}$ is block diagonal with blocks $\big(\phi_{L+1}\big)_{i,\ell}$.
-The rank of a block-diagonal linear map is the sum of the ranks of its diagonal blocks
-(because its image is the direct sum of the images of the blocks).
-Hence
-\[
-\rank(\phi_{L+1})
-\;=\;
-\sum_{i,\ell}\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big).
-\]
-Substituting \eqref{eq:rank_block_zero} in Case A and \eqref{eq:rank_block_full} in Case B yields
-\[
-\rank(\phi_{L+1})
-\;=\;
-\sum_{i,\ell}\epsilon(i,\ell)\,m_{i,\ell}.
-\]
-By definition $r(\mathbf m)=\rank(\phi_{L+1})$ for $\phi\in\mathcal O_{\mathbf m}$, so this proves
-\eqref{eq:rank_formula_eps}. 
-\end{proof}
+The proof of that proposition is given in the appendix \ref{proof:rank_formula_eps}.
 \begin{corollary}[Orbit decomposition of $\Gamma_{XY}$ indexed by $\mathcal M_d^+$]
 \label{cor:GammaXY_decomposition_by_Mdplus}
 Work over $\mathbb{R}$ and keep the notation of Proposition~\ref{prop:GammaXY_orbit_decomposition}
@@ -1453,14 +1297,6 @@ Nakayama indecomposable multiplicity data satisfying the rank constraint.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Rank Patterns parameterize orbits of critical points}
 \subsection{Cyclic rank patterns and multiplicities}
-
-We work with the cyclic quiver on vertices $\{0,\dots,L\}$ and arrows
-\[
-\phi_\ell : V_{\ell-1} \longrightarrow V_\ell,
-\qquad \ell=1,\dots,L+1,
-\]
-where indices are taken modulo $L+1$ (so $\phi_{L+1}:V_L\to V_0$). We impose the cyclic relations described above, so that only oriented paths of length at most $L$ are relevant.
-
 \paragraph{Cyclic intervals.}
 For $i,j\in\{0,\dots,L\}$ we denote by
 \[
@@ -1481,7 +1317,7 @@ i \xrightarrow{\phi_{i+1}} i+1 \xrightarrow{\phi_{i+2}} \cdots
 \]
 
 \paragraph{Cyclic rank patterns.}
-Given $\phi=(\phi_1,\dots,\phi_{L+1})\in\Gamma_d$, for any pair $(i,j)$ with $\delta(i,j)\le L$ we define the composed path map
+Given $\phi=(\phi_0,\dots,\phi_{L})\in\Gamma_d$, for any pair $(i,j)$ with $\delta(i,j)\le L$ we define the composed path map
 \[
 \Phi_{i\to j}(\phi)
 :=
@@ -1631,7 +1467,7 @@ R_d^{\mathrm{orb}}
 :=
 \Bigl\{
 r\in R_d \ \Bigm|\ 
-r_{i,\,i+\ell-1}-r_{i,\,i+\ell}\ge 0 \ \text{for all } i\text{ and } \ell=1,\dots,L
+r_{i,\,i+\ell-1}-r_{i,\,i+\ell}\ge 0 \ \text{for all } i\text{ and } \ell=0,\dots,L
 \Bigr\},
 \]
 where indices are taken modulo $L+1$.
@@ -1860,205 +1696,7 @@ Consequently, the forward map \eqref{eq:forward-map} becomes a one-sided
 cumulative sum along each fixed start vertex $i$, and the inversion
 \eqref{eq:inverse-map} is a first-difference (telescoping) formula.
 \subsection{Orbit decomposition of $\Gamma_{XY}$ via cyclic rank patterns and the constraint $r(m)=\sigma$}
-
-\paragraph{Setup.}
-Fix vector spaces $V_0,\dots,V_L$ with $\dim V_i=d_i$ and consider the cyclic quiver on
-vertices $\{0,\dots,L\}$ with arrows
-\[
-\phi_\ell:V_{\ell-1}\longrightarrow V_\ell,\qquad \ell=1,\dots,L+1,
-\]
-where indices are taken modulo $L+1$ (so $\phi_{L+1}:V_L\to V_0$). Let $\Gamma_d\subset \Rep_d(C_{L+1})$
-be the closed subvariety cut out by the cyclic relations introduced earlier.
-We fix a linear map
-\[
-\sigma \in \Hom(V_L,V_0)
-\]
-and define the fibre
-\[
-\Gamma_{XY}:=\{\phi\in \Gamma_d \mid \phi_{L+1}=\sigma\}.
-\]
-
-Let
-\[
-G_d:=\prod_{i=0}^L GL(V_i)
-\]
-act on $\Gamma_d$ by base change. Since $\sigma$ is fixed, the natural group acting on
-$\Gamma_{XY}$ is the stabilizer of $\sigma$ under the $(0,L)$-component action:
-\[
-G_\sigma:=\{(g_0,\dots,g_L)\in G_d \mid g_0\,\sigma=\sigma\, g_L\}.
-\]
-
-\paragraph{Step 1: $G_d$--orbit decomposition of $\Gamma_d$.}
-By the finiteness of the representation type in the present cyclic (Nakayama) setting,
-the $G_d$--orbits in $\Gamma_d$ are parametrized by multiplicity data
-\[
-m=(m_{ij})\in M_d^+,
-\]
-where $m_{ij}\in\Bbb Z_{\ge 0}$ denotes the multiplicity of the indecomposable interval
-module $M(i,j)$ supported on the oriented segment $[i\leadsto j]$.
-We denote by $\mathcal O_m\subset \Gamma_d$ the corresponding $G_d$--orbit. Then
-\begin{equation}\label{eq:Gamma_d_orbit_decomp}
-\Gamma_d=\bigsqcup_{m\in M_d^+}\mathcal O_m.
-\end{equation}
-
-\paragraph{Step 2: Passage to the fibre $\Gamma_{XY}$ and $G_\sigma$--orbits.}
-Consider the morphism
-\[
-F:\Gamma_d\longrightarrow \Hom(V_L,V_0),\qquad F(\phi):=\phi_{L+1}.
-\]
-The map $F$ is $G_d$--equivariant with respect to the natural action of $G_d$ on
-$\Hom(V_L,V_0)$ given by $(g_0,\dots,g_L)\cdot A=g_0 A g_L^{-1}$.
-
-For each $m\in M_d^+$, the rank
-\[
-r(m):=\rank(\phi_{L+1})
-\qquad (\phi\in \mathcal O_m)
-\]
-is well-defined (independent of $\phi\in\mathcal O_m$) because rank is invariant under left--right
-base change. Equivalently, $F(\mathcal O_m)$ is contained in the rank stratum
-\[
-\Hom(V_L,V_0)_{r(m)}:=\{A\in\Hom(V_L,V_0)\mid \rank(A)=r(m)\}.
-\]
-
-Since over $\Bbb R$ (or $\Bbb C$) the orbits of $GL(V_0)\times GL(V_L)$ in $\Hom(V_L,V_0)$
-are precisely the rank strata, we have:
-\begin{equation}\label{eq:nonempty_fibre_criterion}
-\mathcal O_m\cap \Gamma_{XY}\neq\varnothing \quad\Longleftrightarrow\quad r(m)=\rank(\sigma).
-\end{equation}
-Moreover, whenever $\mathcal O_m\cap \Gamma_{XY}\neq\varnothing$, this intersection is a single
-$G_\sigma$--orbit (equivalently: the fibre of a $G_d$--equivariant map over a point in a homogeneous
-$G_d$--orbit is homogeneous under the stabilizer of that point). Therefore,
-\begin{equation}\label{eq:Gamma_XY_orbit_decomp_m}
-\Gamma_{XY}
-=
-\bigsqcup_{\substack{m\in M_d^+\\ r(m)=\rank(\sigma)}}
-\bigl(\mathcal O_m\cap \Gamma_{XY}\bigr),
-\qquad
-\text{and each }\ \mathcal O_m\cap\Gamma_{XY}\ \text{is a single $G_\sigma$--orbit.}
-\end{equation}
-
-\paragraph{Step 3: Reparametrization by cyclic rank patterns.}
-For $\phi\in\Gamma_d$ we define, for all $i,j\in\{0,\dots,L\}$, the composed map
-\[
-\Phi_{ij}(\phi):=\phi_{j}\phi_{j-1}\cdots \phi_{i+1}:V_i\to V_j
-\]
-(along the unique oriented path $i\leadsto j$), and the cyclic rank pattern
-\[
-r_{ij}(\phi):=\rank\bigl(\Phi_{ij}(\phi)\bigr).
-\]
-As proved in the previous subsection, the assignment $\phi\mapsto (r_{ij}(\phi))$
-is constant on $G_d$--orbits and yields a bijection
-\[
-M_d^+ \xrightarrow{\ \sim\ } R_d^{\mathrm{orb}},
-\qquad
-m\longmapsto r(m):=(r_{ij}(m)),
-\]
-with inverse given by the first-difference formula
-\begin{equation}\label{eq:m_from_r}
-m_{ij}=r_{ij}-r_{i,j+1},
-\end{equation}
-where $j+1$ is taken modulo $L+1$, and we adopt the terminating convention
-\[
-r_{i,i+L+1}:=0
-\qquad (\text{so that telescoping identities are valid}).
-\]
-
-Combining \eqref{eq:Gamma_XY_orbit_decomp_m} with the bijection $M_d^+\simeq R_d^{\mathrm{orb}}$,
-we may equivalently index the $G_\sigma$--orbits in $\Gamma_{XY}$ by rank patterns
-$r\in R_d^{\mathrm{orb}}$ subject to a single additional scalar constraint,
-obtained by translating $r(m)=\rank(\sigma)$ into rank-pattern language.
-
-\paragraph{Step 4: The constraint $r(m)=\rank(\sigma)$ in rank-pattern coordinates.}
-For each indecomposable interval module $M(i,j)$ (equivalently, $M(i,i+\ell)$ with $\ell=\delta(i,j)$),
-the distinguished arrow $\phi_{L+1}:V_L\to V_0$ acts either trivially or nontrivially. Define the indicator
-\[
-\epsilon(i,j)\in\{0,1\}
-\]
-by
-\[
-\epsilon(i,j)=1 \ \Longleftrightarrow\ 
-\text{the arrow } (L\to 0) \text{ lies in the support segment } [i\leadsto j]
-\text{ (equivalently: $\phi_{L+1}$ is active on $M(i,j)$)}.
-\]
-(Equivalently: $[i\leadsto j]$ contains the step $L\leadsto 0$.)
-
-\begin{lemma}\label{lem:r_of_m_epsilon}
-For $m\in M_d^+$ one has
-\begin{equation}\label{eq:r(m)_epsilon}
-r(m)=\rank(\phi_{L+1})
-=
-\sum_{i,j}\epsilon(i,j)\,m_{ij},
-\end{equation}
-where the sum ranges over all $(i,j)$ with $\delta(i,j)\le L$ (i.e.\ over all indecomposables present).
-\end{lemma}
-
-\begin{proof}
-Decompose the corresponding module as a direct sum of indecomposables:
-$\mathcal M \cong \bigoplus_{i,j} M(i,j)^{\oplus m_{ij}}$.
-The map $\phi_{L+1}$ is block-diagonal with respect to this decomposition, and on each summand $M(i,j)$
-it has rank $1$ precisely when the arrow $L\to 0$ belongs to the support of $M(i,j)$, and rank $0$ otherwise.
-Thus the total rank of $\phi_{L+1}$ equals the number of summands (counted with multiplicity) on which it is active,
-i.e.\ the sum \eqref{eq:r(m)_epsilon}.
-\end{proof}
-
-Now substitute \eqref{eq:m_from_r} into \eqref{eq:r(m)_epsilon}. Writing $j=i+\ell$ with $\ell=\delta(i,j)$,
-we obtain, for the rank pattern $r=(r_{ij})\in R_d^{\mathrm{orb}}$ corresponding to $m$,
-\begin{align}
-\rank(r)
-&:=\sum_{i,j}\epsilon(i,j)\,m_{ij}
-=\sum_{i,j}\epsilon(i,j)\,\bigl(r_{ij}-r_{i,j+1}\bigr).
-\label{eq:rank_r_general}
-\end{align}
-Equivalently, grouping by the length parameter $\ell\in\{0,\dots,L\}$ and using the terminating convention
-$r_{i,i+L+1}=0$, one may write
-\begin{equation}\label{eq:rank_r_length_form}
-\rank(r)
-=
-\sum_{i=0}^L\ \sum_{\ell=0}^L \epsilon(i,i+\ell)\,\bigl(r_{i,\,i+\ell}-r_{i,\,i+\ell+1}\bigr)
-=
-\sum_{i=0}^L\ \sum_{\ell=0}^L \epsilon(i,i+\ell)\,r_{i,\,i+\ell}
-\;-\;
-\sum_{i=0}^L\epsilon(i,i+L)\,r_{i,\,i+L+1}.
-\end{equation}
-Since $r_{i,i+L+1}=0$ by convention, the final term vanishes; in particular one may record the schematic identity
-\[
-\rank(r)
-=
-\sum_{i,\ell}\epsilon(i,i+\ell)\,m_{i,\,i+\ell}
-=
-\sum_{i,\ell}\epsilon(i,i+\ell)\,\bigl(r_{i,\,i+\ell}-r_{i,\,i+\ell+1}\bigr),
-\]
-which is the rank-pattern form of the constraint $r(m)=\rank(\sigma)$.
-
-\paragraph{Conclusion: orbit decomposition of $\Gamma_{XY}$ by rank patterns.}
-Define the rank-pattern admissible locus
-\[
-R_d^{\mathrm{orb}}(\sigma)
-:=
-\{\, r\in R_d^{\mathrm{orb}} \mid \rank(r)=\rank(\sigma)\,\},
-\]
-where $\rank(r)$ is given by \eqref{eq:rank_r_general} (equivalently \eqref{eq:rank_r_length_form}).
-Then \eqref{eq:Gamma_XY_orbit_decomp_m} becomes the rank-pattern stratification
-\begin{equation}\label{eq:Gamma_XY_orbit_decomp_r}
-\Gamma_{XY}
-=
-\bigsqcup_{r\in R_d^{\mathrm{orb}}(\sigma)}
-\Gamma_{XY}^{(r)},
-\end{equation}
-where each stratum $\Gamma_{XY}^{(r)}$ is a single $G_\sigma$--orbit, namely
-\[
-\Gamma_{XY}^{(r)}=\mathcal O_m\cap \Gamma_{XY}
-\quad\text{for the unique }m\in M_d^+\text{ with }F(m)=r.
-\]
-Thus $\Gamma_{XY}$ decomposes into $G_\sigma$--orbits indexed by cyclic rank patterns
-$r\in R_d^{\mathrm{orb}}$ satisfying the additional scalar constraint
-$\rank(r)=\rank(\sigma)$, which is equivalently the condition
-\[
-\sum_{i,j}\epsilon(i,j)\,m_{ij}=\rank(\sigma)
-\qquad\Longleftrightarrow\qquad
-\sum_{i,j}\epsilon(i,j)\,(r_{ij}-r_{i,j+1})=\rank(\sigma).
-\]
-\begin{proposition}[Orbit stratification of $\Gamma_{XY}$ by cyclic rank patterns]\label{prop:GammaXY_orbit_stratification}
+\begin{theorem}[Orbit stratification of $\Gamma_{XY}$ by cyclic rank patterns]\label{prop:GammaXY_orbit_stratification}
 Fix $\sigma\in\Hom(V_L,V_0)$ and set
 \[
 \Gamma_{XY}:=\{\phi\in\Gamma_d\mid \phi_{L+1}=\sigma\}.
@@ -2099,7 +1737,8 @@ with $m_{ij}=r_{ij}-r_{i,j+1}$ and the convention $r_{i,\,i+L+1}=0$.
 In particular, $\Gamma_{XY}$ is stratified by $G_\sigma$--orbits indexed by cyclic rank patterns
 $r\in R_d^{\mathrm{orb}}$ satisfying $\rank(r)=\rank(\sigma)$.
 \end{enumerate}
-\end{proposition}
+\end{theorem}
+We prove this theorem in the appendix \ref{proof:GammaXY_orbit_stratification}
 \section{Codimension of $\mathcal{C}_r$}
 \subsection{Relation with codimension of orbits}
 \begin{proposition}[Codimension of $\Gamma_{XY}$ via the largest cyclic orbit]
@@ -2674,109 +2313,86 @@ If $m=L+1$, then $M(j,m)=P(j)$ is projective and $\Ext^1_A(M(i,\ell),P(j))=0$ fo
 $\varepsilon((i,\ell),(j,L+1))=0$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Appendix}
-\subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{prop:associated-bundle}
-\begin{proof}[Proof of Proposition~\ref{prop:associated-bundle}]
-We prove the three statements in order.
+\subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{thm:critical-bundle}
+\begin{proof}
+We proceed in explicit steps.
 
 \medskip
-\noindent
-\textbf{(1) Image of $\Phi$.}
-
-For any $(g,Z)\in G\times\mathcal Z$ we have by definition
-\[
-\Phi(g,Z)=g\cdot\iota(Z)\in G\cdot S_r=\Omega_r,
-\]
-so $\Phi(G\times\mathcal Z)\subseteq\Omega_r$.
-
-Conversely, if $W\in\Omega_r$, then by definition there exist
-$g\in G$ and $Z\in\mathcal Z$ such that
-$W=g\cdot\iota(Z)$.
-Hence $W=\Phi(g,Z)$ and therefore
-$\Phi(G\times\mathcal Z)=\Omega_r$.
+\textbf{Step~1: Proof of~(22).}
+By the assumed DLN normal form for rank-$r$ critical points, $W \in C_r$ if and only if there exists $Z \in \mathcal X_{r,\sigma}$ and a sequence of hidden invertible changes of basis $g = (g_1, \dots, g_{L-1}) \in G_h$ such that the transformed weights satisfy the block gauge-fixed identities~(17)--(18).  Equivalently, $g^{-1} \cdot W = \iota(Z) \in S_{r,\sigma}$.  Therefore $W = g \cdot \iota(Z) \in G_h \cdot S_{r,\sigma}$, proving $C_r \subseteq G_h \cdot S_{r,\sigma}$.  Conversely, if $W = g \cdot \iota(Z)$ with $Z \in \mathcal X_{r,\sigma}$, then $W$ has the required normal form up to the hidden reparametrisation~$g$, and since $Z$ satisfies both~(14) and~(15), $W$ is critical.  Thus $G_h \cdot S_{r,\sigma} \subseteq C_r$.  This proves~(22).
 
 \medskip
-\noindent
-\textbf{(2) $H_r$-invariance.}
+\textbf{Step~2: Image of $\Phi$ equals $C_r$.}
+By definition~(23), $\Phi(g, Z) = g \cdot \iota(Z) \in G_h \cdot S_{r,\sigma} = C_r$ by Step~1.  Hence $\Phi(G_h \times \mathcal X_{r,\sigma}) \subseteq C_r$.  Conversely, Step~1 already shows every $W \in C_r$ can be written $W = g \cdot \iota(Z)$ with $Z \in \mathcal X_{r,\sigma}$.  Therefore $\Phi(G_h \times \mathcal X_{r,\sigma}) = C_r$.
+\medskip
+\textbf{Step~3: $H_{r,\sigma}$-invariance of $\Phi$.}
+Fix $(g, Z) \in G_h \times \mathcal X_{r,\sigma}$ and $h \in H_{r,\sigma}$.  Then
+\[
+\Phi\bigl((g, Z) \cdot h\bigr) = \Phi\bigl(gh,\; h^{-1} \cdot Z\bigr)
+= (gh) \cdot \iota(h^{-1} \cdot Z).
+\]
+Using associativity of the group action~(13), this equals $g \cdot \bigl(h \cdot \iota(h^{-1} \cdot Z)\bigr)$.  Thus it suffices to show
+\begin{equation}\tag{$\star$}
+h \cdot \iota(h^{-1} \cdot Z) = \iota(Z).
+\end{equation}
+Write each $h_\ell = \bigl(\begin{smallmatrix} I_r & 0 \\ 0 & K_\ell \end{smallmatrix}\bigr)$ (recall that the setwise stabiliser condition and the endpoint structure force $A = I_r$; see the paragraph after Definition~8.2).
 
-Let $h\in H_r$. Using the definition of the action~(5),
+\emph{Middle layers $(\ell = 2, \dots, L{-}1)$:}  Here $(h^{-1} \cdot Z)_\ell = K_\ell^{-1} Z_\ell K_{\ell-1}$, and the computation is identical to Step~2 of Proposition~8.3:
 \[
-\Phi((g,Z)\cdot h)
-=
-\Phi(gh,h^{-1}\cdot Z)
-=
-gh\cdot\iota(h^{-1}\cdot Z).
-\]
-
-Since $h\in H_r$ stabilizes the slice $S_r=\iota(\mathcal Z)$,
-one has
-\[
-h\cdot\iota(h^{-1}\cdot Z)=\iota(Z).
-\]
-Therefore
-\[
-\Phi((g,Z)\cdot h)
-=
-g\cdot\iota(Z)
-=
-\Phi(g,Z),
-\]
-so $\Phi$ is $H_r$–invariant and hence descends to a map
-\[
-\bar\Phi:G\times_{H_r}\mathcal Z\to\Omega_r.
+h_\ell \begin{pmatrix} I_r & 0 \\ 0 & K_\ell^{-1} Z_\ell K_{\ell-1} \end{pmatrix} h_{\ell-1}^{-1}
+= \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix} = \iota(Z)_\ell.
 \]
 
-Surjectivity follows from part (1).
+\emph{Last layer $(\ell = L)$:}  Since $g_L = I$ in $G_h$, the action gives $(h \cdot \iota(h^{-1} \cdot Z))_L = \iota(h^{-1} \cdot Z)_L \, h_{L-1}^{-1}$.  Now $(h^{-1} \cdot Z)_L = Z_L K_{L-1}$ (since $g_L = I$ implies the effective residual action at layer~$L$ is right multiplication by $K_{L-1}$), so
+\[
+[U_S,\; U_Q Z_L K_{L-1}]
+\begin{pmatrix} I_r & 0 \\ 0 & K_{L-1}^{-1} \end{pmatrix}
+= [U_S,\; U_Q Z_L] = \iota(Z)_L.
+\]
+
+\emph{First layer $(\ell = 1)$:}  Since $g_0 = I$, the action gives $(h \cdot \iota(h^{-1} \cdot Z))_1 = h_1 \, \iota(h^{-1} \cdot Z)_1$.  Now $(h^{-1} \cdot Z)_1 = K_1^{-1} Z_1$ (since $g_0 = I$), so
+\[
+\begin{pmatrix} I_r & 0 \\ 0 & K_1 \end{pmatrix}
+\begin{pmatrix} U_S^\top \Sigma_{YX} \Sigma_X^{-1} \\ K_1^{-1} Z_1 \end{pmatrix}
+= \begin{pmatrix} U_S^\top \Sigma_{YX} \Sigma_X^{-1} \\ Z_1 \end{pmatrix}
+= \iota(Z)_1.
+\]
+This proves~($\star$), hence $\Phi$ is $H_{r,\sigma}$-invariant and descends to $\bar\Phi$.
 
 \medskip
-\noindent
-\textbf{(3) Injectivity on the principal locus.}
+\textbf{Step~4: Injectivity on the principal slice locus.}
+Assume $\Phi(g, Z) = \Phi(g', Z')$ with $Z, Z' \in X_{r,\sigma}^{\circ}$.  Then $g \cdot \iota(Z) = g' \cdot \iota(Z')$, and setting $h := g^{-1} g' \in G_h$ we obtain
+\begin{equation}\tag{$\star\star$}
+\iota(Z) = h \cdot \iota(Z').
+\end{equation}
+In particular, $h$ maps the slice point $\iota(Z')$ to another slice point $\iota(Z)$, so $h \in \mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$.  Since $Z' \in  \mathcal X_{r,\sigma}^{\circ}$, we have $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma}) = H_{r,\sigma}$ by definition of the principal slice locus.  Therefore $h \in H_{r,\sigma}$.
 
-Let $Z\in\mathcal Z^\circ$.
-Assume that
-\[
-\bar\Phi([g,Z])=\bar\Phi([g',Z']).
-\]
-By definition of $\bar\Phi$ this means
-\[
-g\cdot\iota(Z)=g'\cdot\iota(Z').
-\]
-
-Setting $h=g^{-1}g'\in G$, we obtain
-\[
-\iota(Z)=h\cdot\iota(Z').
-\]
-In particular $h\cdot\iota(Z')\in S_r$.
-
-Since $Z'\in\mathcal Z^\circ$, by definition of the principal locus
-\[
-\{\,g\in G\mid g\cdot\iota(Z')\in S_r\,\}=H_r.
-\]
-Therefore $h\in H_r$.
-
-Hence
-\[
-(g',Z')=(gh,h^{-1}\cdot Z),
-\]
-which means that $(g',Z')$ lies in the $H_r$–orbit of $(g,Z)$
-under the action~(5).
-Thus
-\[
-[g',Z']=[g,Z]
-\]
-in $G\times_{H_r}\mathcal Z^\circ$.
-
-This proves injectivity of $\bar\Phi$ on $G\times_{H_r}\mathcal Z^\circ$.
+Having established $h \in H_{r,\sigma}$, we compute~($\star\star$) componentwise.  By the same block multiplication as in Step~3 (run in reverse), equation~($\star\star$) yields $Z = h \cdot Z'$, i.e.\ $Z' = h^{-1} \cdot Z$.  Therefore $(g', Z') = (gh, h^{-1} \cdot Z) = (g, Z) \cdot h$ in the right action~(24), and hence $[g', Z'] = [g, Z]$ in $G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma}^{\circ}$.  This proves injectivity on the principal slice locus.
 
 \medskip
+\textbf{Step~5: The principal slice locus is generically non-empty.}
+We show that $\mathcal X_{r,\sigma}^{\circ}$ contains a dense open subset of $X_{r,\sigma}$, so that the bijection~(25) holds on a large locus.  Take any $h = (h_1, \dots, h_{L-1}) \in G_h$ satisfying $h \cdot \iota(Z') \in S_{r,\sigma}$ for some $Z' \in X_{r,\sigma}$.  We must show $h \in H_{r,\sigma}$ for generic~$Z'$.
 
-Surjectivity onto $\Omega_r^\circ$ follows directly from the definition
-$\Omega_r^\circ=\Phi(G\times\mathcal Z^\circ)$.
-Hence the restriction
+Write $h_\ell = \bigl(\begin{smallmatrix} a_\ell & b_\ell \\ c_\ell & k_\ell \end{smallmatrix}\bigr)$ in the $r \times (d_\ell - r)$ block decomposition.
+
+\emph{Endpoint $\ell = L$:}  The condition $(h \cdot \iota(Z'))_L = \iota(Z)_L$ gives $[U_S,\, U_Q Z_L']\, h_{L-1}^{-1} = [U_S,\, U_Q Z_L]$.  Write $h_{L-1}^{-1} = \bigl(\begin{smallmatrix} \alpha & \beta \\ \gamma & \kappa \end{smallmatrix}\bigr)$.  Comparing the first block column and using $U_S^\top U_Q = 0$ yields $\alpha = I_r$ (from the $U_S$-component) and $Z_L' \gamma = 0$ (from the $U_Q$-component).  For generic $Z' \in X_{r,\sigma}$, the matrix $Z_L'$ has full row rank $d_L - r$, so $\gamma = 0$.  Hence $h_{L-1}^{-1}$ is block upper-triangular; since it is also invertible, its inverse $h_{L-1}$ is block upper-triangular as well.
+
+\emph{Endpoint $\ell = 1$:}  The condition $(h \cdot \iota(Z'))_1 = \iota(Z)_1$ gives $h_1 \bigl(\begin{smallmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1' \end{smallmatrix}\bigr) = \bigl(\begin{smallmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{smallmatrix}\bigr)$.  From the top block: $a_1 U_S^\top \Sigma_{YX}\Sigma_X^{-1} + b_1 Z_1' = U_S^\top \Sigma_{YX}\Sigma_X^{-1}$.  Generically $Z_1'$ is linearly independent from the rows of $U_S^\top \Sigma_{YX}\Sigma_X^{-1}$, which forces $b_1 = 0$ and $a_1 = I_r$.  From the bottom block: $c_1 U_S^\top \Sigma_{YX}\Sigma_X^{-1} + k_1 Z_1' = Z_1$; for this to admit a solution with $Z_1$ free, we need $c_1 = 0$ (since otherwise $c_1 U_S^\top \Sigma_{YX}\Sigma_X^{-1}$ would introduce a component in the signal subspace, contradicting the block structure).  Hence $h_1$ is block-diagonal with $a_1 = I_r$.
+
+\emph{Middle layers $(\ell = 2, \dots, L{-}2)$:}  Having established that $h_1$ and $h_{L-1}$ are block-diagonal, one propagates inward.  At each layer the condition
 \[
-\bar\Phi:G\times_{H_r}\mathcal Z^\circ\to\Omega_r^\circ
+h_\ell \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell' \end{pmatrix} h_{\ell-1}^{-1}
+= \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
 \]
-is bijective.
+with $h_{\ell-1}$ already known to be block-diagonal forces $b_\ell Z_\ell' \kappa_{\ell-1} = 0$ and $c_\ell = 0$.  Since $\kappa_{\ell-1}$ is invertible and generically $Z_\ell'$ has full row rank, we get $b_\ell = 0$.  Hence $h_\ell$ is block-diagonal at every layer.
+
+Thus, for $Z'$ in a dense open subset of $X_{r,\sigma}$ (where certain residual blocks have full rank), every element of $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ is block-diagonal, i.e.\ belongs to $H_{r,\sigma}$.  Since $H_{r,\sigma} \subseteq \mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ always holds (by Step~3), we conclude $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma}) = H_{r,\sigma}$ on this locus, confirming that $X_{r,\sigma}^{\circ}$ is generically non-empty.
+
+\medskip
+\textbf{Step~6: Conclusion.}
+Steps~2 and~3 establish that $\bar\Phi$ is a well-defined surjection.  Step~4 establishes injectivity on $\mathcal X_{r,\sigma}^{\circ}$, giving~(25).  Taking $G_h$-quotients gives~(26).  The global map $\bar\Phi \colon G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma} \to C_r$ is surjective but may fail to be injective at points $Z'$ where certain residual blocks $Z_\ell'$ are rank-deficient, causing $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ to strictly contain $H_{r,\sigma}$.
 \end{proof}
+
 \subsection*{DLNs as Quiver Representations}
 \begin{definition}
 A \emph{quiver} is a directed graph $Q = (P, E, s, t)$ where $P$ is the set of vertices, $E$ the set of directed edges, and $s,t: E \to P$ are the source and target maps.
@@ -3043,5 +2659,372 @@ while inclusion $(\ast\ast\ast)$ gives the reverse inclusion. Therefore
 \]
 This proves that whenever the intersection is not empty, it consists of a single
 $G_\sigma$--orbit. The lemma follows.
+\end{proof}
+\subsection*{Stratification of vanishing cyclic condition with fixed target map}
+we prove proposition \ref{prop:rank_label_and_nonemptiness_real}
+\begin{proof}\label{proof:rank_label_and_nonemptiness_real}
+We prove (i) and (ii) in separate steps.
+
+\medskip\noindent
+\textbf{Step 1: A basic invariance identity for ranks under left--right change of bases.}
+Let $A\in GL(V_0)$, $B\in GL(V_L)$, and $T\in W=\Hom_{\mathbb{R}}(V_L,V_0)$.
+Consider the map $T':=A\,T\,B^{-1}\in W$.
+We have $\mathrm{rank}(T')=\mathrm{rank}(T)$.
+
+\medskip\noindent
+\textbf{Step 2: Proof of (i) (well-definedness of $r(\lambda)$).}
+Fix $\lambda\in\Lambda$ and choose two points $x,y\in \mathcal O_\lambda$.
+By definition of orbit, there exists $g=(g_0,\dots,g_L)\in G_d$ such that
+\[
+y=g\cdot x.
+\]
+Apply $F$ to both sides and use the equivariance identity \eqref{eq:equivariance_F}:
+\[
+F(y)=F(g\cdot x)=g_0\,F(x)\,g_L^{-1}.
+\]
+Now apply Step 1 with $A=g_0$, $B=g_L$, and $T=F(x)$. This yields
+\[
+\mathrm{rank}(F(y))=\mathrm{rank}(g_0\,F(x)\,g_L^{-1})=\mathrm{rank}(F(x)).
+\]
+Thus the rank of $F(\,\cdot\,)$ is constant along $\mathcal O_\lambda$, so the integer $r(\lambda)$
+defined by \eqref{eq:def_r_lambda} is independent of the choice of $x\in\mathcal O_\lambda$.
+This proves (i).
+
+\medskip\noindent
+\textbf{Step 3: A real classification fact for linear maps by rank.}
+Let $S,T\in W=\Hom_{\mathbb{R}}(V_L,V_1)$. We use the following statement:
+
+\smallskip\noindent
+\emph{Claim.} If $\mathrm{rank}(S)=\mathrm{rank}(T)$, then there exist $A\in GL(V_1)$ and $B\in GL(V_L)$ such that
+\begin{equation}
+\label{eq:rank_equivalence}
+S=A\,T\,B^{-1}.
+\end{equation}
+
+\medskip\noindent
+\textbf{Step 4: Proof of (ii), forward implication.}
+Assume $\mathcal O_\lambda\cap \Gamma_\sigma\neq \varnothing$.
+Choose $x\in \mathcal O_\lambda\cap \Gamma_\sigma$.
+By definition of $\Gamma_\sigma=F^{-1}(\sigma)$ we have $F(x)=\sigma$, hence
+\[
+\mathrm{rank}(\sigma)=\mathrm{rank}(F(x)).
+\]
+By definition of $r(\lambda)$ (and Step 2), $\mathrm{rank}(F(x))=r(\lambda)$ for any $x\in\mathcal O_\lambda$.
+Therefore $\mathrm{rank}(\sigma)=r(\lambda)$, proving the forward direction of \eqref{eq:nonemptiness}.
+
+\medskip\noindent
+\textbf{Step 5: Proof of (ii), reverse implication.}
+Assume $r(\lambda)=\mathrm{rank}(\sigma)$.
+Choose any $x_0\in\mathcal O_\lambda$.
+Then, by definition of $r(\lambda)$,
+\[
+\mathrm{rank}(F(x_0))=r(\lambda)=\mathrm{rank}(\sigma).
+\]
+By the claim in Step 3 (applied to $T=F(x_0)$ and $S=\sigma$), there exist
+$A\in GL(V_0)$ and $B\in GL(V_L)$ such that
+\[
+\sigma=A\,F(x_0)\,B^{-1}.
+\]
+Define $g=(g_0,\dots,g_L)\in G_d$ by setting
+\[
+g_0:=A,\qquad g_L:=B,\qquad g_i:=\mathrm{Id}_{V_i}\ \text{ for } i=1,\dots,L-1.
+\]
+Then $g\in G_d$ and, using equivariance \eqref{eq:equivariance_F},
+\[
+F(g\cdot x_0)=g_0\,F(x_0)\,g_L^{-1}=A\,F(x_0)\,B^{-1}=\sigma.
+\]
+Hence $g\cdot x_0\in \Gamma_\sigma$.
+Also, since $x_0\in\mathcal O_\lambda$ and $\mathcal O_\lambda$ is a $G_d$--orbit, we have $g\cdot x_0\in\mathcal O_\lambda$.
+Therefore $g\cdot x_0\in \mathcal O_\lambda\cap \Gamma_\sigma$, so $\mathcal O_\lambda\cap \Gamma_\sigma\neq\varnothing$.
+
+Combining Steps 4 and 5 yields \eqref{eq:nonemptiness}. This completes the proof.
+\end{proof}
+We prove proposition \ref{prop:rank_formula_eps}:
+\begin{proof}\label{proof:rank_formula_eps}
+Fix $\mathbf m=(m_{i,\ell})\in \mathcal M_d^+$.
+Choose any $\phi\in\mathcal O_{\mathbf m}$ and write $M:=M(\phi)$ for the corresponding Nakayama module.
+By definition of $\mathcal O_{\mathbf m}$, there exists an isomorphism of modules
+\begin{equation}
+\label{eq:KS_decomp}
+M \;\cong\;\bigoplus_{i,\ell} M(i,\ell)^{\oplus m_{i,\ell}}.
+\end{equation}
+We will compute $\rank(\phi_{L+1})=\rank(F(\phi))$ from this decomposition.
+
+\medskip\noindent
+\textbf{Step 1: Describe the vector spaces at vertices $0$ and $L$ using \eqref{eq:KS_decomp}.}
+
+For each vertex $j\in\{0,L\}$ the representation space is $V_j=M(j)$.
+Evaluating \eqref{eq:KS_decomp} at the vertex $j$ gives an isomorphism of real vector spaces
+\begin{equation}
+\label{eq:vertex_decomp}
+V_j
+\;=\;
+M(j)
+\;\cong\;
+\bigoplus_{i,\ell} M(i,\ell)(j)^{\oplus m_{i,\ell}}.
+\end{equation}
+For cyclic Nakayama indecomposables, $M(i,\ell)(j)$ is either $0$ or a $1$--dimensional real vector space
+(depending on whether $j\in \Supp(i,\ell)$). Therefore each summand in \eqref{eq:vertex_decomp} is either
+$0$ or $\mathbb{R}^{m_{i,\ell}}$.
+
+\medskip\noindent
+\textbf{Step 2: The closing arrow respects the direct-sum decomposition.}
+
+The linear map $\phi_{L+1}:V_L\to V_0$ is the structure map on the quiver arrow $L\to 0$.
+Because $M$ is a direct sum of submodules as in \eqref{eq:KS_decomp}, the action of every quiver arrow,
+and in particular the arrow $L\to 0$, decomposes as the direct sum of its actions on each direct summand.
+Concretely, after choosing identifications as in \eqref{eq:vertex_decomp} for $j=L$ and $j=0$,
+the map $\phi_{L+1}$ can be written as a block-diagonal direct sum
+\begin{equation}
+\label{eq:block_sum}
+\phi_{L+1}
+\;\cong\;
+\bigoplus_{i,\ell}
+\big(\phi_{L+1}\big)_{i,\ell},
+\end{equation}
+where
+\[
+\big(\phi_{L+1}\big)_{i,\ell}:\;
+M(i,\ell)(L)^{\oplus m_{i,\ell}}
+\longrightarrow
+M(i,\ell)(1)^{\oplus m_{i,\ell}}
+\]
+is the map induced by $L\to 1$ on the summand $M(i,\ell)^{\oplus m_{i,\ell}}$.
+
+\medskip\noindent
+\textbf{Step 3: Compute each block $\big(\phi_{L+1}\big)_{i,\ell}$.}
+
+Fix a pair $(i,\ell)$. There are two cases.
+
+\smallskip\noindent
+\emph{Case A: $\epsilon(i,\ell)=0$.}
+By definition, $\epsilon(i,\ell)=0$ means the arrow $L\to 1$ acts trivially on $M(i,\ell)$, i.e.\ the map
+\[
+M(i,\ell)(L)\to M(i,\ell)(1)
+\]
+is the zero map. Taking $m_{i,\ell}$ copies, the induced map
+\[
+\big(\phi_{L+1}\big)_{i,\ell}:\;
+M(i,\ell)(L)^{\oplus m_{i,\ell}}
+\to
+M(i,\ell)(1)^{\oplus m_{i,\ell}}
+\]
+is also the zero map. Hence
+\begin{equation}
+\label{eq:rank_block_zero}
+\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big)=0.
+\end{equation}
+
+\smallskip\noindent
+\emph{Case B: $\epsilon(i,\ell)=1$.}
+By definition, $\epsilon(i,\ell)=1$ means the arrow $L\to 1$ acts nontrivially on $M(i,\ell)$.
+For Nakayama indecomposables, both spaces $M(i,\ell)(L)$ and $M(i,\ell)(1)$ are then $1$--dimensional and
+the map between them is a nonzero linear map $\mathbb{R}\to \mathbb{R}$.
+Choose bases of these $1$--dimensional spaces; in these bases the map is multiplication by a nonzero scalar
+$a_{i,\ell}\in \mathbb{R}^\times$.
+On $m_{i,\ell}$ copies, the induced map is multiplication by the same scalar on each copy; in coordinates it is
+\[
+a_{i,\ell}\cdot I_{m_{i,\ell}}:\ \mathbb{R}^{m_{i,\ell}}\to \mathbb{R}^{m_{i,\ell}},
+\]
+which is invertible because $a_{i,\ell}\neq 0$. Therefore
+\begin{equation}
+\label{eq:rank_block_full}
+\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big)=m_{i,\ell}.
+\end{equation}
+
+\medskip\noindent
+\textbf{Step 4: Sum the ranks of the blocks.}
+
+By \eqref{eq:block_sum}, after choosing bases compatible with the decomposition,
+$\phi_{L+1}$ is block diagonal with blocks $\big(\phi_{L+1}\big)_{i,\ell}$.
+The rank of a block-diagonal linear map is the sum of the ranks of its diagonal blocks
+(because its image is the direct sum of the images of the blocks).
+Hence
+\[
+\rank(\phi_{L+1})
+\;=\;
+\sum_{i,\ell}\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big).
+\]
+Substituting \eqref{eq:rank_block_zero} in Case A and \eqref{eq:rank_block_full} in Case B yields
+\[
+\rank(\phi_{L+1})
+\;=\;
+\sum_{i,\ell}\epsilon(i,\ell)\,m_{i,\ell}.
+\]
+By definition $r(\mathbf m)=\rank(\phi_{L+1})$ for $\phi\in\mathcal O_{\mathbf m}$, so this proves
+\eqref{eq:rank_formula_eps}. 
+\end{proof}
+\subsubsection*{Stratification of cyclic conditions with target map by rank patterns}
+We prove theorem \ref{prop:GammaXY_orbit_stratification}
+\begin{proof}\label{proof:GammaXY_orbit_stratification}
+\medskip\noindent\textbf{Step 1: $G_d$--orbit decomposition of $\Gamma_d$.}
+By the finiteness of the representation type in the present cyclic (Nakayama) setting,
+the $G_d$--orbits in $\Gamma_d$ are parametrized by multiplicity data
+\[
+m=(m_{ij})\in M_d^+,
+\]
+where $m_{ij}\in\Bbb Z_{\ge 0}$ denotes the multiplicity of the indecomposable interval
+module $M(i,j)$ supported on the oriented segment $[i\leadsto j]$.
+We denote by $\mathcal O_m\subset \Gamma_d$ the corresponding $G_d$--orbit. Then
+\begin{equation}\label{eq:Gamma_d_orbit_decomp}
+\Gamma_d=\bigsqcup_{m\in M_d^+}\mathcal O_m.
+\end{equation}
+
+\medskip\noindent\textbf{Step 2: Passage to the fibre $\Gamma_{XY}$ and $G_\sigma$--orbits.}
+Consider the morphism
+\[
+F:\Gamma_d\longrightarrow \Hom(V_L,V_0),\qquad F(\phi):=\phi_{L+1}.
+\]
+The map $F$ is $G_d$--equivariant with respect to the natural action of $G_d$ on
+$\Hom(V_L,V_0)$ given by $(g_0,\dots,g_L)\cdot A=g_0 A g_L^{-1}$.
+
+For each $m\in M_d^+$, the rank
+\[
+r(m):=\rank(\phi_{L+1})
+\qquad (\phi\in \mathcal O_m)
+\]
+is well-defined (independent of $\phi\in\mathcal O_m$) because rank is invariant under left--right
+base change. Equivalently, $F(\mathcal O_m)$ is contained in the rank stratum
+\[
+\Hom(V_L,V_0)_{r(m)}:=\{A\in\Hom(V_L,V_0)\mid \rank(A)=r(m)\}.
+\]
+
+Since over $\Bbb R$ (or $\Bbb C$) the orbits of $GL(V_0)\times GL(V_L)$ in $\Hom(V_L,V_0)$
+are precisely the rank strata, we have:
+\begin{equation}\label{eq:nonempty_fibre_criterion}
+\mathcal O_m\cap \Gamma_{XY}\neq\varnothing \quad\Longleftrightarrow\quad r(m)=\rank(\sigma).
+\end{equation}
+Moreover, whenever $\mathcal O_m\cap \Gamma_{XY}\neq\varnothing$, this intersection is a single
+$G_\sigma$--orbit (equivalently: the fibre of a $G_d$--equivariant map over a point in a homogeneous
+$G_d$--orbit is homogeneous under the stabilizer of that point). Therefore,
+\begin{equation}\label{eq:Gamma_XY_orbit_decomp_m}
+\Gamma_{XY}
+=
+\bigsqcup_{\substack{m\in M_d^+\\ r(m)=\rank(\sigma)}}
+\bigl(\mathcal O_m\cap \Gamma_{XY}\bigr),
+\qquad
+\text{and each }\ \mathcal O_m\cap\Gamma_{XY}\ \text{is a single $G_\sigma$--orbit.}
+\end{equation}
+
+\medskip\noindent\textbf{Step 3: Reparametrization by cyclic rank patterns.}
+For $\phi\in\Gamma_d$ we define, for all $i,j\in\{0,\dots,L\}$, the composed map
+\[
+\Phi_{ij}(\phi):=\phi_{j}\phi_{j-1}\cdots \phi_{i+1}:V_i\to V_j
+\]
+(along the unique oriented path $i\leadsto j$), and the cyclic rank pattern
+\[
+r_{ij}(\phi):=\rank\bigl(\Phi_{ij}(\phi)\bigr).
+\]
+As proved in the previous subsection, the assignment $\phi\mapsto (r_{ij}(\phi))$
+is constant on $G_d$--orbits and yields a bijection
+\[
+M_d^+ \xrightarrow{\ \sim\ } R_d^{\mathrm{orb}},
+\qquad
+m\longmapsto r(m):=(r_{ij}(m)),
+\]
+with inverse given by the first-difference formula
+\begin{equation}\label{eq:m_from_r}
+m_{ij}=r_{ij}-r_{i,j+1},
+\end{equation}
+where $j+1$ is taken modulo $L+1$, and we adopt the terminating convention
+\[
+r_{i,i+L+1}:=0
+\qquad (\text{so that telescoping identities are valid}).
+\]
+
+Combining \eqref{eq:Gamma_XY_orbit_decomp_m} with the bijection $M_d^+\simeq R_d^{\mathrm{orb}}$,
+we may equivalently index the $G_\sigma$--orbits in $\Gamma_{XY}$ by rank patterns
+$r\in R_d^{\mathrm{orb}}$ subject to a single additional scalar constraint,
+obtained by translating $r(m)=\rank(\sigma)$ into rank-pattern language.
+
+\medskip\noindent\textbf{Step 4: The constraint $r(m)=\rank(\sigma)$ in rank-pattern coordinates.}
+For each indecomposable interval module $M(i,j)$ (equivalently, $M(i,i+\ell)$ with $\ell=\delta(i,j)$),
+the distinguished arrow $\phi_{L+1}:V_L\to V_0$ acts either trivially or nontrivially. Define the indicator
+\[
+\epsilon(i,j)\in\{0,1\}
+\]
+by
+\[
+\epsilon(i,j)=1 \ \Longleftrightarrow\ 
+\text{the arrow } (L\to 0) \text{ lies in the support segment } [i\leadsto j]
+\text{ (equivalently: $\phi_{L+1}$ is active on $M(i,j)$)}.
+\]
+(Equivalently: $[i\leadsto j]$ contains the step $L\leadsto 0$.)
+\begin{lemma}\label{lem:r_of_m_epsilon}
+For $m\in M_d^+$ one has
+\begin{equation}\label{eq:r(m)_epsilon}
+r(m)=\rank(\phi_{L+1})
+=
+\sum_{i,j}\epsilon(i,j)\,m_{ij},
+\end{equation}
+where the sum ranges over all $(i,j)$ with $\delta(i,j)\le L$ (i.e.\ over all indecomposables present).
+\end{lemma}
+
+\begin{proof}
+Decompose the corresponding module as a direct sum of indecomposables:
+$\mathcal M \cong \bigoplus_{i,j} M(i,j)^{\oplus m_{ij}}$.
+The map $\phi_{L+1}$ is block-diagonal with respect to this decomposition, and on each summand $M(i,j)$
+it has rank $1$ precisely when the arrow $L\to 0$ belongs to the support of $M(i,j)$, and rank $0$ otherwise.
+Thus the total rank of $\phi_{L+1}$ equals the number of summands (counted with multiplicity) on which it is active,
+i.e.\ the sum \eqref{eq:r(m)_epsilon}.
+\end{proof}
+
+Now substitute \eqref{eq:m_from_r} into \eqref{eq:r(m)_epsilon}. Writing $j=i+\ell$ with $\ell=\delta(i,j)$,
+we obtain, for the rank pattern $r=(r_{ij})\in R_d^{\mathrm{orb}}$ corresponding to $m$,
+\begin{align}
+\rank(r)
+&:=\sum_{i,j}\epsilon(i,j)\,m_{ij}
+=\sum_{i,j}\epsilon(i,j)\,\bigl(r_{ij}-r_{i,j+1}\bigr).
+\label{eq:rank_r_general}
+\end{align}
+Equivalently, grouping by the length parameter $\ell\in\{0,\dots,L\}$ and using the terminating convention
+$r_{i,i+L+1}=0$, one may write
+\begin{equation}\label{eq:rank_r_length_form}
+\rank(r)
+=
+\sum_{i=0}^L\ \sum_{\ell=0}^L \epsilon(i,i+\ell)\,\bigl(r_{i,\,i+\ell}-r_{i,\,i+\ell+1}\bigr)
+=
+\sum_{i=0}^L\ \sum_{\ell=0}^L \epsilon(i,i+\ell)\,r_{i,\,i+\ell}
+\;-\;
+\sum_{i=0}^L\epsilon(i,i+L)\,r_{i,\,i+L+1}.
+\end{equation}
+Since $r_{i,i+L+1}=0$ by convention, the final term vanishes; in particular one may record the schematic identity
+\[
+\rank(r)
+=
+\sum_{i,\ell}\epsilon(i,i+\ell)\,m_{i,\,i+\ell}
+=
+\sum_{i,\ell}\epsilon(i,i+\ell)\,\bigl(r_{i,\,i+\ell}-r_{i,\,i+\ell+1}\bigr),
+\]
+which is the rank-pattern form of the constraint $r(m)=\rank(\sigma)$.
+
+\paragraph{Conclusion: orbit decomposition of $\Gamma_{XY}$ by rank patterns.}
+Define the rank-pattern admissible locus
+\[
+R_d^{\mathrm{orb}}(\sigma)
+:=
+\{\, r\in R_d^{\mathrm{orb}} \mid \rank(r)=\rank(\sigma)\,\},
+\]
+where $\rank(r)$ is given by \eqref{eq:rank_r_general} (equivalently \eqref{eq:rank_r_length_form}).
+Then \eqref{eq:Gamma_XY_orbit_decomp_m} becomes the rank-pattern stratification
+\begin{equation}\label{eq:Gamma_XY_orbit_decomp_r}
+\Gamma_{XY}
+=
+\bigsqcup_{r\in R_d^{\mathrm{orb}}(\sigma)}
+\Gamma_{XY}^{(r)},
+\end{equation}
+where each stratum $\Gamma_{XY}^{(r)}$ is a single $G_\sigma$--orbit, namely
+\[
+\Gamma_{XY}^{(r)}=\mathcal O_m\cap \Gamma_{XY}
+\quad\text{for the unique }m\in M_d^+\text{ with }F(m)=r.
+\]
+Thus $\Gamma_{XY}$ decomposes into $G_\sigma$--orbits indexed by cyclic rank patterns
+$r\in R_d^{\mathrm{orb}}$ satisfying the additional scalar constraint
+$\rank(r)=\rank(\sigma)$, which is equivalently the condition
+\[
+\sum_{i,j}\epsilon(i,j)\,m_{ij}=\rank(\sigma)
+\qquad\Longleftrightarrow\qquad
+\sum_{i,j}\epsilon(i,j)\,(r_{ij}-r_{i,j+1})=\rank(\sigma).
+\]
 \end{proof}
 \end{document}
