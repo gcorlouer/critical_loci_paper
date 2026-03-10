@@ -92,7 +92,7 @@ Note that the latter product over $Z$'s–the \textit{residuals}–can be define
 \begin{definition}
 Define the algebraic variety $\Gamma$ by the following cyclic conditions:
 \begin{equation*}
-    \Gamma_d^r =\{Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}\mid Z_{l-1}\cdots Z_1\,\Sigma_{YX}U_Q\,Z_L\cdots Z_{l+1} = 0\}
+    \Gamma_d^r =\{Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}\mid Z_{l-1}\cdots Z_1\,\Sigma_{XY}U_Q\,Z_L\cdots Z_{l+1} = 0\}
 \end{equation*}
 Define the algebraic variety $$\Gamma_{d,XY}:= \Sigma^{d-r}_0\cap\Gamma_d^r $$ also defined by a set of vanishing polynomial cyclic conditions.
 \end{definition}
@@ -145,7 +145,7 @@ U_S\in \R^{d_L\times r},\qquad U_Q\in \R^{d_L\times(d_L-r)},\qquad
 \sigma \;:=\; \Sigma_{XY}U_Q \in \Hom(\R^{d_L-r},\R^{d_0-r}).
 \]
 (Here $\sigma$ is the distinguished ``closing arrow'' in the cyclic-quiver model.)
-
+\begin{comment}
 \paragraph{Residual parameter space and constraints.}
 Define the residual space
 \[
@@ -167,12 +167,13 @@ Finally set
 \begin{equation}\label{eq:X-def}
 \mathcal X_{r,\sigma} \;:=\; \Sigma^{d-r}_0 \cap \Gamma_\sigma \;\subset\; \mathcal Z.
 \end{equation}
+\end{comment}
 \begin{proposition}
 From the paper \cite{alchour}, we can write the set of rank $r$ critical points of a DLN as:
 \begin{equation*}
     \mathcal{C}_r = \{W\in \Omega, Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}|W_L = [U_S, U_QZ_L],  W_l \sim \begin{pmatrix} I_r & 0 \\
                                                       0.  & Z_l      
-                                        \end{pmatrix}, W_1 = [U_S^{\top}\Sigma_{YX}\Sigma_X^{-1}, Z_1 ]^{\top}, Z_l\in\Gamma_{d,XY}\}
+                                        \end{pmatrix}, W_1 = [\Sigma_X^{-1}\Sigma_{XY}U_S, Z_1^{\top}]^{\top}, Z_l\in\Gamma_{d,XY}\}
 \end{equation*}
 Which suggest that studying the geometry of the critical loci amounts to studying the geometry of $\Gamma_{d,XY}$.
 \end{proposition}
@@ -205,7 +206,7 @@ Z_1
 \noindent
 Define the \emph{gauge-fixed critical slice}
 \begin{equation}\label{eq:Scrit-def}
-\mathcal S_{r,\sigma} \;:=\; \iota(\mathcal X_{r,\sigma}) \;\subset\; \Omega .
+\mathcal S_{r,\sigma} \;:=\; \iota(\Gamma_{d,XY}) \;\subset\; \Omega .
 \end{equation}
 
 \paragraph{Hidden-layer gauge group and its slice stabilizer.}
@@ -241,7 +242,7 @@ for $h_\ell=\begin{psmallmatrix}A&0\\0&K_\ell\end{psmallmatrix}$ we set
 \end{equation}
 with the obvious endpoint conventions for $\ell=1$ and $\ell=L$ determined by the fixed endpoint embeddings
 \eqref{eq:endpoints-slice}.
-By construction, $\mathcal X_{r,\sigma}\subset \mathcal Z$ is $H_{r,\sigma}$-stable (this is exactly the meaning of
+By construction, $\Gamma_{d,XY}\subset \mathcal Z$ is $H_{r,\sigma}$-stable (this is exactly the meaning of
 $h\cdot \mathcal S_{r,\sigma}=\mathcal S_{r,\sigma}$).
 \begin{theorem}\label{thm:critical-bundle}
 Let $C_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in the normal form of the DLN second-order characterisation, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)$ such that
@@ -250,7 +251,7 @@ W_L = [U_S,\, U_Q Z_L], \qquad
 W_\ell \sim \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
 \;(\ell = 2, \dots, L{-}1), \qquad
 W_1 = \begin{pmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{pmatrix},
-\qquad Z \in \Sigma_0^{d-r} \cap \Gamma_\sigma.
+\qquad Z \in \Gamma_{d,XY}
 \]
 Then the following hold.
 
@@ -262,44 +263,44 @@ C_r = G_h \cdot S_{r,\sigma}.
 
 \medskip\noindent
 \textbf{(2) Associated bundle model (set-level).}
-Define $\Phi \colon G_h \times \mathcal X_{r,\sigma} \to \Omega$ by
+Define $\Phi \colon G_h \times \Gamma_{d,XY} \to \Omega$ by
 \begin{equation}\tag{23}
 \Phi(g, Z) := g \cdot \iota(Z),
 \end{equation}
-Then $\Phi(G_h \times \mathcal X_{r,\sigma}) = C_r$ and $\Phi$ is invariant under the right action of $H_{r,\sigma}$ on $G_h \times \mathcal X_{r,\sigma}$ given by
+Then $\Phi(G_h \times \Gamma_{d,XY}) = C_r$ and $\Phi$ is invariant under the right action of $H_{r,\sigma}$ on $G_h \times \Gamma_{d,XY}$ given by
 \begin{equation}\tag{24}
 (g, Z) \cdot h := (g h,\; h^{-1} \cdot Z).
 \end{equation}
 Hence $\Phi$ descends to a surjective map
-\[
-\bar\Phi \colon G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma} \longrightarrow C_r.
+\[\
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow C_r.
 \]
-Define the \emph{transporter into the slice} at a point $Z' \in \mathcal X_{r,\sigma}$ by
+Define the \emph{transporter into the slice} at a point $Z' \in \Gamma_{d,XY}$ by
 \[
 \mathrm{Trans}_{G_h}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr)
 := \bigl\{ g \in G_h : g \cdot \iota(Z') \in S_{r,\sigma} \bigr\}.
 \]
 Define the \emph{principal slice locus}
 \[
-\mathcal X_{r,\sigma}^{\circ} := \bigl\{ Z' \in \mathcal X_{r,\sigma} \;\big|\;
+\Gamma_{d,XY}^{\circ} := \bigl\{ Z' \in \Gamma_{d,XY} \;\big|\;
 \mathrm{Trans}_{G_h}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr) = H_{r,\sigma} \bigr\},
 \]
-and let $C_r^{\circ} := \Phi(G_h \times \mathcal X_{r,\sigma}^{\circ})$.
+and let $C_r^{\circ} := \Phi(G_h \times \Gamma_{d,XY}^{\circ})$.
 Then the restriction
 \[
-\bar\Phi \colon G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma}^{\circ}
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
 \xrightarrow{\;\sim\;} C_r^{\circ}
 \]
 is an isomorphism.  In particular, on the principal slice locus one the identification:
 \begin{equation}\tag{25}
-C_r^{\circ} \;\cong\; G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma}^{\circ}
+C_r^{\circ} \;\cong\; G_h \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
 \qquad\text{(on the principal slice locus).}
 \end{equation}
 
 \medskip\noindent
 \textbf{(3) Quotient of critical points by hidden gauge.}  On the same principal slice locus,
 \begin{equation}\tag{26}
-C_r^{\circ} / G_h \;\cong\; \mathcal X_{r,\sigma}^{\circ} / H_{r,\sigma}.
+C_r^{\circ} / G_h \;\cong\; \Gamma_{d,XY}^{\circ} / H_{r,\sigma}.
 \end{equation}
 \end{theorem}
 \noindent
@@ -339,7 +340,101 @@ together with linear maps
 \]
 i.e. a representation of the opposite quiver $C_n$.
 \end{definition}
+\begin{definition}[Cyclic product maps]\label{def:cyclic-product}
+Fix $L\ge 1$ and consider the cyclic quiver $C_{L+1}$ on vertices
+\[
+\{0,1,\ldots,L\}.
+\]
+Let
+\[
+V_l \cong \mathbb{R}^{d_l-r}, \qquad l=0,\ldots,L,
+\]
+and consider a representation of the quiver $C_{L+1}$ given by linear maps
+\[
+\phi_l:V_{l-1}\to V_l, \qquad l=0,\ldots,L,
+\]
+where indices are taken modulo $L+1$.
+\noindent
+For $\phi=(\phi_0,\ldots,\phi_L)\in \Rep_d(C_{L+1})$ and $l=0,\ldots,L$, define
+\[
+d\mu_l(\phi)
+:=
+\phi_{l-1}\cdots\phi_1\,
+\phi_0\,
+\phi_L\cdots\phi_{l+1}
+\in \Hom(V_l,V_{l-1})
+\quad \text{mod } L+1.
+\]
+\noindent
+Each map $d\mu_l(\phi)$ is obtained by composing the arrows along the
+unique oriented path of length $L$ in the cycle $C_{L+1}$ that omits the arrow $\phi_l$.
+Equivalently, the family $(d\mu_l)_{l=0}^{L}$ enumerates all directed paths of length $L$
+in the cycle with $L+1$ vertices.
+\end{definition}
 
+\begin{definition}[Cyclic vanishing variety]\label{def:Gamma-cyclic}
+With the notation of Definition~\ref{def:cyclic-product}, define the closed subvariety
+\[
+\Gamma_{d,L+1}
+:=
+\Big\{
+\phi\in\Rep_d(C_{L+1})
+\;\Big|\;
+d\mu_l(\phi)=0
+\quad\text{for all }l=0,\ldots,L
+\Big\}.
+\]
+Thus $\Gamma_{d,L+1}$ consists of cyclic quiver representations for which all
+length-$L$ compositions around the cycle vanish.
+\end{definition}
+\begin{remark}[The cyclic relations as the zero fibre of a functor]\label{rem:mu-functor}
+The family of maps $d\mu_l$ defined above can be assembled into a single morphism between representation spaces. Namely, define
+\[
+F : \mathrm{Rep}_d(C_{L+1}) \longrightarrow \mathrm{Rep}_d(C_{L+1}^{op})
+\]
+by
+\[
+F(\phi) := \big(d\mu_0(\phi),\ldots,d\mu_L(\phi)\big).
+\]
+\noindent
+Each component $d\mu_l(\phi)$ is obtained by composing the maps $\phi_i$ along the unique oriented path of length $L$ in the cycle which omits the arrow $\phi_l$. Consequently
+\[
+d\mu_l(\phi)\in\mathrm{Hom}(V_l,V_{l-1})
+\]
+defines an arrow in the opposite quiver $C_{L+1}^{op}$.
+\noindent
+With this notation, the variety $\Gamma_{d,L+1}$ can be interpreted as the zero fibre of $F$:
+\[
+\Gamma_{d,L+1} = F^{-1}(0).
+\]
+Thus $\Gamma_{d,L+1}$ consists precisely of those cyclic representations for which all length-$L$ compositions around the cycle vanish.
+\end{remark}
+\begin{definition}[Specialization by the closing arrow]\label{def:Gamma-sigma}
+Identifying the residual parameters of a deep linear network with the quiver maps
+\[
+\phi_l = Z_l, \qquad l=0,\ldots,L,
+\]
+we now specialize the closing arrow by fixing
+\[
+\phi_0 = \sigma := \Sigma_{XY}U_Q : V_L \to V_0 .
+\]
+\noindent
+The algebraic variety relevant for the critical loci of the DLN is then
+\[
+\Gamma_{d,\sigma}=
+\Gamma_{d,L+1}\big|_{\phi_0=\sigma}.
+\]
+And 
+\[
+\Gamma_{d,XY}=
+\Gamma_{d,\sigma}\big|_{\phi_l=Z_l \text{ for } l=1,\ldots,L}.
+\]
+\noindent
+Equivalently, $\Gamma_{d,XY}$ is the space of cyclic quiver representations
+satisfying the vanishing relations $d\mu_l=0$ with the distinguished arrow
+$\phi_0$ fixed to $\sigma$ and the $\phi_l$ for $l=1,\ldots,L$ identified with the residual parameters $Z_l$ of the DLN.
+\end{definition}
+\begin{comment}
 \begin{proposition}[The relations defining $\Gamma$ as a cyclic quiver representation]\label{rem:Gamma-cyclic-quiver}
 Fix $L\ge 1$ and consider the cyclic quiver $C_{L+1}$ on vertices
 \[
@@ -356,7 +451,7 @@ and consider a representation of the opposite quiver $C_{L+1}$ given by linear m
 where indices are understood cyclically.
 
 For $\phi=(\phi_0,\ldots,\phi_{L})\in \mathrm{Rep}_d(C_{L+1})$, define for
-$l=1,\ldots,L$ the maps\footnote{And such that the linear compositions are compatible with the cyclic quiver}:
+$l=0,\ldots,L$ the maps\footnote{And such that the linear compositions are compatible with the cyclic quiver}:
 \[
     d\mu_{l}(\phi)
     :=
@@ -386,12 +481,12 @@ For this specialization, the algebraic variety $\Gamma$ related to the critical 
 \[
     \Gamma_{d,\sigma}
     :=
-    \Gamma_{d,L+1}\big|_{\sigma=\phi_{0}=\Sigma_{XY}U_Q}
+    \Gamma_{d,L+1}\big|_{\phi_0=\sigma}
 \]
 coincides with the space of cyclic representations satisfying the vanishing
 $d\mu$ relations and with the distinguished arrow $\phi_{0}$ fixed.
 \end{proposition}
-
+\end{comment}
 \begin{figure}[t]
     \centering
     \begin{tikzpicture}[scale=1.05, every node/.style={circle,draw,inner sep=1.2pt}, >=Latex]
@@ -419,9 +514,7 @@ $d\mu$ relations and with the distinguished arrow $\phi_{0}$ fixed.
 
 \begin{proposition}[Equivariance of the cyclic composition maps]\label{prop:mu-equivariant}
 Let $C_{L+1}$ be the cyclic quiver on vertices $\{0,\ldots,L\}$, let $\mathrm{Rep}_{d}(C_{L+1})$ be its representation space with
-$V_l\cong\mathbb{R}^{d_l-r}$, and let
-\[\phi=(\phi_0,\ldots,\phi_L)\in \Rep_d(C_{L+1}).\]
-Define the base--change group
+$V_l\cong\mathbb{R}^{d_l-r}$. Define the base--change group
 \[
 G_d:=\prod_{l=0}^{L} \mathrm{GL}(V_l)
 \]
@@ -429,36 +522,32 @@ acting on $\mathrm{Rep}_{d}(C_{L+1})$ via
 \[
 (g\cdot \phi)_l := g_l\,\phi_l\,g_{l-1}^{-1},\quad (l=0,\ldots,L), \ \text{mod} \ L+1
 \]
-For each $l=1,\ldots,L$, define
-\[
-d\mu_l(\phi) := \phi_{l-1}\cdots\phi_1\,\phi_{0}\,\phi_L\cdots\phi_{l+1}\in\mathrm{Hom}(V_l,V_{l-1}), \quad \text{mod } L+1 
-\]
-with the convention that an empty product is the identity.
 Then, for all $g\in G_d$ and all $l=0,\ldots,L$,
 \[
-d\mu_l(g\cdot \phi) = g_l\,d\mu_l(\phi)\,g_{l+1}^{-1}.
+d\mu_l(g\cdot \phi) = g_{l-1}\,d\mu_l(\phi)\,g_{l}^{-1}.
 \]
 \end{proposition}
 
 \begin{proof}
-Expand $d\mu_l(g\cdot\phi)$ as a product of the maps $(g\cdot\phi)_i$. Each factor contributes a left multiplication by some $g_i$ and a right multiplication by $g_{i+1}^{-1}$, and all intermediate terms cancel by associativity, leaving only $g_l$ on the left and $g_{l+1}^{-1}$ on the right.
+Expand $d\mu_l(g\cdot\phi)$ as a product of the maps $(g\cdot\phi)_i$. Each factor contributes a left multiplication by some $g_{i-1}$ and a right multiplication by $g_{i}^{-1}$, and all intermediate terms cancel by associativity, leaving only $g_{l-1}$ on the left and $g_{l}^{-1}$ on the right.
 \end{proof}
 
 \begin{proposition}[Orbit decomposition of $\Gamma_d$]\label{prop:GammaC-orbits}
 Let
 \[
-\Gamma_{d,L+1}:=\Big\{\phi\in \mathrm{Rep}_{d}(C_{L+1})\ \Big|\ d\mu_l(\phi)=0\ \text{for all }l=1,\ldots,L\Big\}.
+\Gamma_{d,L+1}:=\Big\{\phi\in \mathrm{Rep}_{d}(C_{L+1})\ \Big|\ d\mu_l(\phi)=0\ \text{for all }l=0,\ldots,L\Big\}.
 \]
 Then $\Gamma_{d,L+1}$ is $G_d$-invariant. In particular, $\Gamma_{d,L+1}$ decomposes as a disjoint union of $G_d$-orbits:
 \[
-\Gamma_{d,L+1} = \bigsqcup_{\phi\in \Gamma_{d,L+1}} G_d\cdot \phi.
+\Gamma_{d,L+1} = \bigsqcup_{[\phi]\in \Gamma_{d,L+1}/G_d} G_d\cdot \phi .
 \]
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:mu-equivariant}, each map $d\mu_l$ is $G_d$-equivariant and hence the vanishing set $d\mu_l^{-1}(0)$ is $G_d$-stable. Intersecting over $l=1,\ldots,L$ shows that $\Gamma_{d,L+1}$ is $G_d$-stable. Any group action partitions a set into disjoint orbits, yielding the stated decomposition.
+By Proposition~\ref{prop:mu-equivariant}, each map $d\mu_l$ is $G_d$-equivariant and hence the vanishing set $d\mu_l^{-1}(0)$ is $G_d$-stable. Intersecting over $l=0,\ldots,L$ shows that $\Gamma_{d,L+1}$ is $G_d$-stable. Any group action partitions a set into disjoint orbits, yielding the stated decomposition.
 \end{proof}
-Note that $\Gamma_{d,L+1}\cong \Rep_d(C_{L+1})/< d\mu_l > $, we will that $\Gamma_{d,L+1}$ is then finite dimensional and we can classify indecomposable using indecomposable representations of Nakayama algebras.
+\noindent
+Informally, we have $\Gamma_{d,L+1}\cong \Rep_d(C_{L+1})/< d\mu_l > $, we will that $\Gamma_{d,L+1}$ is then finite dimensional and we can classify indecomposable using indecomposable representations of Nakayama algebras.
 \subsection{Cyclic quiver as a bounded module}
 \begin{definition}[Path algebra]
 Let $Q$ be a quiver. The \emph{path algebra} $kQ$ is the $k$-vector space with basis given by all directed paths in $Q$ (including the trivial paths $e_i$ of length $0$ at each vertex $i$), with multiplication given by concatenation of composable paths and $0$ otherwise, extended by bilinearity.
@@ -490,12 +579,12 @@ There is a well-defined map
 \[
 F:\Gamma_{d,L+1}\to \mathrm{Rep}_d(A)
 \]
-which sends $\phi\in\Gamma_d$ to the unique $A$-module structure on $V$ for which each arrow $a_i$ acts by the linear map $\phi_i$.
+which sends $\phi\in\Gamma_{d,L+1}$ to the unique $A$-module structure on $V$ for which each arrow $a_i$ acts by the linear map $\phi_i$.
 \end{proposition}
 
 \begin{proof}
 Given $\phi\in\Gamma_{d,L+1}$, the tuple of linear maps $(\phi_i)_i$ defines a representation of the quiver $Q=C_{L+1}$, hence a left $kQ$-module structure on $V$ by letting a path act by the corresponding composition of arrow maps.
-For each $l$, the defining condition $\mu_l(\phi)=0$ is exactly the statement that the element $p_l\in kQ$ acts as the zero map on $V$.
+For each $l$, the defining condition $d\mu_l(\phi)=0$ is exactly the statement that the element $p_l\in kQ$ acts as the zero map on $V$.
 Since $I$ is the two-sided ideal generated by the $p_l$, every element of $I$ also acts by zero.
 Therefore the $kQ$-action factors through the quotient $A=kQ/I$, producing a unique $A$-module structure on $V$ with the required arrow actions.
 \end{proof}
@@ -511,7 +600,7 @@ which sends an $A$-module structure on $V$ to the induced quiver representation 
 \begin{proof}
 Let $V$ be a representation in $\mathrm{Rep}_d(A)$.
 Composing the action map $A\to \mathrm{End}_k(V)$ with the quotient map $kQ\twoheadrightarrow A$ gives a $kQ$-module structure on $V$.
-Restricting the action of each arrow basis element $a_i$ to the appropriate vertex summand yields linear maps $\phi_i:V_i\to V_{i+1}$ and hence a point $\phi\in\mathrm{Rep}_d(C_{L+1})$.
+Restricting the action of each arrow basis element $a_i$ to the appropriate vertex summand yields linear maps $\phi_i:V_{i-1}\to V_{i}$ and hence a point $\phi\in\mathrm{Rep}_d(C_{L+1})$.
 Because each $p_l$ maps to zero in $A$, it acts as the zero endomorphism on $V$.
 Equivalently, the composed linear map $\mu_l(\phi)$ is zero for every $l$, so $\phi\in\Gamma_{d,L+1}$.
 \end{proof}
@@ -610,7 +699,7 @@ i.e.\ $J(A)$ is the largest two-sided ideal that acts by zero on every simple $A
 \end{definition}
 
 \begin{proposition}[\textbf{Bound quiver criterion for Nakayama algebras}]\label{prop:bound-quiver-nakayama}
-Let $A \simeq kQ/I$ be a finite-dimensional bound quiver algebra, where $Q$ is a finite quiver and
+Let $k$ be a field, let $A \simeq kQ/I$ be a finite-dimensional bound quiver algebra, where $Q$ is a finite quiver and
 $I\subset kQ$ is an admissible ideal.
 Assume that for every vertex $i\in Q_0$ there is at most one arrow leaving $i$ and at most one arrow entering $i$.
 Then $A$ is a Nakayama algebra.
@@ -693,8 +782,36 @@ Thus $\ell(P_i)=L$ for every $i$, which gives the Kupisch series $(L,\ldots,L)$.
 Equivalently, $A$ can be viewed as a \emph{truncated cycle algebra}: it is the path algebra of an oriented cycle with all paths of length $\ge L$ killed.
 \end{remark}
 \subsection{Indecomposable representations of Nakayama algebras}
+\begin{definition}[Interval modules]\label{def:interval-modules}
+Fix $Q=C_{L+1}$ with vertices $Q_0=\{0,\dots,L\}$ and arrows $a_l:l-1\to l$ for $l=0,\dots,L$
+with $a_0:L\to 0$.
+\noindent
+For $i,j\in Q_0$, let
+\[
+[i\rightsquigarrow j] \ \text{mod } L+1
+\]
+denote the oriented segment obtained by following the arrows of the cycle from $i$ to $j$.
+\noindent
+The \emph{interval module} $M(i,j)$ is the representation of $Q$ defined by
+\[
+M(i,j)_t :=
+\begin{cases}
+k, & t\in[i\rightsquigarrow j], \ \text{mod } L+1 \\ 
+0, & \text{otherwise},
+\end{cases}
+\]
+and for each arrow $a_t:t-1\to t$
+\[
+M(i,j)_{a_t}:=
+\begin{cases}
+\mathrm{id}_k, & \text{if both endpoints of }a_t\text{ lie in }[i\rightsquigarrow j],\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+\end{definition}
+\begin{comment}
 \begin{definition}[The uniserial modules $M(i,\ell)$]
-Fix $Q=C_{L+1}$ with vertices $Q_0=\{0,\dots,L\}$ and arrows $a_l:l-1\to l$ for $l=0,\dots,L$ with $a_0:0\to L$.
+Fix $Q=C_{L+1}$ with vertices $Q_0=\{0,\dots,L\}$ and arrows $a_l:l-1\to l$ for $l=0,\dots,L$ with $a_0:L\to 0$.
 For $i\in Q_0$ and $0\le \ell\le L$, define a representation $M(i,\ell)$ of $Q$ by
 \[
 M(i,\ell)_j :=
@@ -712,7 +829,7 @@ M(i,\ell)_{a_j} :=
 \end{cases}
 \]
 \end{definition}
-
+\end{comment}
 \begin{lemma}[The relations vanish on $M(i,\ell)$]\label{lem:Miell-well-defined}
 Let $Q=C_{L+1}$ and, for each $l\in\{0,\dots,L\}$, let
 \[
@@ -720,7 +837,7 @@ p_l := a_{l-1}\cdots a_1\, a_{0}\cdots a_{l+1}, \quad \text{mod } L+1
 \]
 be the oriented path of length $L$ going once around the cycle and omitting $a_l$.
 Set $A:=kQ/\langle p_0,\dots,p_{L}\rangle$.
-Then, for every $i\in Q_0$ and $1\le \ell\le L$, the representation $M(i,\ell)$ factors through $A$, hence defines a finite-dimensional left $A$-module.
+Then, for every $i\in Q_0$ and $0\le \ell\le L$, the representation $M(i,\ell)$ factors through $A$, hence defines a finite-dimensional left $A$-module.
 \end{lemma}
 
 \begin{proof}
@@ -730,16 +847,18 @@ Therefore $p_l$ acts by the zero map on $M(i,\ell)$ for every $l$, so all genera
 Hence the $kQ$-action factors through $A$.
 \end{proof}
 
-\begin{lemma}[Uniseriality of $M(i,\ell)$]\label{lem:Miell-uniserial}
-For every $i\in Q_0$ and $1\le \ell\le L$, the $A$-module $M(i,\ell)$ is uniserial, and in particular indecomposable.
+\begin{lemma}[Uniseriality of $M(i,j)$]
+For every interval module $M(i,j)$, the $A$-module $M(i,j)$ is uniserial, and in particular indecomposable.
 \end{lemma}
 
 \begin{proof}
-Any nonzero submodule $N\subseteq M(i,\ell)$ must contain the one-dimensional space at some vertex in the support.
-Because all arrow maps inside the support are identities, containing a vertex forces $N$ to contain all vertices reachable along the directed arrows within the support.
-Consequently, the nonzero submodules are exactly the modules
-$M(i+t,\ell-t)$ for $t=0,\dots,\ell-1$ (indices taken modulo $n$), and they form a chain under inclusion.
-Thus submodules are totally ordered and $M(i,\ell)$ is uniserial.
+Any nonzero submodule $N\subseteq M(i,j)$ must contain the one-dimensional space at some vertex in the support $[i\rightsquigarrow j]$.
+Because all arrow maps along the support are identities, once $N$ contains the space at some vertex $t\in [i\rightsquigarrow j]$, it must also contain the spaces at all vertices in the terminal segment $[t\rightsquigarrow j]$.
+Hence the nonzero submodules are exactly the interval modules
+\[
+M(t,j), \qquad t\in [i\rightsquigarrow j].
+\]
+These form a chain under inclusion. Therefore the submodules of $M(i,j)$ are totally ordered, so $M(i,j)$ is uniserial.
 \end{proof}
 
 \begin{lemma}[Endomorphisms of $M(i,\ell)$]\label{lem:Miell-end}
@@ -767,7 +886,13 @@ In particular, $P(i)$ is uniserial of length $L$, and $J^tP(i)$ is spanned by re
 Thus $P(i)/J^{\ell}P(i)$ has a basis given by the residue classes of the unique paths of lengths $0,1,\dots,\ell-1$ starting at $i$.
 Under the induced quiver description, this quotient has one-dimensional spaces on the vertices $i,i+1,\dots,i+\ell-1$ (mod $L+1$) and identity maps along arrows inside the support, which is exactly $M(i,\ell)$.
 \end{proof}
-
+\begin{proposition}[Indecomposables of the cyclic truncated Nakayama algebra]
+Let $A=kQ/I$ be the cyclic truncated Nakayama algebra associated with $Q=C_{L+1}$.
+Then every finite-dimensional indecomposable $A$-module is isomorphic to an interval
+module $M(i,j)$ for some $i,j\in Q_0$ with $\delta(i,j)\le L$. Equivalently, every indecomposable $A$-module is of the form $P(i)/J^{\ell}P(i)$ for a unique pair $(i,\ell)$.
+In particular, $A$ has exactly $(L+1)^2$ indecomposable modules up to isomorphism.
+\end{proposition}
+\begin{comment}
 \begin{proposition}[Indecomposable representations of the cyclic truncated Nakayama algebra]
 \label{prop:indecomp-cyclic-nakayama}
 Let $Q=C_{L+1}$ be the oriented cyclic quiver with arrows $a_i:i-1\to i$ for $i=0,\dots,L \text{mod} L+1 $
@@ -779,7 +904,7 @@ Then every finite-dimensional indecomposable left $A$-module is isomorphic to a 
 Equivalently, every indecomposable $A$-module is of the form $P(i)/J^{\ell}P(i)$ for a unique pair $(i,\ell)$.
 In particular, $A$ has exactly $(L+1)^2$ indecomposable modules up to isomorphism.
 \end{proposition}
-
+\end{comment}
 \begin{proof}
 By Lemma~\ref{lem:Miell-well-defined}, each $M(i,\ell)$ is a well-defined finite-dimensional $A$-module, and by Lemma~\ref{lem:Miell-uniserial} it is indecomposable.
 
@@ -2315,7 +2440,7 @@ $\varepsilon((i,\ell),(j,L+1))=0$.
 \section*{Appendix}
 \subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{thm:critical-bundle}
 \begin{proof}
-We proceed in explicit steps.
+We proceed in explicit steps. Note that in this proof we have $\mathcal X_{r,\sigma}:= \Gamma_{d,XY}$ 
 
 \medskip
 \textbf{Step~1: Proof of~(22).}
