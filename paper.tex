@@ -783,28 +783,23 @@ Equivalently, $A$ can be viewed as a \emph{truncated cycle algebra}: it is the p
 \end{remark}
 \subsection{Indecomposable representations of Nakayama algebras}
 \begin{definition}[Interval modules]\label{def:interval-modules}
-Fix $Q=C_{L+1}$ with vertices $Q_0=\{0,\dots,L\}$ and arrows $a_l:l-1\to l$ for $l=0,\dots,L$
-with $a_0:L\to 0$.
+Fix $Q=C_{L+1}$ with vertices $Q_0=\{0,\dots,L\}$ and arrows $a_t:t-1\to t$
+for $t=1,\dots,L$, together with $a_0:L\to 0$.
 \noindent
-For $i,j\in Q_0$, let
+The \emph{interval module} $M(i,\ell)$, starting at vertex $i$ and of length $\ell$,
+is the representation of $Q$ defined by
 \[
-[i\rightsquigarrow j] \ \text{mod } L+1
-\]
-denote the oriented segment obtained by following the arrows of the cycle from $i$ to $j$.
-\noindent
-The \emph{interval module} $M(i,j)$ is the representation of $Q$ defined by
-\[
-M(i,j)_t :=
+M(i,\ell)_j :=
 \begin{cases}
-k, & t\in[i\rightsquigarrow j], \ \text{mod } L+1 \\ 
+k, & j\in\{i,i+1,\dots,i+\ell\}\pmod{L+1},\\
 0, & \text{otherwise},
 \end{cases}
 \]
-and for each arrow $a_t:t-1\to t$
+and for each arrow $a_t:t-1\to t$,
 \[
-M(i,j)_{a_t}:=
+M(i,\ell)_{a_t}:=
 \begin{cases}
-\mathrm{id}_k, & \text{if both endpoints of }a_t\text{ lie in }[i\rightsquigarrow j],\\
+\mathrm{id}_k, & t\in\{i+1,\dots,i+\ell\}\pmod{L+1},\\
 0, & \text{otherwise}.
 \end{cases}
 \]
@@ -833,7 +828,7 @@ M(i,\ell)_{a_j} :=
 \begin{lemma}[The relations vanish on $M(i,\ell)$]\label{lem:Miell-well-defined}
 Let $Q=C_{L+1}$ and, for each $l\in\{0,\dots,L\}$, let
 \[
-p_l := a_{l-1}\cdots a_1\, a_{0}\cdots a_{l+1}, \quad \text{mod } L+1
+p_l := a_{l-1}\cdots a_1\, a_{0}a_L\cdots a_{l+1}, \quad \text{mod } L+1
 \]
 be the oriented path of length $L$ going once around the cycle and omitting $a_l$.
 Set $A:=kQ/\langle p_0,\dots,p_{L}\rangle$.
@@ -846,100 +841,228 @@ Since the support of $M(i,\ell)$ contains only $\ell\le L$ consecutive vertices,
 Therefore $p_l$ acts by the zero map on $M(i,\ell)$ for every $l$, so all generators of the ideal $\langle p_0,\dots,p_{L}\rangle$ act trivially.
 Hence the $kQ$-action factors through $A$.
 \end{proof}
-
-\begin{lemma}[Uniseriality of $M(i,j)$]
-For every interval module $M(i,j)$, the $A$-module $M(i,j)$ is uniserial, and in particular indecomposable.
+\begin{lemma}[Indecomposability of $M(i,\ell)$]\label{lem:Miell-uniserial}
+For every interval module $M(i,\ell)$, the $A$-module $M(i,\ell)$ is uniserial, and in particular indecomposable.
 \end{lemma}
 
 \begin{proof}
-Any nonzero submodule $N\subseteq M(i,j)$ must contain the one-dimensional space at some vertex in the support $[i\rightsquigarrow j]$.
-Because all arrow maps along the support are identities, once $N$ contains the space at some vertex $t\in [i\rightsquigarrow j]$, it must also contain the spaces at all vertices in the terminal segment $[t\rightsquigarrow j]$.
-Hence the nonzero submodules are exactly the interval modules
+Let $N\subseteq M(i,\ell)$ be a nonzero submodule. Since $N\neq 0$, there exists a vertex
+$t$ such that $N_t\neq 0$. As $N_t\subseteq M(i,\ell)_t$ and each nonzero vertex space
+of $M(i,\ell)$ is one-dimensional, we must have
 \[
-M(t,j), \qquad t\in [i\rightsquigarrow j].
+N_t=M(i,\ell)_t\cong k.
 \]
-These form a chain under inclusion. Therefore the submodules of $M(i,j)$ are totally ordered, so $M(i,j)$ is uniserial.
+\noindent
+Write the support of $M(i,\ell)$ as the ordered interval
+\[
+i,\, i+1,\, \dots,\, i+\ell
+\]
+(along the chosen orientation, modulo $L+1$), and choose $t$ minimal such that
+$N_t\neq 0$. Then $N_s=0$ for all vertices $s$ preceding $t$ in this interval.
+\noindent
+Now for each vertex $r$ with
+\[
+t\le r\le i+\ell-1,
+\]
+the arrow
+\[
+a_{r+1}\colon r\to r+1
+\]
+acts as the identity on $M(i,\ell)$. Since $N$ is a subrepresentation and
+$N_r=M(i,\ell)_r\cong k$, its image under $a_{r+1}$ is nonzero, hence
+\[
+N_{r+1}=M(i,\ell)_{r+1}.
+\]
+By induction we obtain
+\[
+N_r=M(i,\ell)_r
+\qquad\text{for all } r=t,t+1,\dots,i+\ell,
+\]
+and $N_r=0$ at all earlier vertices in the support and outside the support.
+\noindent
+Therefore every nonzero submodule $N$ is exactly a terminal interval submodule,
+namely
+\[
+N \cong M\bigl(t,\, i+\ell-t\bigr)
+\]
+(with indices read modulo $L+1$). Hence the nonzero submodules of $M(i,\ell)$
+are precisely the terminal subintervals of the support, and these are totally
+ordered by inclusion. Explicitly, they form the chain
+\[
+0
+\subset
+M(i+\ell,0)
+\subset
+M(i+\ell-1,1)
+\subset
+M(i+\ell-2,2)
+\subset
+\cdots
+\subset
+M(i,\ell).
+\]
+\noindent
+Here $M(i+\ell-r,r)$ is the submodule supported on the vertices
+\[
+i+\ell-r,\; i+\ell-r+1,\; \dots,\; i+\ell,
+\]
+that is, the terminal interval of length $r$ inside the support
+\[
+i,\; i+1,\; \dots,\; i+\ell.
+\]
+Thus $M(i,\ell)$ is uniserial.
+\noindent
+Finally, every uniserial module is indecomposable: if
+\[
+M(i,\ell)=U\oplus V
+\]
+with $U,V\neq 0$, then $U$ and $V$ are two nonzero submodules neither of which
+contains the other, contradicting the fact that the submodules are totally
+ordered. Hence $M(i,\ell)$ is indecomposable.
 \end{proof}
 
 \begin{lemma}[Endomorphisms of $M(i,\ell)$]\label{lem:Miell-end}
-For every $i\in Q_0$ and $1\le \ell\le L$, one has $\mathrm{End}_A\big(M(i,\ell)\big)\cong k$.
+For every interval module $M(i,\ell)$ one has
+\[
+\End_A(M(i,\ell))\cong k.
+\]
 \end{lemma}
 
 \begin{proof}
-Let $f\in \mathrm{End}_A(M(i,\ell))$.
-On each vertex $j$ in the support, $f$ is multiplication by some scalar $\lambda_j\in k$.
-For each arrow inside the support, the arrow map is $\mathrm{id}_k$, so commutativity forces $\lambda_{j+1}=\lambda_j$.
-Hence all $\lambda_j$ coincide with a single scalar $\lambda$, and $f=\lambda\,\mathrm{id}$.
-\end{proof}
+Let $f\in \End_A(M(i,\ell))$.
+At each vertex $t$ in the support $[i\rightsquigarrow i+\ell]$, the map $f_t$
+is multiplication by some scalar $\lambda_t\in k$.
+\noindent
+For each arrow inside the support, the arrow map is $\mathrm{id}_k$, so
+commutativity of
+\[
+f_{t+1}\circ M(i,\ell)_{a_{t+1}} = M(i,\ell)_{a_{t+1}}\circ f_t
+\]
+implies $\lambda_{t+1}=\lambda_t$. Hence all $\lambda_t$ coincide, and
+therefore $f=\lambda\,\mathrm{id}$ for some $\lambda\in k$.
+\end{proof}§
 
-\begin{lemma}[Projective truncations realize $M(i,\ell)$]\label{lem:Miell-as-truncation}
+\begin{lemma}[Projective truncations realize interval modules]
 Let $P(i):=Ae_i$ be the indecomposable projective at vertex $i$ and let $J:=J(A)$.
-Then, for every $i\in Q_0$ and $1\le \ell\le L$, there is an isomorphism of $A$-modules
+Then, for every $i\in Q_0$ and every $0\le \ell\le L-1$, there is an isomorphism of $A$-modules
 \[
-P(i)/J^{\ell}P(i)\ \cong\ M(i,\ell).
+P(i)/J^{\ell+1}P(i)\cong M(i,\ell),
 \]
+where indices are taken modulo $L+1$.
 \end{lemma}
 
 \begin{proof}
-By Proposition~\ref{prop:bound-quiver-nakayama} and the previous subsection, $A$ is a cyclic Nakayama algebra with uniform Kupisch series $(L,\ldots,L)$.
-In particular, $P(i)$ is uniserial of length $L$, and $J^tP(i)$ is spanned by residue classes of paths of length $\ge t$ starting at $i$.
-Thus $P(i)/J^{\ell}P(i)$ has a basis given by the residue classes of the unique paths of lengths $0,1,\dots,\ell-1$ starting at $i$.
-Under the induced quiver description, this quotient has one-dimensional spaces on the vertices $i,i+1,\dots,i+\ell-1$ (mod $L+1$) and identity maps along arrows inside the support, which is exactly $M(i,\ell)$.
-\end{proof}
-\begin{proposition}[Indecomposables of the cyclic truncated Nakayama algebra]
-Let $A=kQ/I$ be the cyclic truncated Nakayama algebra associated with $Q=C_{L+1}$.
-Then every finite-dimensional indecomposable $A$-module is isomorphic to an interval
-module $M(i,j)$ for some $i,j\in Q_0$ with $\delta(i,j)\le L$. Equivalently, every indecomposable $A$-module is of the form $P(i)/J^{\ell}P(i)$ for a unique pair $(i,\ell)$.
-In particular, $A$ has exactly $(L+1)^2$ indecomposable modules up to isomorphism.
-\end{proposition}
-\begin{comment}
-\begin{proposition}[Indecomposable representations of the cyclic truncated Nakayama algebra]
-\label{prop:indecomp-cyclic-nakayama}
-Let $Q=C_{L+1}$ be the oriented cyclic quiver with arrows $a_i:i-1\to i$ for $i=0,\dots,L \text{mod} L+1 $
-For each $l\in\{0,\dots,L\}$, let $p_l$ be the path of length $L$ going once around the cycle and omitting $a_l$, and set
+By Proposition~\ref{prop:bound-quiver-nakayama} and the previous subsection,
+$A$ is a cyclic Nakayama algebra with uniform Kupisch series $(L,\ldots,L)$.
+In particular, $P(i)$ is uniserial of length $L$, and $J^tP(i)$ is spanned
+by residue classes of paths of length $\ge t$ starting at $i$.
+\noindent
+Thus $P(i)/J^{\ell+1}P(i)$ has a basis given by the residue classes of the
+unique paths of lengths
 \[
-A := kQ / \langle p_0,\dots,p_{L}\rangle.
+0,1,\dots,\ell
 \]
-Then every finite-dimensional indecomposable left $A$-module is isomorphic to a unique module $M(i,\ell)$ with $i\in Q_0$ and $1\le \ell\le L$.
-Equivalently, every indecomposable $A$-module is of the form $P(i)/J^{\ell}P(i)$ for a unique pair $(i,\ell)$.
-In particular, $A$ has exactly $(L+1)^2$ indecomposable modules up to isomorphism.
-\end{proposition}
-\end{comment}
-\begin{proof}
-By Lemma~\ref{lem:Miell-well-defined}, each $M(i,\ell)$ is a well-defined finite-dimensional $A$-module, and by Lemma~\ref{lem:Miell-uniserial} it is indecomposable.
-
-Conversely, since $A$ is Nakayama (Proposition~\ref{prop:bound-quiver-nakayama}), every indecomposable $A$-module is uniserial and hence a quotient of a unique indecomposable projective $P(i)=Ae_i$.
-Its composition length is some $\ell$ with $1\le \ell\le \ell(P(i))=L$, and uniseriality forces the quotient to be $P(i)/J^{\ell}P(i)$.
-By Lemma~\ref{lem:Miell-as-truncation}, this module is isomorphic to $M(i,\ell)$.
-
-Uniqueness follows because the top simple module determines $i$ and the length determines $\ell$.
-Counting pairs $(i,\ell)$ with $i\in Q_0$ and $0\le \ell\le L$ gives $(L+1)^2$.
+starting at $i$.
+\noindent
+Under the induced quiver description, this quotient has one-dimensional
+spaces on the vertices
+\[
+i,i+1,\dots,i+\ell \pmod{L+1},
+\]
+and identity maps along arrows inside the support. This is precisely the
+interval module $M(i,\ell)$.
 \end{proof}
-More details about this can be found in the following lecture notes:
-\href{https://www.math.uni-bielefeld.de/~wcrawley/1920noncommalg2/NA2.pdf}{Noncommutative Algebra 2: Representations of finite-dimensional algebras} in particular theorem and corroloray section 1.6.
-We have a Krull schmidt theorem for these Nakayama algebras.
+\begin{proposition}[Indecomposables of the cyclic truncated Nakayama algebra]\label{prop:indecomp-cyclic-nakayama}
+Let $A=kQ/I$ be the cyclic truncated Nakayama algebra associated with $Q=C_{L+1}$,
+where $I$ is generated by the paths $p_0,\dots,p_L$ of length $L$.
+Then every finite-dimensional indecomposable $A$-module is isomorphic to an
+interval module
+\[
+M(i,\ell)
+\]
+for a unique pair $(i,\ell)$ such that
+\[
+i\in Q_0, \qquad 0\le \ell\le L-1 .
+\]
+\noindent
+Equivalently, every indecomposable $A$-module is of the form
+\[
+P(i)/J^{\ell+1}P(i)
+\]
+for a unique pair $(i,\ell)$ with
+\[
+0 \le \ell \le L-1 .
+\]
+\noindent
+In particular, $A$ has exactly
+\[
+L(L+1)
+\]
+indecomposable modules up to isomorphism.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:Miell-well-defined}, each $M(i,\ell)$ is a well-defined
+finite-dimensional $A$-module, and by Lemma~\ref{lem:Miell-uniserial}
+it is indecomposable.
+\noindent
+Conversely, since $A$ is Nakayama
+(Proposition~\ref{prop:bound-quiver-nakayama}),
+every indecomposable $A$-module is uniserial and hence a quotient of a unique
+indecomposable projective $P(i)=Ae_i$.
+\noindent
+Because all paths of length $L$ vanish in $A$, the indecomposable projective
+$P(i)$ has composition length $L$. Hence every indecomposable quotient of
+$P(i)$ is of the form
+\[
+P(i)/J^{\ell+1}P(i)
+\]
+for some $0\le \ell \le L-1$.
+\noindent
+By Lemma~\ref{lem:Miell-uniserial}, this module is isomorphic to
+\[
+M(i,\ell).
+\]
+\noindent
+Uniqueness follows because the top simple module determines $i$ and the
+length determines $\ell$.
+\noindent
+For each $i\in Q_0$ there are $L$ possible values of $\ell$, namely
+$0,\dots,L-1$. Since $|Q_0|=L+1$, this yields a total of
+\[
+L(L+1)
+\]
+indecomposable modules up to isomorphism.
+\end{proof}
+\noindent
+More details about Nakayama algebras and their representations can be found in the following lecture notes:
+\href{https://www.math.uni-bielefeld.de/~wcrawley/1920noncommalg2/NA2.pdf}{Noncommutative Algebra 2: Representations of finite-dimensional algebras} in particular theorem and corollary section 1.6.
+We have a Krull--Schmidt theorem for these Nakayama algebras.
 \begin{proposition}[Krull--Schmidt for the cyclic truncated Nakayama algebra]\label{prop:KS-cyclic-truncated-nakayama}
-Let $A=kQ/I$ be the cyclic truncated Nakayama algebra, where $Q=C_{L+1}$ is the oriented $L+1$-cycle and $I$ is the ideal generated by the length-$(L)$ paths $p_0,\dots,p_{L}$ (equivalently, all paths of length $\ge L+1$ vanish in $A$).
+Let $A=kQ/I$ be the cyclic truncated Nakayama algebra, where $Q=C_{L+1}$ is the oriented $(L+1)$-cycle and $I$ is the ideal generated by the paths $p_0,\dots,p_{L}$ of length $L$ (equivalently, all paths of length $\ge L$ vanish in $A$).
 Let $\mathrm{mod}\text{-}A$ denote the category of finite-dimensional left $A$-modules.
+\noindent
 Then every $M\in \mathrm{mod}\text{-}A$ admits a decomposition as a finite direct sum of indecomposable $A$-modules.
 Moreover, this decomposition is unique up to reordering and isomorphism of the indecomposable summands.
-Equivalently, using the explicit indecomposables $M(i,\ell)$ from Proposition~\ref{prop:indecomp-cyclic-nakayama}, there exist uniquely determined multiplicities
+\noindent
+Equivalently, using the explicit indecomposables $M(i,\ell)$ from proposition~\ref{prop:indecomp-cyclic-nakayama}, there exist uniquely determined multiplicities
 $m_{i,\ell}\in\mathbb{Z}_{\ge 0}$ such that
 \[
-M \ \cong\ \bigoplus_{i=0}^{L} \ \bigoplus_{\ell=0}^{L} \ M(i,\ell)^{\oplus m_{i,\ell}}.
+M \ \cong\ \bigoplus_{i=0}^{L} \ \bigoplus_{\ell=0}^{L-1} \ M(i,\ell)^{\oplus m_{i,\ell}}.
 \]
 \end{proposition}
 
 \begin{proof}[Proof sketch]
 Since $A$ is finite-dimensional over $k$, it is left artinian (and left noetherian), hence every object of $\mathrm{mod}\text{-}A$ has finite length.
 In particular, $\mathrm{mod}\text{-}A$ is a Krull--Schmidt category: every object decomposes as a finite direct sum of indecomposables, and such a decomposition is unique up to permutation and isomorphism.
-
+\noindent
 Concretely, existence follows by choosing a nonzero module $M$ and repeatedly splitting off a nontrivial direct summand until all summands are indecomposable; the process terminates because $M$ has finite length.
 Uniqueness follows because each indecomposable has a local endomorphism ring (for example, by Lemma~\ref{lem:Miell-end} in the explicit classification), and the classical Krull--Schmidt--Azumaya argument applies.
-
-Finally, Proposition~\ref{prop:indecomp-cyclic-nakayama} classifies the indecomposables as the modules $M(i,\ell)$, so any Krull--Schmidt decomposition can be rewritten uniquely in the stated multiplicity form.
+\noindent
+Finally, Proposition~\ref{prop:indecomp-cyclic-nakayama} classifies the indecomposables as the modules $M(i,\ell)$ with $0\le \ell\le L-1$, so any Krull--Schmidt decomposition can be rewritten uniquely in the stated multiplicity form.
 \end{proof}
-\textbf{Note}: This enables to parameterize the orbits of $\Gamma$ with the indecomposables representations.
+\noindent
+\textbf{Note}: This latter proposition enables to parameterize the orbits of $\Gamma$ with the indecomposables representations.
 \begin{comment}
 \paragraph{Orbits, isomorphism classes, and multiplicity patterns.}
 Fix a finite-dimensional $k$-algebra $A$ and a dimension vector $d=(d_0,\dots,d_{L})$.
@@ -1002,105 +1125,54 @@ M_d^{+}(A),
 \]
 where the last map sends an $A$-module to the multiplicities of the indecomposables $M(i,\ell)$ in its Krull--Schmidt decomposition.
 \end{comment}
-\begin{proposition}[Orbit stratification of $\Gamma_d$ by indecomposable Nakayama modules]
+\begin{definition}
+    Consider a $A$ module $M$ and its Krull-Schmidt decomposition into $M(i,\ell)$ for $i\in\{0,\dots,L\}$ and $\ell\in\{0,\dots,L-1\}$. For each vertex $k$ the dimension $d_k$ of the representation $M$ at vertex $k$ satisfies the dimension constraint:
+\[d_k \;=\;
+\sum_{i=0}^{L}\sum_{\ell=0}^{L-1}
+m_{i,\ell}\,\mathbf{1}\!\left\{
+k \in \{i,i+1,\dots,i+\ell\} \ (\mathrm{mod}\ L+1)
+\right\}\quad k=0,\dots,L\]
+Define the set of \emph{multiplicity patterns} as
+\[\mathcal M_d^+ := \left\{(m_{i,\ell})\in \mathbb{Z}_{\ge 0}^{L(L+1)}\middle|\ \text{the above dimension constraints hold for all }k\right\}.\]
+\end{definition}
+\begin{definition}
+    For each $m \in \mathcal M_d^+(A)$, define the stratum
+\[
+\mathcal{O}_m
+:=
+\left\{
+\phi \in \Gamma_{d,L+1}
+\;\middle|\;
+M(\phi) \cong
+\bigoplus_{i,\ell} M(i,\ell)^{\oplus m_{i,\ell}}
+\right\},
+\]
+$\mathcal{O}_m$ is a single $G_d$-orbit and $\phi_m$ is a particular representative in this orbit. 
+\end{definition}
+\begin{proposition}[Orbit stratification of $\Gamma_{d,L+1}$ by indecomposable Nakayama modules]
 \label{prop:Gamma_orbit_stratification}
 
 Fix $L \ge 1$ and let $Q = C_{L+1}$ be the oriented cyclic quiver on vertices
 $\{0,\dots,L\}$.  
 Let $A := kQ/I$ be the bound quiver algebra, where $I$ is the ideal generated by the length-$L$
 paths $p_0,\dots,p_{L}$ obtained by going once around the cycle and omitting one arrow.
-Let $d=(d_0,\dots,d_L)$ be a dimension vector. Define
+Let $d=(d_0,\dots,d_L)$ be a dimension vector. 
+The variety $\Gamma_{d,L+1}$ decomposes as a disjoint union of these orbits:
 \[
-\Gamma_{d, L+1} := \left\{
-\phi \in \mathrm{Rep}_d(Q)
-\;\middle|\;
-d\mu_\ell(\phi)=0 \text{ for all } \ell=0,\dots,L, \quad \text{mod} L+1
-\right\},
-\]
-where
-\[
-d\mu_\ell(\phi) := \phi_{\ell-1}\cdots \phi_1\,\phi_{0}\,\phi_L\cdots \phi_{\ell+1}.
-\]
-
-Let
-\[
-G_d := \prod_{i=0}^{L} \mathrm{GL}(k^{d_i})
-\]
-act on $\Gamma_d$ by base change at the vertices.
-\medskip
-Then the following hold:
-\begin{enumerate}
-\item
-There is an identification
-\[
-\Gamma_d \;\cong\; \mathrm{Rep}_d(A),
-\]
-under which the $G_d$-action coincides with transport of structure on $A$-modules.
-
-\item
-The algebra $A$ is a finite-dimensional cyclic Nakayama algebra.  
-Its indecomposable finite-dimensional left modules are, up to isomorphism, the uniserial modules
-\[
-M(i,\ell), \qquad i \in \{0,\dots,L\}, \quad  0 \le \ell \le L,
-\]
-supported on $\ell$ consecutive vertices starting at $i$ (indices taken modulo $L+1$).
-
-\item
-Every $A$-module $M$ of dimension vector $d$ admits a unique (up to permutation)
-Krull--Schmidt decomposition
-\[
-M \;\cong\; \bigoplus_{i=0}^{L}\;\bigoplus_{\ell=0}^{L} M(i,\ell)^{\oplus m_{i,\ell}},
-\]
-for uniquely determined multiplicities $m_{i,\ell} \in \mathbb{Z}_{\ge 0}$ satisfying the
-dimension constraints
-\[
-d_k \;=\;
-\sum_{i=0}^{L}\sum_{\ell=0}^{L}
-m_{i,\ell}\,
-\mathbf{1}\!\left\{
-k \in \{i,i+1,\dots,i+\ell\} \ (\mathrm{mod}\ L+1)
-\right\},
-\quad k=0,\dots,L.
-\]
-
-Denote by $\mathcal M_d^+(A)$ the finite set of all such multiplicity patterns
-$m=(m_{i,\ell})$.
-
-\item
-For each $m \in \mathcal M_d^+(A)$, define the stratum
-\[
-\Gamma_d^{(m)}
-:=
-\left\{
-\phi \in \Gamma_{d,L+1}
-\;\middle|\;
-F(\phi) \cong
-\bigoplus_{i,\ell} M(i,\ell)^{\oplus m_{i,\ell}}
-\right\},
-\]
-where $F(\phi)$ denotes the associated $A$-module.
-
-Then $\Gamma_d^{(m)}$ is a single $G_d$-orbit.
-
-\item
-The variety $\Gamma_d$ decomposes as a disjoint union of these orbits:
-\[
-\Gamma_d
+\Gamma_{d,L+1}
 \;=\;
-\bigsqcup_{m \in \mathcal M_d^+(A)} \Gamma_d^{(m)}
+\bigsqcup_{m \in \mathcal M_d^+(A)} \mathcal{O}_m
 \;=\;
 \bigsqcup_{m \in \mathcal M_d^+(A)} G_d \cdot \phi_m,
 \]
 where $\phi_m$ is any representative whose associated $A$-module has multiplicity pattern $m$.
-\end{enumerate}
-
 \noindent
-In particular, the $G_d$-orbits in $\Gamma_d$ are parameterized by the
+In particular, the $G_d$-orbits in $\Gamma_{d,L+1}$ are parameterized by the
 multiplicity data of indecomposable $A$-modules, i.e.\ by the set
 $\mathcal M_d^+(A)$.
 \end{proposition}
 \section{Stratification of vanishing cyclic conditions with fixed target map}
-While the indecomposable representation of $\Gamma_{d,\sigma}$ are parameterized by the $M(i,\ell)$ from the previous modules over Nakayama algebras we are actually interested in stratifying:
+While the indecomposable representation of $\Gamma_{d,\sigma}$ are parameterized by the $M(i,\ell)$ we are actually interested in stratifying:
 \begin{equation*}
     \Gamma_{d,\sigma} := \left\{(\phi_0,\ldots,\phi_{L})\in \mathrm{Rep}_d(C_{L+1})\;\middle|\; \phi_{l-1}\cdots\phi_1\,\phi_{0}\,\phi_L\cdots\phi_{l+1} = 0,\; \phi_{0}=\sigma\right\}.
 \end{equation*}
@@ -1123,54 +1195,30 @@ G_\sigma:=\{g=(g_0,\ldots,g_L)\in \prod_{l=0}^L\mathrm{GL}(V_l)\mid (g_0,g_L)\in
 \end{definition}
 
 \begin{proposition}[$G_\sigma$-equivariance of the cyclic composition maps]\label{prop:mu-sigma-equivariant}
-Fix $\sigma\in\mathrm{Hom}(V_L,V_0)$ and consider the representation space with $\phi_{L+1}=\sigma$.
-For $\phi=(\phi_1,\ldots,\phi_L,\sigma)$ and each $l=1,\ldots,L$, define
+Fix $\sigma\in\mathrm{Hom}(V_L,V_0)$ and consider the representation space with $\phi_{0}=\sigma$.
+For $\phi=(\sigma,\phi_1,\ldots,\phi_L)$ and each $l=0,\ldots,L$, define
 \[
-d\mu_{l,\sigma}(\phi):=\phi_{l-1}\cdots \phi_1\,\sigma\,\phi_L\cdots \phi_{l+1}\in\mathrm{Hom}(V_{l+1},V_l),
+d\mu_{l,\sigma}(\phi):=\phi_{l-1}\cdots \phi_1\,\sigma\,\phi_L\cdots \phi_{l+1}\in\mathrm{Hom}(V_{l},V_{l-1}),
 \]
 with the convention that an empty product is the identity.
 Then, for all $g\in G_\sigma$ and all $l$,
 \[
 d\mu_{l,\sigma}(g\cdot \phi)= g_l\,d\mu_{l,\sigma}(\phi)\,g_{l+1}^{-1}.
 \]
-In particular, the subset $\Gamma_\sigma:=\bigcap_{l=1}^L d\mu_{l,\sigma}^{-1}(0)$ is $G_\sigma$-invariant.
+In particular, the subset $\Gamma_{d,\sigma}=\bigcap_{l=0}^L d\mu_{l,\sigma}^{-1}(0)$ is $G_\sigma$-invariant.
 \end{proposition}
 
 \begin{proof}
 Expand $d\mu_{l,\sigma}(g\cdot\phi)$ as a product of the maps $(g\cdot\phi)_i$.
 All intermediate base-change factors cancel. The only remaining factors are $g_l$ on the left and
-$g_{l+1}^{-1}$ on the right. The middle arrow is $(g\cdot\phi)_{L+1}=g_1\sigma g_L^{-1}$, which equals
+$g_{l+1}^{-1}$ on the right. The middle arrow is $(g\cdot\phi)_{0}=g_0\sigma g_L^{-1}$, which equals
 $\sigma$ because $g\in G_\sigma$. 
 \end{proof}
-For all modules in $\Gamma_\sigma$ Krull-Schmidt applies (as a category of $A$-modules where $A$ is finite dimensional). We want to parameterize the orbits of $\Gamma_\sigma$ under the action of $G_\sigma$ and study their geometry (e.g. codimension).
+\noindent
+For all modules in $\Gamma_{d,\sigma}$ Krull-Schmidt applies (as a category of $A$-modules where $A$ is finite dimensional). We want to parameterize the orbits of $\Gamma_{d,\sigma}$ under the action of $G_\sigma$ to obtain a combinatorial description of the saddle points.
 \begin{lemma}[Intersection of a $G_d$--orbit with a fixed--arrow fiber]
 \label{lem:orbit_fiber_intersection}
 Let $L\ge 2$ and let $V_0,\dots,V_L$ be finite--dimensional vector spaces over a field $\Bbbk$.  
-Set
-\[
-G_d \;:=\; \prod_{i=0}^L GL(V_i).
-\]
-Consider the morphism
-\begin{align*}
-    F: \ & \Gamma_{d,L+1} \longrightarrow \Hom(V_L,V_0) \\
-    & (\phi_0,\ldots,\phi_L) \longmapsto \phi_0.
-\end{align*}
-satisfying the equivariance property
-\begin{equation}
-\label{eq:equivariance}
-F(g\cdot x) \;=\; g_0\,F(x)\,g_L^{-1}
-\qquad
-\text{for all } g=(g_0,\dots,g_L)\in G_d,\; x\in\Gamma_d .
-\end{equation}
-
-Fix $\sigma\in \Hom(V_L,V_0)$ and define the fiber
-\[
-\Gamma_{d,\sigma} \;:=\; F^{-1}(\sigma).
-\]
-Consider the stabilizer subgroup of $G_d$
-\[
-G_\sigma \;:=\; \{ g=(g_0,\dots,g_L)\in G_d \mid g_0\,\sigma\,g_L^{-1}=\sigma \}.
-\]
 Let $\mathcal O\subset \Gamma_{d,L+1}$ be a single $G_d$--orbit.  
 Then either $\mathcal O\cap\Gamma_{d,\sigma}=\varnothing$, or else for every
 $x\in\mathcal O\cap\Gamma_{d,\sigma}$ one has
@@ -1180,10 +1228,11 @@ $x\in\mathcal O\cap\Gamma_{d,\sigma}$ one has
 In particular, whenever $\mathcal O\cap\Gamma_{d,\sigma}\neq\varnothing$, this
 intersection consists of a single $G_\sigma$--orbit.
 \end{lemma}
+\noindent
 We prove this lemma in the appendix \ref{proof-lem:orbit_fiber_intersection}.
 \begin{proposition}[Rank label for Nakayama orbits and the fiber non-emptiness criterion over $\mathbb{R}$]
 \label{prop:rank_label_and_nonemptiness_real}
-Consider the morphism of real varieties
+Consider the morphism:
 \[
 F:\Gamma_d \longrightarrow \Hom_{\mathbb{R}}(V_L,V_0)
 \]
@@ -1195,7 +1244,7 @@ F\!\big((g_0,\dots,g_L)\cdot x\big)=g_0\,F(x)\,g_L^{-1}
 \end{equation}
 \medskip
 \noindent
-Consider the stratification of $\Gamma_{d,\sigma}$ into $G_d$--orbits indexed by a parameter set $\Lambda$,
+Consider a stratification of $\Gamma_{d,\sigma}$ into $G_d$--orbits indexed by a parameter set $\Lambda$,
 \[
 \Gamma_{d,\sigma} \;=\; \bigsqcup_{\lambda\in\Lambda}\, \mathcal O_\lambda,
 \]
@@ -1291,42 +1340,33 @@ and each stratum in this decomposition is a single $G_\sigma$--orbit.
 \end{enumerate}
 \end{proposition}
 \end{comment}
-\begin{proposition}[Rank formula for the closing arrow in terms of Nakayama multiplicities]
-\label{prop:rank_formula_eps}
-Work over $\mathbb{R}$. Fix $L\ge 2$ and a dimension vector $d=(d_0,\dots,d_L)$.
-Let $\Gamma_d\subset \Rep_d(C_{L+1})$ be the variety from the document, and recall that
-$\Gamma_d$ decomposes into $G_d$--orbits indexed by $\mathcal M_d^+$, i.e.\ for each
+\begin{definition}
+    Fix $L\ge 2$ and a dimension vector $d=(d_0,\dots,d_L)$.
+Recall that
+$\Gamma_{d,L+1}$ decomposes into $G_d$--orbits indexed by $\mathcal M_d^+$, i.e.\ for each
 \[
 \mathbf m=(m_{i,\ell})\in \mathcal M_d^+
 \]
-there is a corresponding $G_d$--orbit $\mathcal O_{\mathbf m}\subset \Gamma_d$ such that
+there is a corresponding $G_d$--orbit $\mathcal O_{\mathbf m}\subset \Gamma_{d,L+1}$ such that
 every $\phi\in \mathcal O_{\mathbf m}$ has associated Nakayama module
 \[
 M(\phi)\;\cong\;\bigoplus_{i,\ell} M(i,\ell)^{\oplus m_{i,\ell}}
 \]
 (up to isomorphism), where $M(i,\ell)$ denote the indecomposable modules of the cyclic Nakayama algebra.
-
-Define the morphism
-\[
-F:\Gamma_d\to \Hom_{\mathbb{R}}(V_L,V_1),
-\qquad
-F(\phi)=\phi_{L+1}.
-\]
 For $\mathbf m\in\mathcal M_d^+$ define
 \[
 r(\mathbf m)\;:=\;\rank(F(\phi))\qquad\text{for any }\phi\in\mathcal O_{\mathbf m},
 \]
 which is well-defined by Proposition~\ref{prop:rank_label_and_nonemptiness_real}.
-
-\medskip
-\noindent
-For an indecomposable $M(i,\ell)$, define its \emph{support interval} to be the cyclic set of vertices
+\end{definition}
+\begin{definition}
+    For an indecomposable $M(i,\ell)$, define its \emph{support interval} to be the cyclic set of vertices
 \[
-\Supp(i,\ell)\;:=\;\{\,i,\; i+1,\; \dots,\; i+\ell-1\,\}\subset \mathbb{Z}/(L+1)\mathbb{Z},
+\Supp(i,\ell)\;:=\;\{\,i,\; i+1,\; \dots,\; i+\ell\,\}\subset \mathbb{Z}/(L+1)\mathbb{Z},
 \]
-where addition is taken modulo $L$ and we identify vertices with their residue classes.
+where addition is taken modulo $L+1$ and we identify vertices with their residue classes.
 Say that $M(i,\ell)$ is \emph{$(L\to 0)$--active} if the arrow $L\to 0$ acts nontrivially on $M(i,\ell)$,
-i.e.\ if the structure map
+i.e.\ if the closing map
 \[
 M(i,\ell)(L)\longrightarrow M(i,\ell)(0)
 \]
@@ -1339,74 +1379,75 @@ Define the indicator
 0, & \text{otherwise}.
 \end{cases}
 \]
-\noindent
-Then for every $\mathbf m=(m_{i,\ell})\in \mathcal M_d^+$ one has the formula
+\end{definition}
+\begin{proposition}[Rank formula for the closing arrow in terms of Nakayama multiplicities]
+\label{prop:rank_formula_eps}
+For every $\mathbf m=(m_{i,\ell})\in \mathcal M_d^+$ one has the formula
 \begin{equation}
 \label{eq:rank_formula_eps}
 r(\mathbf m)\;=\;\sum_{i=0}^L\sum_{\ell=1}^L\epsilon(i,\ell)\,m_{i,\ell}.
 \end{equation}
 \end{proposition}
+\noindent
 The proof of that proposition is given in the appendix \ref{proof:rank_formula_eps}.
 \begin{corollary}[Orbit decomposition of $\Gamma_{XY}$ indexed by $\mathcal M_d^+$]
 \label{cor:GammaXY_decomposition_by_Mdplus}
-Work over $\mathbb{R}$ and keep the notation of Proposition~\ref{prop:GammaXY_orbit_decomposition}
-and Proposition~\ref{prop:rank_formula_eps}. In particular, $\Gamma_{XY}=\Gamma_\sigma:=F^{-1}(\sigma)$,
+Recall $\Gamma_{d,XY}=\Gamma_{d,\sigma}:=F^{-1}(\sigma)$,
 the $G_d$--orbits in $\Gamma_d$ are denoted $\mathcal O_{\mathbf m}$ for $\mathbf m\in\mathcal M_d^+$,
-and $G_\sigma:=\{g\in G_d:\ g_1\sigma g_L^{-1}=\sigma\}$.
-
-Then $\Gamma_{XY}$ decomposes as a disjoint union of $G_\sigma$--orbits indexed by those
+and $G_\sigma:=\{g\in G_d:\ g_0\sigma g_L^{-1}=\sigma\}$. Consider the orbit:
+\begin{equation*}
+    \mathcal O_{\mathbf m, \sigma} := \mathcal O_{\mathbf m}\cap \Gamma_{d,XY}.
+\end{equation*}
+Then $\Gamma_{d,XY}$ decomposes as a disjoint union of $G_\sigma$--orbits indexed by those
 $\mathbf m\in\mathcal M_d^+$ satisfying the rank constraint:
 \[
-\Gamma_{XY}
+\Gamma_{d,XY}
 \;=\;
 \bigsqcup_{\mathbf m\in\mathcal M_d^+\;:\; r(\mathbf m)=\rank(\sigma)}
-\big(\mathcal O_{\mathbf m}\cap \Gamma_{XY}\big),
+ \mathcal O_{\mathbf m, \sigma},
 \]
-and for each such $\mathbf m$ the set $\mathcal O_{\mathbf m}\cap \Gamma_{XY}$ is a single $G_\sigma$--orbit.
-
+and for each such $\mathbf m$ the set $ \mathcal O_{\mathbf m, \sigma}$ is a single $G_\sigma$--orbit.
+\noindent
 Moreover, for $\mathbf m=(m_{i,\ell})\in\mathcal M_d^+$ the integer $r(\mathbf m)$ is given by the explicit formula
 \[
 r(\mathbf m)\;=\;\sum_{i,\ell}\epsilon(i,\ell)\,m_{i,\ell},
 \]
-where $\epsilon(i,\ell)\in\{0,1\}$ is the $(L\to 1)$--activity indicator of the indecomposable $M(i,\ell)$
+where $\epsilon(i,\ell)\in\{0,1\}$ is the $(L\to 0)$--activity indicator of the indecomposable $M(i,\ell)$
 as in Proposition~\ref{prop:rank_formula_eps}.
 \end{corollary}
 
 \begin{proof}
-Fix $\sigma\in\Hom(V_L,V_1)$ and recall $\Gamma_{XY}=\Gamma_\sigma$.
-
-First, since $\Gamma_d=\bigsqcup_{\mathbf m\in\mathcal M_d^+}\mathcal O_{\mathbf m}$ is a disjoint union,
+Fix $\sigma\in\Hom(V_L,V_0)$ and recall $\Gamma_{d,XY}=\Gamma_{d,\sigma}$. First, since $\Gamma_{d,L+1}=\bigsqcup_{\mathbf m\in\mathcal M_d^+}\mathcal O_{\mathbf m}$ is a disjoint union,
 intersecting with $\Gamma_\sigma$ gives the disjoint union
 \[
-\Gamma_\sigma
+\Gamma_{d,\sigma}
 \;=\;
-\Gamma_\sigma\cap \Gamma_d
+\Gamma_{d,\sigma}\cap \Gamma_{d,L+1}
 \;=\;
-\Gamma_\sigma \cap \left(\bigsqcup_{\mathbf m\in\mathcal M_d^+}\mathcal O_{\mathbf m}\right)
+\Gamma_{d,\sigma}\cap \Gamma_{d,L+1}
 \;=\;
-\bigsqcup_{\mathbf m\in\mathcal M_d^+}\big(\mathcal O_{\mathbf m}\cap \Gamma_\sigma\big).
+\Gamma_{d,\sigma} \cap \left(\bigsqcup_{\mathbf m\in\mathcal M_d^+}\mathcal O_{\mathbf m}\right)
+\;=\;
+\bigsqcup_{\mathbf m\in\mathcal M_d^+}\mathcal O_{\mathbf m, \sigma}.
 \]
-By Proposition~\ref{prop:GammaXY_orbit_decomposition}, for a given $\mathbf m$ the intersection
-$\mathcal O_{\mathbf m}\cap \Gamma_\sigma$ is nonempty if and only if
+By Proposition~\ref{prop:rank_label_and_nonemptiness_real}, for a given $\mathbf m$ the intersection
+$\mathcal O_{\mathbf m}\cap \Gamma_{d,\sigma}$ is nonempty if and only if
 $r(\mathbf m)=\rank(\sigma)$. Therefore all terms with $r(\mathbf m)\neq\rank(\sigma)$ vanish,
 and we obtain
 \[
-\Gamma_\sigma
+\Gamma_{d,\sigma}
 \;=\;
 \bigsqcup_{\mathbf m\in\mathcal M_d^+\;:\; r(\mathbf m)=\rank(\sigma)}
-\big(\mathcal O_{\mathbf m}\cap \Gamma_\sigma\big).
+\mathcal O_{\mathbf m, \sigma}.
 \]
-Again by Proposition~\ref{prop:GammaXY_orbit_decomposition}, whenever the intersection is nonempty,
-$\mathcal O_{\mathbf m}\cap \Gamma_\sigma$ is a single $G_\sigma$--orbit. This proves the stated orbit
+Again by Proposition~\ref{prop:rank_label_and_nonemptiness_real}, whenever the intersection is nonempty,
+$\mathcal O_{\mathbf m}\cap \Gamma_{d,\sigma}$ is a single $G_\sigma$--orbit. This proves the stated orbit
 decomposition.
-
-Finally, the explicit formula $r(\mathbf m)=\sum_{i,\ell}\epsilon(i,\ell)m_{i,\ell}$ is exactly
-Proposition~\ref{prop:rank_formula_eps}.
 \end{proof}
 \begin{remark}[Parametrization of $G_\sigma$--orbits in $\Gamma_{XY}$]
 \label{rem:GammaXY_Gsigma_orbits}
 The previous corollary can be equivalently phrased as follows.
-The $G_\sigma$--orbits in $\Gamma_{XY}$ are in bijection with the subset
+The $G_\sigma$--orbits in $\Gamma_{d,XY}$ are in bijection with the subset
 \[
 \left\{\mathbf m\in \mathcal M_d^+ \;\middle|\; r(\mathbf m)=\rank(\sigma)\right\},
 \]
@@ -1414,10 +1455,10 @@ via the correspondence
 \[
 \mathbf m
 \;\longmapsto\;
-\mathcal O_{\mathbf m}\cap \Gamma_\sigma.
+\mathcal O_{\mathbf m}\cap \Gamma_{d,\sigma}.
 \]
-In particular, $\Gamma_{XY}$ decomposes as a disjoint union of $G_\sigma$--orbits indexed by
-Nakayama indecomposable multiplicity data satisfying the rank constraint.
+In particular, $\Gamma_{d,XY}$ decomposes as a disjoint union of $G_\sigma$--orbits indexed by
+Nakayama indecomposable multiplicity data satisfying the rank constraint $r(\mathbf m)=\rank(\sigma)$.
 \end{remark}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Rank Patterns parameterize orbits of critical points}
@@ -2708,48 +2749,48 @@ We proceed in several steps.
 \medskip\noindent
 \textbf{Step 1: $\Gamma_{d,\sigma}$ is stable under the action of $G_\sigma$.}
 
-Let $x\in\Gamma_\sigma$, so by definition $F(x)=\sigma$.  
+Let $x\in\Gamma_{d,\sigma}$, so by definition $F(x)=\sigma$.  
 Let $g\in G_\sigma$. Using the equivariance property \eqref{eq:equivariance},
 \[
 F(g\cdot x)
 \;=\;
-g_1\,F(x)\,g_L^{-1}
+g_0\,F(x)\,g_L^{-1}
 \;=\;
-g_1\,\sigma\,g_L^{-1}.
+g_0\,\sigma\,g_L^{-1}.
 \]
-Since $g\in G_\sigma$, we have $g_1\,\sigma\,g_L^{-1}=\sigma$, and hence
-$F(g\cdot x)=\sigma$. Therefore $g\cdot x\in\Gamma_\sigma$.  
-This shows that $\Gamma_\sigma$ is invariant under the action of $G_\sigma$ and,
+Since $g\in G_\sigma$, we have $g_0\,\sigma\,g_L^{-1}=\sigma$, and hence
+$F(g\cdot x)=\sigma$. Therefore $g\cdot x\in\Gamma_{d,\sigma}$.  
+This shows that $\Gamma_{d,\sigma}$ is invariant under the action of $G_\sigma$ and,
 in particular,
 \[
-G_\sigma\cdot x \subseteq \Gamma_\sigma
+G_\sigma\cdot x \subseteq \Gamma_{d,\sigma}
 \qquad
-\text{for all } x\in\Gamma_\sigma .
+\text{for all } x\in\Gamma_{d,\sigma} .
 \tag{$\ast$}
 \]
 
 \medskip\noindent
-\textbf{Step 2: If $x\in\mathcal O\cap\Gamma_\sigma$, then
-$G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_\sigma$.}
+\textbf{Step 2: If $x\in\mathcal O\cap\Gamma_{d,\sigma}$, then
+$G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_{d,\sigma}$.}
 
-Let $x\in\mathcal O\cap\Gamma_\sigma$.  
+Let $x\in\mathcal O\cap\Gamma_{d,\sigma}$.  
 Since $\mathcal O$ is a $G_d$--orbit, it is stable under the action of $G_d$ and
 hence under the subgroup $G_\sigma\subseteq G_d$. Thus $G_\sigma\cdot x\subseteq
 \mathcal O$.  
-By $(\ast)$, $G_\sigma\cdot x\subseteq \Gamma_\sigma$.  
+By $(\ast)$, $G_\sigma\cdot x\subseteq \Gamma_{d,\sigma}$.  
 Combining these two inclusions gives
 \[
-G_\sigma\cdot x \subseteq \mathcal O\cap\Gamma_\sigma .
+G_\sigma\cdot x \subseteq \mathcal O\cap\Gamma_{d,\sigma} .
 \tag{$\ast\ast$}
 \]
 
 \medskip\noindent
-\textbf{Step 3: Any two points of $\mathcal O\cap\Gamma_\sigma$ differ by the
+\textbf{Step 3: Any two points of $\mathcal O\cap\Gamma_{d,\sigma}$ differ by the
 action of $G_\sigma$.}
 
-Assume $x,y\in\mathcal O\cap\Gamma_\sigma$.  
+Assume $x,y\in\mathcal O\cap\Gamma_{d,\sigma}$.  
 Because $x$ and $y$ lie in the same $G_d$--orbit $\mathcal O$, there exists
-$g=(g_1,\dots,g_L)\in G_d$ such that
+$g=(g_0,\dots,g_L)\in G_d$ such that
 \[
 y = g\cdot x .
 \]
@@ -2759,28 +2800,28 @@ F(y)
 \;=\;
 F(g\cdot x)
 \;=\;
-g_1\,F(x)\,g_L^{-1}.
+g_0\,F(x)\,g_L^{-1}.
 \]
-Since $x,y\in\Gamma_\sigma$, we have $F(x)=F(y)=\sigma$. Therefore
+Since $x,y\in\Gamma_{d,\sigma}$, we have $F(x)=F(y)=\sigma$. Therefore
 \[
-\sigma = g_1\,\sigma\,g_L^{-1}.
+\sigma = g_0\,\sigma\,g_L^{-1}.
 \]
 By definition of $G_\sigma$, this implies $g\in G_\sigma$. Hence
 $y=g\cdot x\in G_\sigma\cdot x$, and we conclude that
 \[
-\mathcal O\cap\Gamma_\sigma \subseteq G_\sigma\cdot x .
+\mathcal O\cap\Gamma_{d,\sigma} \subseteq G_\sigma\cdot x .
 \tag{$\ast\ast\ast$}
 \]
 
 \medskip\noindent
 \textbf{Step 4: Conclusion.}
 
-If $\mathcal O\cap\Gamma_\sigma=\varnothing$, there is nothing to prove.
-Otherwise choose any $x\in\mathcal O\cap\Gamma_\sigma$.  
-Inclusion $(\ast\ast)$ gives $G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_\sigma$,
+If $\mathcal O\cap\Gamma_{d,\sigma}=\varnothing$, there is nothing to prove.
+Otherwise choose any $x\in\mathcal O\cap\Gamma_{d,\sigma}$.  
+Inclusion $(\ast\ast)$ gives $G_\sigma\cdot x\subseteq \mathcal O\cap\Gamma_{d,\sigma}$,
 while inclusion $(\ast\ast\ast)$ gives the reverse inclusion. Therefore
 \[
-\mathcal O\cap\Gamma_\sigma = G_\sigma\cdot x .
+\mathcal O\cap\Gamma_{d,\sigma} = G_\sigma\cdot x .
 \]
 This proves that whenever the intersection is not empty, it consists of a single
 $G_\sigma$--orbit. The lemma follows.
@@ -2820,7 +2861,7 @@ This proves (i).
 Let $S,T\in W=\Hom_{\mathbb{R}}(V_L,V_1)$. We use the following statement:
 
 \smallskip\noindent
-\emph{Claim.} If $\mathrm{rank}(S)=\mathrm{rank}(T)$, then there exist $A\in GL(V_1)$ and $B\in GL(V_L)$ such that
+\emph{Claim.} If $\mathrm{rank}(S)=\mathrm{rank}(T)$, then there exist $A\in GL(V_0)$ and $B\in GL(V_L)$ such that
 \begin{equation}
 \label{eq:rank_equivalence}
 S=A\,T\,B^{-1}.
@@ -2864,6 +2905,7 @@ Therefore $g\cdot x_0\in \mathcal O_\lambda\cap \Gamma_\sigma$, so $\mathcal O_\
 
 Combining Steps 4 and 5 yields \eqref{eq:nonemptiness}. This completes the proof.
 \end{proof}
+\subsection*{Rank formula for the stratification with target map}
 We prove proposition \ref{prop:rank_formula_eps}:
 \begin{proof}\label{proof:rank_formula_eps}
 Fix $\mathbf m=(m_{i,\ell})\in \mathcal M_d^+$.
@@ -2873,7 +2915,7 @@ By definition of $\mathcal O_{\mathbf m}$, there exists an isomorphism of module
 \label{eq:KS_decomp}
 M \;\cong\;\bigoplus_{i,\ell} M(i,\ell)^{\oplus m_{i,\ell}}.
 \end{equation}
-We will compute $\rank(\phi_{L+1})=\rank(F(\phi))$ from this decomposition.
+We will compute $\rank(\phi_{0})=\rank(F(\phi))$ from this decomposition.
 
 \medskip\noindent
 \textbf{Step 1: Describe the vector spaces at vertices $0$ and $L$ using \eqref{eq:KS_decomp}.}
@@ -2895,55 +2937,55 @@ $0$ or $\mathbb{R}^{m_{i,\ell}}$.
 \medskip\noindent
 \textbf{Step 2: The closing arrow respects the direct-sum decomposition.}
 
-The linear map $\phi_{L+1}:V_L\to V_0$ is the structure map on the quiver arrow $L\to 0$.
+The linear map $\phi_{0}:V_L\to V_0$ is the structure map on the quiver arrow $L\to 0$.
 Because $M$ is a direct sum of submodules as in \eqref{eq:KS_decomp}, the action of every quiver arrow,
 and in particular the arrow $L\to 0$, decomposes as the direct sum of its actions on each direct summand.
 Concretely, after choosing identifications as in \eqref{eq:vertex_decomp} for $j=L$ and $j=0$,
-the map $\phi_{L+1}$ can be written as a block-diagonal direct sum
+the map $\phi_{0}$ can be written as a block-diagonal direct sum
 \begin{equation}
 \label{eq:block_sum}
-\phi_{L+1}
+\phi_{0}
 \;\cong\;
 \bigoplus_{i,\ell}
-\big(\phi_{L+1}\big)_{i,\ell},
+\big(\phi_{0}\big)_{i,\ell}
 \end{equation}
 where
 \[
-\big(\phi_{L+1}\big)_{i,\ell}:\;
+\big(\phi_{0}\big)_{i,\ell}:\;
 M(i,\ell)(L)^{\oplus m_{i,\ell}}
 \longrightarrow
-M(i,\ell)(1)^{\oplus m_{i,\ell}}
+M(i,\ell)(0)^{\oplus m_{i,\ell}}
 \]
-is the map induced by $L\to 1$ on the summand $M(i,\ell)^{\oplus m_{i,\ell}}$.
+is the map induced by $L\to 0$ on the summand $M(i,\ell)^{\oplus m_{i,\ell}}$.
 
 \medskip\noindent
-\textbf{Step 3: Compute each block $\big(\phi_{L+1}\big)_{i,\ell}$.}
+\textbf{Step 3: Compute each block $\big(\phi_{0}\big)_{i,\ell}$.}
 
 Fix a pair $(i,\ell)$. There are two cases.
 
 \smallskip\noindent
 \emph{Case A: $\epsilon(i,\ell)=0$.}
-By definition, $\epsilon(i,\ell)=0$ means the arrow $L\to 1$ acts trivially on $M(i,\ell)$, i.e.\ the map
+By definition, $\epsilon(i,\ell)=0$ means the arrow $L\to 0$ acts trivially on $M(i,\ell)$, i.e.\ the map
 \[
-M(i,\ell)(L)\to M(i,\ell)(1)
+M(i,\ell)(L)\to M(i,\ell)(0)
 \]
 is the zero map. Taking $m_{i,\ell}$ copies, the induced map
 \[
-\big(\phi_{L+1}\big)_{i,\ell}:\;
+\big(\phi_{0}\big)_{i,\ell}:\;
 M(i,\ell)(L)^{\oplus m_{i,\ell}}
 \to
-M(i,\ell)(1)^{\oplus m_{i,\ell}}
+M(i,\ell)(0)^{\oplus m_{i,\ell}}
 \]
 is also the zero map. Hence
 \begin{equation}
 \label{eq:rank_block_zero}
-\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big)=0.
+\rank\big(\big(\phi_{0}\big)_{i,\ell}\big)=0.
 \end{equation}
 
 \smallskip\noindent
 \emph{Case B: $\epsilon(i,\ell)=1$.}
-By definition, $\epsilon(i,\ell)=1$ means the arrow $L\to 1$ acts nontrivially on $M(i,\ell)$.
-For Nakayama indecomposables, both spaces $M(i,\ell)(L)$ and $M(i,\ell)(1)$ are then $1$--dimensional and
+By definition, $\epsilon(i,\ell)=1$ means the arrow $L\to 0$ acts nontrivially on $M(i,\ell)$.
+For Nakayama indecomposables, both spaces $M(i,\ell)(L)$ and $M(i,\ell)(0)$ are then $1$--dimensional and
 the map between them is a nonzero linear map $\mathbb{R}\to \mathbb{R}$.
 Choose bases of these $1$--dimensional spaces; in these bases the map is multiplication by a nonzero scalar
 $a_{i,\ell}\in \mathbb{R}^\times$.
@@ -2954,24 +2996,24 @@ a_{i,\ell}\cdot I_{m_{i,\ell}}:\ \mathbb{R}^{m_{i,\ell}}\to \mathbb{R}^{m_{i,\el
 which is invertible because $a_{i,\ell}\neq 0$. Therefore
 \begin{equation}
 \label{eq:rank_block_full}
-\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big)=m_{i,\ell}.
+\rank\big(\big(\phi_{0}\big)_{i,\ell}\big)=m_{i,\ell}.
 \end{equation}
 
 \medskip\noindent
 \textbf{Step 4: Sum the ranks of the blocks.}
 
 By \eqref{eq:block_sum}, after choosing bases compatible with the decomposition,
-$\phi_{L+1}$ is block diagonal with blocks $\big(\phi_{L+1}\big)_{i,\ell}$.
+$\phi_{0}$ is block diagonal with blocks $\big(\phi_{0}\big)_{i,\ell}$.
 The rank of a block-diagonal linear map is the sum of the ranks of its diagonal blocks
 (because its image is the direct sum of the images of the blocks).
 Hence
 \[
-\rank(\phi_{L+1})
+\rank(\phi_{0})
 \;=\;
-\sum_{i,\ell}\rank\big(\big(\phi_{L+1}\big)_{i,\ell}\big).
+\sum_{i,\ell}\rank\big(\big(\phi_{0}\big)_{i,\ell}\big).
 \]
 Substituting \eqref{eq:rank_block_zero} in Case A and \eqref{eq:rank_block_full} in Case B yields
-\[
+\[\
 \rank(\phi_{L+1})
 \;=\;
 \sum_{i,\ell}\epsilon(i,\ell)\,m_{i,\ell}.
