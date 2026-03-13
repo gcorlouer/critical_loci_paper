@@ -317,6 +317,44 @@ On the same principal slice locus,
 \end{theorem}
 \noindent
 The proof of the latter theorem can be found appendix \ref{app:loci-cyclic}.
+\begin{remark}[Why a rank-stratification of $\Gamma_{d,XY}$ does not lift naively to $\mathcal C_r$]
+A priori, the orbit decomposition of $\Gamma_{d,XY}$ by rank data does \emph{not} induce a disjoint decomposition of the critical locus $\mathcal C_r$ by the same labels. The reason is that Proposition~3.4 only provides a surjective map
+\[
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow \mathcal C_r,
+\]
+whereas injectivity is established only after restricting to the principal slice locus $\Gamma^\circ_{d,XY}$ in Theorem~3.6.
+\noindent
+Concretely, let $O_{\rho,\sigma}, O_{\rho',\sigma} \subset \Gamma_{d,XY}$ be two distinct $G_\sigma$-orbits, corresponding to different rank strata. In order for these to define distinct strata in $\mathcal C_r$, one would need that
+\[
+G_h \cdot \iota(O_{\rho,\sigma}) \cap G_h \cdot \iota(O_{\rho',\sigma}) = \varnothing
+\qquad\text{whenever } \rho \neq \rho'.
+\]
+However, this need not hold outside the principal slice locus. Indeed, it may happen that for some
+$Z \in O_{\rho,\sigma}$ and $Z' \in O_{\rho',\sigma}$ there exists $h \in G_h$ such that
+\[
+\iota(Z) = h \cdot \iota(Z'),
+\]
+even though $h \notin H_{r,\sigma}$. In that case, $\iota(Z)$ and $\iota(Z')$ represent the same point of
+$\mathcal C_r$, but $Z$ and $Z'$ are not related by the residual $H_{r,\sigma}$-action on $\Gamma_{d,XY}$.
+Thus distinct rank strata in the slice can collapse to the same point, or the same $G_h$-orbit, in
+$\mathcal C_r$.
+\noindent
+Geometrically, the obstruction is the possible presence of \emph{extra transporter symmetries}
+\[
+\mathrm{Trans}_{G_h}\!\bigl(\iota(Z), S_{r,\sigma}\bigr) \supsetneq H_{r,\sigma},
+\]
+which allow one to move between different slice representatives of the same critical point using
+hidden-layer gauge transformations that do not preserve the residual block decomposition. On the
+principal slice locus, by definition, no such extra symmetries occur, and one recovers a genuine
+identification
+\[
+\mathcal C_r^\circ \cong G_h \times_{H_{r,\sigma}} \Gamma^\circ_{d,XY}.
+\]
+Accordingly, the rank-stratification of $\Gamma^\circ_{d,XY}$ lifts faithfully to $\mathcal C_r^\circ$,
+but not, in general, to all of $\mathcal C_r$ without further refinement.
+\end{remark}
+\noindent
+We will use cyclic quiver representation theory to stratify $\Gamma_{d,XY}$ by rank data and then use the above bundle structure to stratify the critical loci $\mathcal C_r$.
 \begin{comment}
 \begin{remark}[Hidden-layer gauge variant]
 If only hidden-layer changes of basis are allowed, replace $G$ by $G_h := \prod_{\ell=1}^{L-1} \mathrm{GL}(d_\ell, \mathbb{R})$ (i.e.\ fix $g_0, g_L$), and replace $H_r$ by $H_{r,h} := H_r \cap G_h$. All statements and the proof remain valid verbatim with this replacement, with $\mathcal{Z}^{\circ}$ redefined using $\operatorname{Stab}_{G_h}$ in place of $\operatorname{Stab}_G$.
@@ -1816,6 +1854,238 @@ In particular, \(\Gamma_{d,\sigma}\) is stratified by \(G_\sigma\)-orbits indexe
 \end{theorem}
 \noindent
 We prove this theorem in the appendix \ref{proof:GammaXY_orbit_stratification}
+\section{Stratification of the Critical loci}
+\begin{definition}[Lifted rank-pattern loci and rank-support]
+For each cyclic admissible rank pattern $\rho$, define the corresponding lifted locus in the critical set by
+\[
+\mathcal C_r^{(\rho)}
+:=
+\bar\Phi\!\bigl(G_h\times_{H_{r,\sigma}} O_{\rho,\sigma}\bigr)
+=
+G_h\cdot \iota(O_{\rho,\sigma}) \subseteq \mathcal C_r.
+\]
+The family $\{\mathcal C_r^{(\rho)}\}_\rho$ will be called the rank-pattern cover of $\mathcal C_r$:
+\begin{equation*}
+\mathcal C_r = \bigcup_{\rho\in R_d^{\mathrm{orb}}} \mathcal C_r^{(\rho)}.
+\end{equation*}
+\noindent
+For $W\in \mathcal C_r$, define its rank-support by
+\[
+\operatorname{Supp}_{\mathrm{rk}}(W)
+:=
+\{\rho \mid W\in \mathcal C_r^{(\rho)}\}.
+\]
+Equivalently, $\rho\in \operatorname{Supp}_{\mathrm{rk}}(W)$ if and only if there exist
+$g\in G_h$ and $Z\in O_{\rho,\sigma}$ such that $W=g\cdot \iota(Z)$.
+\end{definition}
+
+\begin{remark}
+In general, the subsets $\mathcal C_r^{(\rho)}$ need not be disjoint, since distinct rank strata in
+$\Gamma_{d,XY}$ may map to the same critical point under $\bar\Phi$. Thus the natural global lift of the
+rank-stratification of $\Gamma_{d,XY}$ is not a genuine partition of $\mathcal C_r$ by single rank patterns,
+but rather a rank-pattern cover. On the principal locus, where $\bar\Phi$ is bijective, the rank-support is a singleton and this reduces to the
+usual rank-stratification.
+\end{remark}
+\begin{definition}[Rank-pattern stack pieces]
+Let
+\[
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow \mathcal C_r
+\]
+be the surjective map of Proposition~3.4, and let
+\[
+\Gamma_{d,XY}
+=
+\bigsqcup_{\rho} O_{\rho,\sigma}
+\]
+be the orbit stratification of $\Gamma_{d,XY}$ by cyclic rank patterns from Theorem~5.21.
+\noindent
+For each admissible cyclic rank pattern $\rho$, define the corresponding stack piece by
+\[
+\mathfrak X_\rho
+:=
+\bigl[\,G_h \times O_{\rho,\sigma}\,/\,H_{r,\sigma}\,\bigr].
+\]
+Equivalently, $\mathfrak X_\rho$ is the quotient groupoid associated to the restriction of the
+right $H_{r,\sigma}$-action on $G_h\times \Gamma_{d,XY}$ to the invariant subset
+$G_h\times O_{\rho,\sigma}$.
+\noindent
+We also write
+\[
+\mathfrak X
+:=
+\bigl[\,G_h \times \Gamma_{d,XY}\,/\,H_{r,\sigma}\,\bigr].
+\]
+Then the decomposition of $\Gamma_{d,XY}$ induces a decomposition
+\[
+\mathfrak X
+=
+\bigsqcup_{\rho}\mathfrak X_\rho.
+\]
+\end{definition}
+
+\begin{remark}
+The decomposition above is disjoint on the parameter side because the strata
+$O_{\rho,\sigma}\subset \Gamma_{d,XY}$ are pairwise disjoint $G_\sigma$-orbits. Thus the ambiguity in
+lifting rank strata from $\Gamma_{d,XY}$ to $\mathcal C_r$ does not occur at the level of the stack
+$\mathfrak X$, but only after pushing forward along $\bar\Phi$.
+\end{remark}
+
+\begin{definition}[Fiber groupoid and rank-pattern fiber pieces]
+For $W\in \mathcal C_r$, define the fiber groupoid of presentations of $W$ by
+\[
+\mathfrak X_W
+:=
+\bar\Phi^{-1}(W)
+\subseteq
+\mathfrak X.
+\]
+For each admissible rank pattern $\rho$, define the $\rho$-piece of the fiber by
+\[
+\mathfrak X_{W,\rho}
+:=
+\mathfrak X_W\cap \mathfrak X_\rho.
+\]
+Equivalently, $\mathfrak X_{W,\rho}$ is the full subgroupoid of $\mathfrak X_W$ consisting of
+those presentation classes $[g,Z]$ with $Z\in O_{\rho,\sigma}$.
+\end{definition}
+
+\begin{proposition}[Fiber decomposition by rank pattern]
+For every $W\in \mathcal C_r$, the fiber groupoid $\mathfrak X_W$ admits a canonical disjoint
+decomposition
+\[
+\mathfrak X_W
+=
+\bigsqcup_{\rho}\mathfrak X_{W,\rho}.
+\]
+In particular, each presentation class of $W$ determines a unique cyclic rank pattern $\rho$,
+namely the rank pattern of its slice representative $Z\in \Gamma_{d,XY}$.
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+\mathfrak X=\bigsqcup_{\rho}\mathfrak X_\rho,
+\]
+intersecting both sides with the fiber $\mathfrak X_W=\bar\Phi^{-1}(W)$ yields
+\[
+\mathfrak X_W
+=
+\bar\Phi^{-1}(W)\cap \mathfrak X
+=
+\bigsqcup_{\rho}\bigl(\bar\Phi^{-1}(W)\cap \mathfrak X_\rho\bigr)
+=
+\bigsqcup_{\rho}\mathfrak X_{W,\rho}.
+\]
+The union is disjoint because the $\mathfrak X_\rho$ are disjoint. The final statement follows
+from the fact that each $Z\in \Gamma_{d,XY}$ belongs to a unique orbit $O_{\rho,\sigma}$ in the
+rank-pattern stratification of $\Gamma_{d,XY}$.
+\end{proof}
+\begin{definition}[Presentation of a saddle]
+Let
+\[
+\bar\Phi \colon X=(G_h\times \Gamma_{d,XY})/H_{r,\sigma}\longrightarrow C_r
+\]
+be the surjective map to the critical locus. For a saddle \(W\in C_r\), a
+\emph{presentation} of \(W\) is an element of the fiber
+\[
+X_W:=\bar\Phi^{-1}(W).
+\]
+Equivalently, a presentation of \(W\) is an equivalence class \([g,Z]\in X\)
+such that
+\[
+\bar\Phi([g,Z])=W,
+\]
+that is, a way of writing \(W\) in the form
+\[
+W=g\cdot \iota(Z), \qquad g\in G_h,\; Z\in \Gamma_{d,XY},
+\]
+modulo the natural \(H_{r,\sigma}\)-equivalence.
+\end{definition}
+
+\begin{proposition}[Rank patterns distinguish different presentations]
+For each saddle \(W\in C_r\), the fiber \(X_W\) admits a stratification labelled by cyclic rank patterns:
+\[
+X_W=\bigsqcup_{\rho} X_{W,\rho},
+\qquad
+X_{W,\rho}:=\{[g,Z]\in X_W \mid Z\in O_{\rho,\sigma}\},
+\]
+where the \(O_{\rho,\sigma}\subset \Gamma_{d,XY}\) are the strata indexed by
+cyclic rank patterns \(\rho\).
+\\
+\noindent
+In particular, every presentation \([g,Z]\in X_W\) determines a unique cyclic
+rank pattern \(\rho\). Hence cyclic rank patterns label distinct presentations
+of a saddle: if two presentations of \(W\) lie in different pieces
+\(X_{W,\rho}\) and \(X_{W,\rho'}\) with \(\rho\neq \rho'\), then they are
+distinguished combinatorially by their cyclic rank pattern data.
+\\
+\noindent
+Therefore, the fibers of \(\bar\Phi\), together with their decomposition into
+rank-pattern strata, provide a combinatorial description of saddles at the
+level of their presentations.
+\end{proposition}
+\begin{definition}[Rank-support]
+For $W\in \mathcal C_r$, define its rank-support by
+\[
+\operatorname{Supp}_{\mathrm{rk}}(W)
+:=
+\{\rho \mid \mathfrak X_{W,\rho}\neq \varnothing\}.
+\]
+Equivalently,
+\[
+\operatorname{Supp}_{\mathrm{rk}}(W)
+=
+\{\rho \mid \exists\, [g,Z]\in G_h\times_{H_{r,\sigma}}\Gamma_{d,XY}
+\text{ with } \bar\Phi([g,Z])=W \text{ and } Z\in O_{\rho,\sigma}\}.
+\]
+\end{definition}
+
+\begin{definition}[Support strata in the critical locus]
+For any subset $\mathsf S$ of admissible cyclic rank patterns, define the corresponding support
+stratum of the critical locus by
+\[
+\mathcal C_r^{\mathsf S}
+:=
+\{\,W\in \mathcal C_r \mid \operatorname{Supp}_{\mathrm{rk}}(W)=\mathsf S\,\}.
+\]
+\end{definition}
+
+\begin{proposition}[Support stratification of $\mathcal C_r$]
+The family
+\[
+\bigl\{\mathcal C_r^{\mathsf S}\bigr\}_{\mathsf S}
+\]
+forms a disjoint decomposition of $\mathcal C_r$:
+\[
+\mathcal C_r
+=
+\bigsqcup_{\mathsf S}\mathcal C_r^{\mathsf S}.
+\]
+Thus every critical point is assigned a well-defined combinatorial support set of cyclic rank
+patterns, and two points lie in the same support stratum precisely when they admit presentations
+by exactly the same rank-pattern pieces $\mathfrak X_\rho$.
+\end{proposition}
+
+\begin{proof}
+For every $W\in \mathcal C_r$, the set $\operatorname{Supp}_{\mathrm{rk}}(W)$ is well-defined by the
+preceding definition. Hence each $W$ belongs to exactly one subset $\mathcal C_r^{\mathsf S}$,
+namely the one corresponding to its support set $\mathsf S=\operatorname{Supp}_{\mathrm{rk}}(W)$.
+Therefore the subsets $\mathcal C_r^{\mathsf S}$ are pairwise disjoint and their union is all of
+$\mathcal C_r$.
+\end{proof}
+
+\begin{remark}[Relation with the principal slice locus]
+On the principal slice locus, Theorem~3.6 identifies
+\[
+\mathcal C_r^\circ \cong G_h\times_{H_{r,\sigma}}\Gamma_{d,XY}^\circ.
+\]
+Hence for $W\in \mathcal C_r^\circ$, the fiber groupoid $\mathfrak X_W$ consists of a single
+presentation class up to the $H_{r,\sigma}$-action, and therefore
+$\operatorname{Supp}_{\mathrm{rk}}(W)$ is a singleton. In this sense, the support stratification
+refines the usual rank-pattern stratification on the principal locus and extends it to all of
+$\mathcal C_r$, including degenerate points where several rank patterns may occur in the same
+fiber.
+\end{remark}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Appendix}
 \subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{thm:critical-bundle}
