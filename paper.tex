@@ -70,12 +70,12 @@ The dimension $d_0$ is the dimension of the input data and the dimensions $d_l,\
 This function $\mu$ maps the parameter space $\Omega:=\{(W_1,...,W_L) \in \prod_{l=0}^{L-1}\mathbb{R}^{d_l \times d_{l+1}}\}$ to the function space $\mathcal{F} \cong \mathbb{R}^{d_0\times d_L}$ of a Deep Neural Network. A DLN is a matrix-monomial (so non-linear) in the parameter space $\Omega$ (the space above) and linear map in the function space $\mathcal{F}$ (the space below).
 \end{definition}
 \begin{definition}
-    Define the variety of matrices of rank $r$:
+    Define the algebraic variety of matrices of rank $r$:
 \begin{equation*}
     \Sigma^r_d := \{W\in\Omega|rk(W_L...W_1) = r\}
 \end{equation*}
 Consider the following group action of $GL_d=\Pi_{l=L}^0 GL_{d_l} = GL_{d_L}\times GL_{h} \times GL_{d_0}$:
-\begin{equation*}
+\begin{equation*}\label{eq:action-G_d}
     (W_1,\dots,W_L)\mapsto (g_1W_1g_0^{-1},\; g_2W_2g_1^{-1},\;\dots,\; g_L W_L g_{L-1}^{-1})
 \end{equation*}
 We can also reparametrize $\Sigma^r_d$ by the following:
@@ -124,7 +124,6 @@ Then $\Gamma$ is the subset of such representations satisfying the $L$ cyclic re
 \]
 with the convention that an empty product is the identity.
 If we include the condition that $$\phi_L...\phi_1=0$$ Then all paths of length $L$ are zero and we denote $\Gamma_d$ the set of paths representations satisfying this condition.
-\end{comment}
 \noindent
 Fix a depth $L\ge 2$, widths $(d_0,\dots,d_L)$, and an integer $0\le r\le \min_\ell d_\ell$.
 Let
@@ -139,12 +138,14 @@ act on $\Omega$ by
 \begin{equation}\label{eq:gauge-action-crit}
 (g\cdot W)_\ell \;:=\; g_\ell\, W_\ell\, g_{\ell-1}^{-1}.
 \end{equation}
+\end{comment}
+\noindent
 We also fix the data-dependent matrices appearing in the normal form of critical points (e.g.\ from the DLN second-order analysis):
 \[
 U_S\in \R^{d_L\times r},\qquad U_Q\in \R^{d_L\times(d_L-r)},\qquad
 \sigma \;:=\; \Sigma_{XY}U_Q \in \Hom(\R^{d_L-r},\R^{d_0-r}).
 \]
-(Here $\sigma$ is the distinguished ``closing arrow'' in the cyclic-quiver model.)
+(Here $\sigma$ is the ``closing arrow'' in the later cyclic-quiver model.)
 \begin{comment}
 \paragraph{Residual parameter space and constraints.}
 Define the residual space
@@ -169,19 +170,27 @@ Finally set
 \end{equation}
 \end{comment}
 \begin{proposition}
-From the paper \cite{alchour}, we can write the set of rank $r$ critical points of a DLN as:
+From the paper \cite{alchour}, we can write the set of rank $r$ critical points of a DLN as the following algebraic variety:
 \begin{equation*}
     \mathcal{C}_r = \{W\in \Omega, Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}|W_L = [U_S, U_QZ_L],  W_l \sim \begin{pmatrix} I_r & 0 \\
                                                       0.  & Z_l      
                                         \end{pmatrix}, W_1 = [\Sigma_X^{-1}\Sigma_{XY}U_S, Z_1^{\top}]^{\top}, Z_l\in\Gamma_{d,XY}\}
-\end{equation*}
-Which suggest that studying the geometry of the critical loci amounts to studying the geometry of $\Gamma_{d,XY}$.
+\end{equation*} 
+In other words, $\mathcal{C}_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in the normal form of the DLN, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)$ such that
+\[
+W_L = [U_S,\, U_Q Z_L], \qquad
+W_\ell \sim \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
+\;(\ell = 2, \dots, L{-}1), \qquad
+W_1 = \begin{pmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{pmatrix},
+\qquad Z \in \Gamma_{d,XY}
+\]
+This suggests that stratifying the geometry of the critical loci amounts to stratifying the geometry of $\Gamma_{d,XY}$.
 \end{proposition}
 %------------------------------------------------------------
 \section{Critical loci as a bundle over $\Gamma$}
 %------------------------------------------------------------
-\paragraph{A gauge-fixed slice of rank-$r$ critical points.}
-Define the map $\iota:\mathcal Z\to \Omega$ by putting residual blocks on the diagonal:
+\begin{definition}[A gauge-fixed slice of rank-$r$ critical points.]
+    Define the map $\iota:\mathcal Z\to \Omega$ by putting residual blocks on the diagonal:
 \begin{equation}\label{eq:iota-Z}
 \iota(Z)_\ell \;:=\;
 \begin{pmatrix}
@@ -203,18 +212,19 @@ Z_1
 \in \Mat_{d_1\times d_0}(\R).
 \end{equation}
 (Only the block structure matters for what follows; any equivalent fixed endpoint embedding works.)
+\end{definition}
 \noindent
 Define the \emph{gauge-fixed critical slice}
 \begin{equation}\label{eq:Scrit-def}
 \mathcal S_{r,\sigma} \;:=\; \iota(\Gamma_{d,XY}) \;\subset\; \Omega .
 \end{equation}
 
-\paragraph{Hidden-layer gauge group and its slice stabilizer.}
+\begin{definition}[Hidden-layer gauge group and its slice stabilizer.]
 Let
 \[
 G_h \;:=\; \prod_{\ell=1}^{L-1} GL(d_\ell,\R)
 \]
-act on $\Omega$ via \eqref{eq:gauge-action-crit} with $g_0=g_L=I$ (endpoints fixed).
+act on $\Omega$ via \ref{eq:action-G_d} with $g_0=g_L=I$ (endpoints fixed).
 Define the subgroup $H_{r,\sigma}\le G_h$ consisting of those hidden reparametrizations that preserve the block decomposition
 $\R^{d_\ell}\cong \R^r\oplus \R^{d_\ell-r}$ for every hidden layer \emph{and} preserve the endpoint embeddings
 \eqref{eq:endpoints-slice}:
@@ -242,39 +252,39 @@ for $h_\ell=\begin{psmallmatrix}A&0\\0&K_\ell\end{psmallmatrix}$ we set
 \end{equation}
 with the obvious endpoint conventions for $\ell=1$ and $\ell=L$ determined by the fixed endpoint embeddings
 \eqref{eq:endpoints-slice}.
-By construction, $\Gamma_{d,XY}\subset \mathcal Z$ is $H_{r,\sigma}$-stable (this is exactly the meaning of
+By construction, $\Gamma_{d,XY}\subset \mathcal Z$ is $H_{r,\sigma}$-stable (since
 $h\cdot \mathcal S_{r,\sigma}=\mathcal S_{r,\sigma}$).
-\begin{theorem}\label{thm:critical-bundle}
-Let $C_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in the normal form of the DLN second-order characterisation, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)$ such that
-\[
-W_L = [U_S,\, U_Q Z_L], \qquad
-W_\ell \sim \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
-\;(\ell = 2, \dots, L{-}1), \qquad
-W_1 = \begin{pmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{pmatrix},
-\qquad Z \in \Gamma_{d,XY}
-\]
-Then the following hold.
-
-\medskip\noindent
-\textbf{(1) Orbit-saturation description.}
-\begin{equation}\tag{22}
-C_r = G_h \cdot S_{r,\sigma}.
+\end{definition}
+\noindent
+\begin{proposition}\label{prop:orbit-saturation}
+The critical loci $\mathcal{C}_r$ is the orbit of the gauge-fixed critical slice $\mathcal{S}_{r,\sigma}$ by the hidden-layer gauge group $G_h$:
+\begin{equation}\label{eq:orbit-saturation}
+\mathcal{C}_r = G_h \cdot S_{r,\sigma}.
 \end{equation}
-
-\medskip\noindent
-\textbf{(2) Associated bundle model (set-level).}
-Define $\Phi \colon G_h \times \Gamma_{d,XY} \to \Omega$ by
-\begin{equation}\tag{23}
+\end{proposition}
+\noindent
+We prove this proposition in the appendix \ref{proof:orbit-saturation}
+\begin{proposition}\label{prop:parameters-as-bundle}
+    Define $\Phi \colon G_h \times \Gamma_{d,XY} \to \Omega$ by
+\begin{equation}
 \Phi(g, Z) := g \cdot \iota(Z),
 \end{equation}
-Then $\Phi(G_h \times \Gamma_{d,XY}) = C_r$ and $\Phi$ is invariant under the right action of $H_{r,\sigma}$ on $G_h \times \Gamma_{d,XY}$ given by
-\begin{equation}\tag{24}
+Then $\Phi(G_h \times \Gamma_{d,XY}) = \mathcal{C}_r$ and $\Phi$ is invariant under the right action of $H_{r,\sigma}$ on $G_h \times \Gamma_{d,XY}$ given by
+\begin{equation}
 (g, Z) \cdot h := (g h,\; h^{-1} \cdot Z).
 \end{equation}
 Hence $\Phi$ descends to a surjective map
 \[\
-\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow C_r.
+\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow \mathcal{C}_r.
 \]
+With 
+\begin{equation*}
+     G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} := (G_h \times \Gamma_{d,XY}) / H_{r,\sigma}
+\end{equation*}
+\end{proposition}
+\noindent
+We prove this proposition in the appendix \ref{proof:parameters-as-bundle}.
+\begin{definition}
 Define the \emph{transporter into the slice} at a point $Z' \in \Gamma_{d,XY}$ by
 \[
 \mathrm{Trans}_{G_h}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr)
@@ -285,26 +295,28 @@ Define the \emph{principal slice locus}
 \Gamma_{d,XY}^{\circ} := \bigl\{ Z' \in \Gamma_{d,XY} \;\big|\;
 \mathrm{Trans}_{G_h}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr) = H_{r,\sigma} \bigr\},
 \]
-and let $C_r^{\circ} := \Phi(G_h \times \Gamma_{d,XY}^{\circ})$.
-Then the restriction
+and let $\mathcal{C}_r^{\circ} := \Phi(G_h \times \Gamma_{d,XY}^{\circ})$.
+\end{definition}
+\begin{theorem}\label{thm:critical-bundle}
+The restriction
 \[
 \bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
-\xrightarrow{\;\sim\;} C_r^{\circ}
+\xrightarrow{\;\sim\;} \mathcal{C}_r^{\circ}
 \]
-is an isomorphism.  In particular, on the principal slice locus one the identification:
-\begin{equation}\tag{25}
-C_r^{\circ} \;\cong\; G_h \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
+is a bijection.  In particular, on the principal slice locus one has the identification:
+\begin{equation}
+\mathcal{C}_r^{\circ} \;\cong\; G_h \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
 \qquad\text{(on the principal slice locus).}
 \end{equation}
 
 \medskip\noindent
-\textbf{(3) Quotient of critical points by hidden gauge.}  On the same principal slice locus,
-\begin{equation}\tag{26}
-C_r^{\circ} / G_h \;\cong\; \Gamma_{d,XY}^{\circ} / H_{r,\sigma}.
+On the same principal slice locus,
+\begin{equation}
+\mathcal{C}_r^{\circ} / G_h \;\cong\; \Gamma_{d,XY}^{\circ} / H_{r,\sigma}.
 \end{equation}
 \end{theorem}
 \noindent
-The proof of the latter proposition can be found appendix \ref{app:loci-cyclic}.
+The proof of the latter theorem can be found appendix \ref{app:loci-cyclic}.
 \begin{comment}
 \begin{remark}[Hidden-layer gauge variant]
 If only hidden-layer changes of basis are allowed, replace $G$ by $G_h := \prod_{\ell=1}^{L-1} \mathrm{GL}(d_\ell, \mathbb{R})$ (i.e.\ fix $g_0, g_L$), and replace $H_r$ by $H_{r,h} := H_r \cap G_h$. All statements and the proof remain valid verbatim with this replacement, with $\mathcal{Z}^{\circ}$ redefined using $\operatorname{Stab}_{G_h}$ in place of $\operatorname{Stab}_G$.
@@ -1807,42 +1819,37 @@ We prove this theorem in the appendix \ref{proof:GammaXY_orbit_stratification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Appendix}
 \subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{thm:critical-bundle}
-\begin{proof}
-We proceed in explicit steps. Note that in this proof we have $\mathcal X_{r,\sigma}:= \Gamma_{d,XY}$ 
-
-\medskip
-\textbf{Step~1: Proof of~(22).}
-By the assumed DLN normal form for rank-$r$ critical points, $W \in C_r$ if and only if there exists $Z \in \mathcal X_{r,\sigma}$ and a sequence of hidden invertible changes of basis $g = (g_1, \dots, g_{L-1}) \in G_h$ such that the transformed weights satisfy the block gauge-fixed identities~(17)--(18).  Equivalently, $g^{-1} \cdot W = \iota(Z) \in S_{r,\sigma}$.  Therefore $W = g \cdot \iota(Z) \in G_h \cdot S_{r,\sigma}$, proving $C_r \subseteq G_h \cdot S_{r,\sigma}$.  Conversely, if $W = g \cdot \iota(Z)$ with $Z \in \mathcal X_{r,\sigma}$, then $W$ has the required normal form up to the hidden reparametrisation~$g$, and since $Z$ satisfies both~(14) and~(15), $W$ is critical.  Thus $G_h \cdot S_{r,\sigma} \subseteq C_r$.  This proves~(22).
-
-\medskip
-\textbf{Step~2: Image of $\Phi$ equals $C_r$.}
-By definition~(23), $\Phi(g, Z) = g \cdot \iota(Z) \in G_h \cdot S_{r,\sigma} = C_r$ by Step~1.  Hence $\Phi(G_h \times \mathcal X_{r,\sigma}) \subseteq C_r$.  Conversely, Step~1 already shows every $W \in C_r$ can be written $W = g \cdot \iota(Z)$ with $Z \in \mathcal X_{r,\sigma}$.  Therefore $\Phi(G_h \times \mathcal X_{r,\sigma}) = C_r$.
-\medskip
-\textbf{Step~3: $H_{r,\sigma}$-invariance of $\Phi$.}
-Fix $(g, Z) \in G_h \times \mathcal X_{r,\sigma}$ and $h \in H_{r,\sigma}$.  Then
+\begin{proof}[Proof of \ref{prop:orbit-saturation} critical locus as a single $G_h$--orbit of a block gauge-fixed subset]\label{proof:orbit-saturation}
+    By the assumed DLN normal form for rank-$r$ critical points, $W \in \mathcal{C}_r$ if and only if there exists $Z \in \Gamma_{d,XY}$ and a hidden invertible changes of basis $g = (g_1, \dots, g_{L-1}) \in G_h$ such that the transformed weights satisfy the block gauge-fixed identities.  Equivalently, $g^{-1} \cdot W = \iota(Z) \in S_{r,\sigma}$.  Therefore $W = g \cdot \iota(Z) \in G_h \cdot S_{r,\sigma}$, proving $\mathcal{C}_r \subseteq G_h \cdot S_{r,\sigma}$.  Conversely, if $W = g \cdot \iota(Z)$ with $Z \in \Gamma_{d,XY}$, then $W$ has the required normal form up to the hidden reparametrisation~$g$, and since $Z\in \Gamma_{d,XY}$, $W$ is critical.  Thus $G_h \cdot S_{r,\sigma} \subseteq \mathcal{C}_r$.
+\end{proof}
+\begin{proof}[Proof of \ref{prop:parameters-as-bundle}]\label{proof:parameters-as-bundle}
+    By definition, $\Phi(g, Z) = g \cdot \iota(Z) \in G_h \cdot S_{r,\sigma} = \mathcal{C}_r$.  Hence $\Phi(G_h \times \Gamma_{d,XY}) \subseteq \mathcal{C}_r$.  Conversely, we have shown every $W \in \mathcal{C}_r$ can be written $W = g \cdot \iota(Z)$ with $Z \in \Gamma_{d,XY}$.  Therefore $\Phi(G_h \times \Gamma_{d,XY}) = \mathcal{C}_r$.
+Fix $(g, Z) \in G_h \times \Gamma_{d,XY}$ and $h \in H_{r,\sigma}$.  Then
 \[
 \Phi\bigl((g, Z) \cdot h\bigr) = \Phi\bigl(gh,\; h^{-1} \cdot Z\bigr)
 = (gh) \cdot \iota(h^{-1} \cdot Z).
 \]
-Using associativity of the group action~(13), this equals $g \cdot \bigl(h \cdot \iota(h^{-1} \cdot Z)\bigr)$.  Thus it suffices to show
+Using associativity of the group action, this equals $g \cdot \bigl(h \cdot \iota(h^{-1} \cdot Z)\bigr)$.  Thus it suffices to show
 \begin{equation}\tag{$\star$}
 h \cdot \iota(h^{-1} \cdot Z) = \iota(Z).
 \end{equation}
-Write each $h_\ell = \bigl(\begin{smallmatrix} I_r & 0 \\ 0 & K_\ell \end{smallmatrix}\bigr)$ (recall that the setwise stabiliser condition and the endpoint structure force $A = I_r$; see the paragraph after Definition~8.2).
-
+Write each $h_\ell = \bigl(\begin{smallmatrix} I_r & 0 \\ 0 & K_\ell \end{smallmatrix}\bigr)$ (recall that the setwise stabiliser condition and the endpoint structure force $A = I_r$).
+\noindent
+\\
 \emph{Middle layers $(\ell = 2, \dots, L{-}1)$:}  Here $(h^{-1} \cdot Z)_\ell = K_\ell^{-1} Z_\ell K_{\ell-1}$, and the computation is identical to Step~2 of Proposition~8.3:
 \[
 h_\ell \begin{pmatrix} I_r & 0 \\ 0 & K_\ell^{-1} Z_\ell K_{\ell-1} \end{pmatrix} h_{\ell-1}^{-1}
 = \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix} = \iota(Z)_\ell.
 \]
-
+\noindent
 \emph{Last layer $(\ell = L)$:}  Since $g_L = I$ in $G_h$, the action gives $(h \cdot \iota(h^{-1} \cdot Z))_L = \iota(h^{-1} \cdot Z)_L \, h_{L-1}^{-1}$.  Now $(h^{-1} \cdot Z)_L = Z_L K_{L-1}$ (since $g_L = I$ implies the effective residual action at layer~$L$ is right multiplication by $K_{L-1}$), so
 \[
 [U_S,\; U_Q Z_L K_{L-1}]
 \begin{pmatrix} I_r & 0 \\ 0 & K_{L-1}^{-1} \end{pmatrix}
 = [U_S,\; U_Q Z_L] = \iota(Z)_L.
 \]
-
+\\
+\noindent
 \emph{First layer $(\ell = 1)$:}  Since $g_0 = I$, the action gives $(h \cdot \iota(h^{-1} \cdot Z))_1 = h_1 \, \iota(h^{-1} \cdot Z)_1$.  Now $(h^{-1} \cdot Z)_1 = K_1^{-1} Z_1$ (since $g_0 = I$), so
 \[
 \begin{pmatrix} I_r & 0 \\ 0 & K_1 \end{pmatrix}
@@ -1851,39 +1858,41 @@ h_\ell \begin{pmatrix} I_r & 0 \\ 0 & K_\ell^{-1} Z_\ell K_{\ell-1} \end{pmatrix
 = \iota(Z)_1.
 \]
 This proves~($\star$), hence $\Phi$ is $H_{r,\sigma}$-invariant and descends to $\bar\Phi$.
-
-\medskip
-\textbf{Step~4: Injectivity on the principal slice locus.}
-Assume $\Phi(g, Z) = \Phi(g', Z')$ with $Z, Z' \in X_{r,\sigma}^{\circ}$.  Then $g \cdot \iota(Z) = g' \cdot \iota(Z')$, and setting $h := g^{-1} g' \in G_h$ we obtain
+\end{proof}
+\begin{proof}[Proof of theorem \ref{thm:critical-bundle}]\label{proof:critical-bundle}
+Assume $\Phi(g, Z) = \Phi(g', Z')$ with $Z, Z' \in \Gamma_{d,XY}^{\circ}$.  Then $g \cdot \iota(Z) = g' \cdot \iota(Z')$, and setting $h := g^{-1} g' \in G_h$ we obtain
 \begin{equation}\tag{$\star\star$}
 \iota(Z) = h \cdot \iota(Z').
 \end{equation}
-In particular, $h$ maps the slice point $\iota(Z')$ to another slice point $\iota(Z)$, so $h \in \mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$.  Since $Z' \in  \mathcal X_{r,\sigma}^{\circ}$, we have $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma}) = H_{r,\sigma}$ by definition of the principal slice locus.  Therefore $h \in H_{r,\sigma}$.
-
-Having established $h \in H_{r,\sigma}$, we compute~($\star\star$) componentwise.  By the same block multiplication as in Step~3 (run in reverse), equation~($\star\star$) yields $Z = h \cdot Z'$, i.e.\ $Z' = h^{-1} \cdot Z$.  Therefore $(g', Z') = (gh, h^{-1} \cdot Z) = (g, Z) \cdot h$ in the right action~(24), and hence $[g', Z'] = [g, Z]$ in $G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma}^{\circ}$.  This proves injectivity on the principal slice locus.
-
+In particular, $h$ maps the slice point $\iota(Z')$ to another slice point $\iota(Z)$, so $h \in \mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$.  Since $Z' \in  \Gamma_{d,XY}^{\circ}$, we have $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma}) = H_{r,\sigma}$ by definition of the principal slice locus $S_{r,\sigma}$.  Therefore $h \in H_{r,\sigma}$.
+\\
+\noindent
+Having established $h \in H_{r,\sigma}$, we compute~($\star\star$) componentwise. Equation~($\star\star$) yields $Z = h \cdot Z'$, i.e.\ $Z' = h^{-1} \cdot Z$.  Therefore $(g', Z') = (gh, h^{-1} \cdot Z) = (g, Z) \cdot h$, and hence $[g', Z'] = [g, Z]$ in $G_h \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}$.  This proves injectivity on the principal slice locus.
+\\
 \medskip
-\textbf{Step~5: The principal slice locus is generically non-empty.}
-We show that $\mathcal X_{r,\sigma}^{\circ}$ contains a dense open subset of $X_{r,\sigma}$, so that the bijection~(25) holds on a large locus.  Take any $h = (h_1, \dots, h_{L-1}) \in G_h$ satisfying $h \cdot \iota(Z') \in S_{r,\sigma}$ for some $Z' \in X_{r,\sigma}$.  We must show $h \in H_{r,\sigma}$ for generic~$Z'$.
-
-Write $h_\ell = \bigl(\begin{smallmatrix} a_\ell & b_\ell \\ c_\ell & k_\ell \end{smallmatrix}\bigr)$ in the $r \times (d_\ell - r)$ block decomposition.
-
-\emph{Endpoint $\ell = L$:}  The condition $(h \cdot \iota(Z'))_L = \iota(Z)_L$ gives $[U_S,\, U_Q Z_L']\, h_{L-1}^{-1} = [U_S,\, U_Q Z_L]$.  Write $h_{L-1}^{-1} = \bigl(\begin{smallmatrix} \alpha & \beta \\ \gamma & \kappa \end{smallmatrix}\bigr)$.  Comparing the first block column and using $U_S^\top U_Q = 0$ yields $\alpha = I_r$ (from the $U_S$-component) and $Z_L' \gamma = 0$ (from the $U_Q$-component).  For generic $Z' \in X_{r,\sigma}$, the matrix $Z_L'$ has full row rank $d_L - r$, so $\gamma = 0$.  Hence $h_{L-1}^{-1}$ is block upper-triangular; since it is also invertible, its inverse $h_{L-1}$ is block upper-triangular as well.
-
+\noindent
+We show that $\Gamma_{d,XY}^{\circ}$ contains a dense open subset of $\Gamma_{d,XY}$, so that the bijection holds on a large locus.  Take any $h = (h_1, \dots, h_{L-1}) \in G_h$ satisfying $h \cdot \iota(Z') \in S_{r,\sigma}$ for some $Z' \in \Gamma_{d,XY}$.  We must show $h \in H_{r,\sigma}$ for generic~$Z'$. Write $h_\ell = \bigl(\begin{smallmatrix} a_\ell & b_\ell \\ c_\ell & k_\ell \end{smallmatrix}\bigr)$ in the $r \times (d_\ell - r)$ block decomposition.
+\noindent
+\\
+\emph{Endpoint $\ell = L$:}  The condition $(h \cdot \iota(Z'))_L = \iota(Z)_L$ gives $[U_S,\, U_Q Z_L']\, h_{L-1}^{-1} = [U_S,\, U_Q Z_L]$.  Write $h_{L-1}^{-1} = \bigl(\begin{smallmatrix} \alpha & \beta \\ \gamma & \kappa \end{smallmatrix}\bigr)$.  Comparing the first block column and using $U_S^\top U_Q = 0$ yields $\alpha = I_r$ (from the $U_S$-component) and $Z_L' \gamma = 0$ (from the $U_Q$-component).  For generic $Z' \in \Gamma_{d,XY}$, the matrix $Z_L'$ has full row rank $d_L - r$, so $\gamma = 0$.  Hence $h_{L-1}^{-1}$ is block upper-triangular; since it is also invertible, its inverse $h_{L-1}$ is block upper-triangular as well.
+\\
+\noindent
 \emph{Endpoint $\ell = 1$:}  The condition $(h \cdot \iota(Z'))_1 = \iota(Z)_1$ gives $h_1 \bigl(\begin{smallmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1' \end{smallmatrix}\bigr) = \bigl(\begin{smallmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{smallmatrix}\bigr)$.  From the top block: $a_1 U_S^\top \Sigma_{YX}\Sigma_X^{-1} + b_1 Z_1' = U_S^\top \Sigma_{YX}\Sigma_X^{-1}$.  Generically $Z_1'$ is linearly independent from the rows of $U_S^\top \Sigma_{YX}\Sigma_X^{-1}$, which forces $b_1 = 0$ and $a_1 = I_r$.  From the bottom block: $c_1 U_S^\top \Sigma_{YX}\Sigma_X^{-1} + k_1 Z_1' = Z_1$; for this to admit a solution with $Z_1$ free, we need $c_1 = 0$ (since otherwise $c_1 U_S^\top \Sigma_{YX}\Sigma_X^{-1}$ would introduce a component in the signal subspace, contradicting the block structure).  Hence $h_1$ is block-diagonal with $a_1 = I_r$.
-
+\noindent
+\\
 \emph{Middle layers $(\ell = 2, \dots, L{-}2)$:}  Having established that $h_1$ and $h_{L-1}$ are block-diagonal, one propagates inward.  At each layer the condition
 \[
 h_\ell \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell' \end{pmatrix} h_{\ell-1}^{-1}
 = \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
 \]
 with $h_{\ell-1}$ already known to be block-diagonal forces $b_\ell Z_\ell' \kappa_{\ell-1} = 0$ and $c_\ell = 0$.  Since $\kappa_{\ell-1}$ is invertible and generically $Z_\ell'$ has full row rank, we get $b_\ell = 0$.  Hence $h_\ell$ is block-diagonal at every layer.
-
-Thus, for $Z'$ in a dense open subset of $X_{r,\sigma}$ (where certain residual blocks have full rank), every element of $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ is block-diagonal, i.e.\ belongs to $H_{r,\sigma}$.  Since $H_{r,\sigma} \subseteq \mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ always holds (by Step~3), we conclude $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma}) = H_{r,\sigma}$ on this locus, confirming that $X_{r,\sigma}^{\circ}$ is generically non-empty.
-
-\medskip
-\textbf{Step~6: Conclusion.}
-Steps~2 and~3 establish that $\bar\Phi$ is a well-defined surjection.  Step~4 establishes injectivity on $\mathcal X_{r,\sigma}^{\circ}$, giving~(25).  Taking $G_h$-quotients gives~(26).  The global map $\bar\Phi \colon G_h \times_{H_{r,\sigma}} \mathcal X_{r,\sigma} \to C_r$ is surjective but may fail to be injective at points $Z'$ where certain residual blocks $Z_\ell'$ are rank-deficient, causing $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ to strictly contain $H_{r,\sigma}$.
+\noindent
+\\
+Thus, for $Z'$ in a dense open subset of $\Gamma_{d,XY}$ (where residual blocks have full rank), every element of $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ is block-diagonal, i.e.\ belongs to $H_{r,\sigma}$.  Since $H_{r,\sigma} \subseteq \mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ always holds (by Step~3), we conclude $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma}) = H_{r,\sigma}$ on this locus, confirming that $\Gamma_{d,XY}$ is generically non-empty.
+\\
+\noindent
+\textbf{Conclusion.}
+We have established that $\bar\Phi$ is a well-defined surjection.  We also established injectivity on $\Gamma_{d,XY}^{\circ}$. The main obstruction for the global map $\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \to \mathcal{C}_r$ to be bijective is that it is surjective but may fail to be injective at points $Z'$ where certain residual blocks $Z_\ell'$ are rank-deficient, causing $\mathrm{Trans}_{G_h}(\iota(Z'), S_{r,\sigma})$ to strictly contain $H_{r,\sigma}$.
 \end{proof}
 
 \subsection*{DLNs as Quiver Representations}
