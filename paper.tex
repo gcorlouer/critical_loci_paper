@@ -3,7 +3,8 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
-
+\usepackage{natbib} 
+\bibliographystyle{unsrtnat}
 % Operators
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\Hom}{\operatorname{Hom}}
@@ -41,11 +42,14 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    We study the critical loci of deep linear networks i.e. the set of parameters at which the gradient of the loss vanishes. The set of vanishing gradients can be described as an algebraic variety described by cyclic vanishing conditions. This allows us to study the fiber of the gradient map using cyclic quiver representation theory and stratify the critical loci into orbits parametrized by rank patterns i.e. the ranks of partial products of the deep linear networks weights. These orbits allow to better understand the geometry of the critical loci as the codimension of the largest irreducible component relates to the volume scaling around the critical loci of the deep linear network. 
+    We study the critical loci of deep linear networks i.e. the set of parameters at which the gradient of the loss vanishes. The set of vanishing gradients can be described as an algebraic variety described by cyclic vanishing conditions. Using cyclic quiver representation theory we stratify the critical loci into orbits parametrized by cyclic rank patterns which are ranks of partial products of the deep linear networks weights matrices. The strata provides a combinatorial description of critical loci and in particular saddle points of a given rank. This stratification promise to be a useful tool to globally understand how the critical loci shape the training dynamics of stochastic gradient descent in deep linear networks.  
 \end{abstract}
 \section{Introduction}
+Critical points of deep linear networks were parametrized in \cite{achour2024loss}, where they were shown to satisfy vanishing cyclic conditions (see the proof of Proposition 10 in Appendix B.5). Furthermore, the stratification of the locus of global minima was obtained in \cite{lehalleur2024geometry} through the use of affine quiver representation theory. The present work relies heavily on both of these results.
 
+Our starting point is the observation that the cyclic vanishing conditions defining critical points can be interpreted as the vanishing of cyclic products in a representation of a cyclic quiver. This interpretation makes it possible to apply methods from cyclic quiver representation theory to the study of critical loci. In particular, the cyclic vanishing conditions effectively reduce the difficult problem of classifying indecomposable representations of cyclic quivers to that of classifying indecomposable modules over Nakayama algebras, which form a class of finite-dimensional algebras.
 
+Using this framework, and following a strategy similar to that of \cite{lehalleur2024geometry}, we show that the critical locus admits a stratification indexed by a finite set. This provides a combinatorial description of saddle points, in which different classes of saddles are identified by their cyclic rank patterns.
 \subsection{Related works}
 
 
@@ -2086,6 +2090,7 @@ refines the usual rank-pattern stratification on the principal locus and extends
 $\mathcal C_r$, including degenerate points where several rank patterns may occur in the same
 fiber.
 \end{remark}
+\bibliography{bibliography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Appendix}
 \subsection*{Critical loci and cyclic conditions}\label{app:loci-cyclic} We proove proposition \ref{thm:critical-bundle}
