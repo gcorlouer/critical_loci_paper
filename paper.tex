@@ -58,6 +58,7 @@ Using this framework, and following a strategy similar to that of \cite{lehalleu
 
 
 \section{Setup and notations}
+\textbf{Warning on AI generatation:} I used ChatGPT to assist with generation and verification. I have verified the outputs. 
 \begin{definition}
     A $L$ layers Deep Linear Network (DLN) is a function:
 \begin{align*}
@@ -85,21 +86,54 @@ Consider the following group action of $GL_d=\Pi_{l=L}^0 GL_{d_l} = GL_{d_L}\tim
 \end{equation*}
 We can also reparametrize $\Sigma^r_d$ by the following:
 \begin{equation*}
-    \Sigma^r_d = \{W\in \Omega, Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}| W_l \sim \begin{pmatrix} I_r & 0 \\
+    \Sigma^r_d = \{W\in \Omega, Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}, 1\leq l \leq L| W_l \sim \begin{pmatrix} I_r & 0 \\
                                                       0.  & Z_l      
-                                        \end{pmatrix}, Z_L...Z_1= 0\}
+                                        \end{pmatrix}, 1\leq l \leq L Z_L...Z_1= 0\}
 \end{equation*}
 Note that the latter product over $Z$'s–the \textit{residuals}–can be defined by the algebraic variety:
 \begin{equation*}
     \Sigma_0^{d -r} = \{Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}| Z_L...Z_1= 0\}
 \end{equation*}
 \end{definition}
+\begin{definition}[Residual space $\mathcal Z$]
+Fix $r \le \min_i d_i$. Define
+\[
+\mathcal Z
+:=
+\mathrm{Mat}_{d_1 - r,\; d_0}
+\times
+\prod_{\ell=2}^{L}
+\mathrm{Mat}_{d_\ell - r,\; d_{\ell-1} - r}.
+\]
+\end{definition}
+
+\begin{definition}[Residual variety $\Gamma_d^r$]
+Let $\Sigma_{XY} \in \mathrm{Mat}_{d_0,\; d_L}$ and $U_Q \in \mathrm{Mat}_{d_L,\; d_L - r}$. Define
+\[
+\Gamma_d^r
+:=
+\left\{
+Z \in \mathcal Z
+\;\middle|\;
+Z_{\ell-1}\cdots Z_2 Z_1 \,\Sigma_{XY} U_Q\, Z_L \cdots Z_{\ell+1} = 0,
+\;\; 1 \le \ell \le L \ \text{mod } L+1
+\right\},
+\]
+\end{definition}
+\begin{definition}[Variety $\Sigma_r$]
+We define
+\[
+\Sigma_r
+:=
+\left\{
+Z\in \mathcal Z_d^r
+\;\middle|\;
+Z_L\cdots Z_1=0
+\right\}.
+\]
+\end{definition}
 \begin{definition}
-Define the algebraic variety $\Gamma$ by the following cyclic conditions:
-\begin{equation*}
-    \Gamma_d^r =\{Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}\mid Z_{l-1}\cdots Z_1\,\Sigma_{XY}U_Q\,Z_L\cdots Z_{l+1} = 0\}
-\end{equation*}
-Define the algebraic variety $$\Gamma_{d,XY}:= \Sigma^{d-r}_0\cap\Gamma_d^r $$ also defined by a set of vanishing polynomial cyclic conditions.
+Define the algebraic variety $$\Gamma_{d,XY}:= \Sigma_r\cap\Gamma_d^r $$ also defined by a set of vanishing polynomial cyclic conditions.
 \end{definition}
 \begin{comment}
 We can view $\Gamma$ as a space of quiver representations with relations.
@@ -148,7 +182,7 @@ act on $\Omega$ by
 We also fix the data-dependent matrices appearing in the normal form of critical points (e.g.\ from the DLN second-order analysis):
 \[
 U_S\in \R^{d_L\times r},\qquad U_Q\in \R^{d_L\times(d_L-r)},\qquad
-\sigma \;:=\; \Sigma_{XY}U_Q \in \Hom(\R^{d_L-r},\R^{d_0-r}).
+\sigma \;:=\; \Sigma_{XY}U_Q \in \Hom(\R^{d_L-r},\R^{d_0}).
 \]
 (Here $\sigma$ is the ``closing arrow'' in the later cyclic-quiver model.)
 \begin{comment}
