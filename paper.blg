@@ -3,10 +3,9 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: paper.aux
 The style file: unsrtnat.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "alchour"
 You've used 2 entries,
             2481 wiz_defined-function locations,
-            564 strings with 4828 characters,
+            563 strings with 4821 characters,
 and the built_in function-call counts, 718 in all, are:
 = -- 58
 > -- 36
@@ -45,4 +44,3 @@ warning$ -- 0
 while$ -- 6
 width$ -- 0
 write$ -- 32
-(There was 1 warning)

@@ -75,6 +75,7 @@ The dimension $d_0$ is the dimension of the input data and the dimensions $d_l,\
 \end{align*}
 This function $\mu$ maps the parameter space $\Omega:=\{(W_1,...,W_L) \in \prod_{l=0}^{L-1}\mathbb{R}^{d_l \times d_{l+1}}\}$ to the function space $\mathcal{F} \cong \mathbb{R}^{d_0\times d_L}$ of a Deep Neural Network. A DLN is a matrix-monomial (so non-linear) in the parameter space $\Omega$ (the space above) and linear map in the function space $\mathcal{F}$ (the space below).
 \end{definition}
+\begin{comment}
 \begin{definition}
     Define the algebraic variety of matrices of rank $r$:
 \begin{equation*}
@@ -95,8 +96,44 @@ Note that the latter product over $Z$'s–the \textit{residuals}–can be define
     \Sigma_0^{d -r} = \{Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}| Z_L...Z_1= 0\}
 \end{equation*}
 \end{definition}
+\end{comment}
+\begin{definition}
+We consider the quadratic loss function of a DLN with training data $\{(x_i,y_i)\}_{i=1}^N$ i.i.d: :
+    \begin{equation*}
+        \mathcal{L}_N(W) = \frac{1}{N}\sum_{i=1}^N \||W_L...W_1 x_i - y_i\||_2^2
+    \end{equation*}
+With the covariance matrices $\Sigma_X = \frac{1}{N}\sum_{i=1}^N x_i x_i^\top$, $\Sigma_{XY} = \frac{1}{N}\sum_{i=1}^N x_i y_i^\top$, $\Sigma_{YX} = \frac{1}{N}\sum_{i=1}^N y_i x_i^\top$ and $\Sigma_Y = \frac{1}{N}\sum_{i=1}^N y_i y_i^\top$ identified with their expectation in the limit of large samples.
+\end{definition}
+\paragraph{Assumptions} We will assume that $\Sigma_X$ is invertible, that $\Sigma_{XY}$ has full rank $d_L$. Furthermore we assume that the matrix: $\Sigma_{YX}\Sigma_X^{-1}$ has distinct singular values (non degenerate data). Furthermore the DLN has no bottleneck i.e. $d_i \geq d_L$ for all $i$. These are the same assumptions as in \cite{achour2024loss}. 
+\begin{definition}
+    The teacher matrix (global minimum of the loss function) is defined as $W^* = \Sigma_{YX}\Sigma_X^{-1}$ and the teacher rank is defined as $r_{\max} = \text{rk}(W^*)$. The teacher SVD decomposition writes:
+    \begin{equation*}
+        W^* = U \Sigma_{YX}\Sigma_X^{-1} V^\top
+    \end{equation*}
+\end{definition}
+\noindent
+Recall proposition 1 in \cite{achour2024loss}:
+\begin{proposition}
+Let $W = (W_H, \dots, W_1)$ be a first-order critical point of $\mathcal{L}$ and set
+\[
+r = \text{rk}(W_H \cdots W_1) \in \{ 0, \dots, r_{\max} \}.
+\]
+Then there exists a unique subset $S \subset \{ 1, \dots, d_L \}$ with $|S| = r$ such that
+\[
+W_H \cdots W_1 = U_S U_S^\top \, \Sigma_{YX} \, \Sigma_{X}^{-1}.
+\]
+\end{proposition}
+\begin{definition}
+We define $U_Q$ the orthogonal complement of $U_S$ in $U$ i.e. we have:
+\begin{align*}
+    U  & = [U_S \; U_Q] \\
+    U_S^{\top}U_S & = I_r \\
+    U_Q^{\top}U_Q & = I_{d_L-r} \\
+    U_S^{\top}U_Q & = 0
+\end{align*}
+\end{definition}
 \begin{definition}[Residual space $\mathcal Z$]
-Fix $r \le \min_i d_i$. Define
+Fix $r \le \min_i d_i$. Define the space of residuals:
 \[
 \mathcal Z
 :=
@@ -108,7 +145,7 @@ Fix $r \le \min_i d_i$. Define
 \end{definition}
 
 \begin{definition}[Residual variety $\Gamma_d^r$]
-Let $\Sigma_{XY} \in \mathrm{Mat}_{d_0,\; d_L}$ and $U_Q \in \mathrm{Mat}_{d_L,\; d_L - r}$. Define
+Let $\Sigma_{XY} \in \mathrm{Mat}_{d_0,\; d_L}$ and $U_Q \in \mathrm{Mat}_{d_L,\; d_L - r}$. Define the algebraic variety:
 \[
 \Gamma_d^r
 :=
@@ -133,7 +170,10 @@ Z_L\cdots Z_1=0
 \]
 \end{definition}
 \begin{definition}
-Define the algebraic variety $$\Gamma_{d,XY}:= \Sigma_r\cap\Gamma_d^r $$ also defined by a set of vanishing polynomial cyclic conditions.
+Define the algebraic variety of residuals satisfying the cyclic vanishing conditions:
+\[
+\Gamma_{d,XY}:= \Sigma_r\cap\Gamma_d^r
+\]
 \end{definition}
 \begin{comment}
 We can view $\Gamma$ as a space of quiver representations with relations.
@@ -184,7 +224,7 @@ We also fix the data-dependent matrices appearing in the normal form of critical
 U_S\in \R^{d_L\times r},\qquad U_Q\in \R^{d_L\times(d_L-r)},\qquad
 \sigma \;:=\; \Sigma_{XY}U_Q \in \Hom(\R^{d_L-r},\R^{d_0}).
 \]
-(Here $\sigma$ is the ``closing arrow'' in the later cyclic-quiver model.)
+(Here $\sigma$ is the ``closing arrow'' in the later cyclic-quiver.)
 \begin{comment}
 \paragraph{Residual parameter space and constraints.}
 Define the residual space
@@ -209,13 +249,13 @@ Finally set
 \end{equation}
 \end{comment}
 \begin{proposition}
-From the paper \cite{alchour}, we can write the set of rank $r$ critical points of a DLN as the following algebraic variety:
+From \cite{achour2024loss} proof of proposition 10, appendix B.5 (gradient formulas), we can write the set of rank $r$ critical points of a DLN as the following algebraic variety:
 \begin{equation*}
     \mathcal{C}_r = \{W\in \Omega, Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}|W_L = [U_S, U_QZ_L],  W_l \sim \begin{pmatrix} I_r & 0 \\
                                                       0.  & Z_l      
                                         \end{pmatrix}, W_1 = [\Sigma_X^{-1}\Sigma_{XY}U_S, Z_1^{\top}]^{\top}, Z_l\in\Gamma_{d,XY}\}
 \end{equation*} 
-In other words, $\mathcal{C}_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in the normal form of the DLN, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)$ such that
+In other words, $\mathcal{C}_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in a normal form of the DLN, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)$ such that
 \[
 W_L = [U_S,\, U_Q Z_L], \qquad
 W_\ell \sim \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
@@ -223,7 +263,7 @@ W_\ell \sim \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
 W_1 = \begin{pmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{pmatrix},
 \qquad Z \in \Gamma_{d,XY}
 \]
-This suggests that stratifying the geometry of the critical loci amounts to stratifying the geometry of $\Gamma_{d,XY}$.
+This suggests that $\mathcal{C}_r $ is some fiber bundle over $\Gamma_{d,XY}$, and that a stratification of $\Gamma_{d,XY}$ can be lifted to $\mathcal{C}_r$.
 \end{proposition}
 %------------------------------------------------------------
 \section{Critical loci as a bundle over $\Gamma$}
