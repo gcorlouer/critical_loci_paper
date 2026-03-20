@@ -13,6 +13,9 @@
 \newcommand{\rk}{\operatorname{rank}}
 \newcommand{\Supp}{\operatorname{Supp}}
 \newcommand{\codim}{\operatorname{codim}}
+\newcommand{\hid}{\operatorname{hid}}
+\newcommand{\dhid}{\operatorname{d_{hid}}}
+
 \newcommand{\Ext}{\operatorname{Ext}}
 \newcommand{\End}{\operatorname{End}}
 \newcommand{\GL}{\operatorname{GL}}
@@ -144,7 +147,7 @@ Fix $r \le \min_i d_i$. Define the space of residuals:
 \]
 \end{definition}
 
-\begin{definition}[Residual variety $\Gamma_d^r$]
+\begin{definition}[Residual variety $\Gamma_{d_r}^r$]
 Let $\Sigma_{XY} \in \mathrm{Mat}_{d_0,\; d_L}$ and $U_Q \in \mathrm{Mat}_{d_L,\; d_L - r}$ as defined above. Define the algebraic variety:
 \[
 \Gamma_d^r
@@ -159,21 +162,21 @@ Z_{\ell-1}\cdots Z_2 Z_1 \,\Sigma_{XY} U_Q\, Z_L \cdots Z_{\ell+1} = 0,
 \end{definition}
 \begin{definition}[Variety $\Sigma_d$] Let $d=(d_0,\dots,d_L)$ and $r\le \min_i d_i$. Define the determinantal variety of rank $r$ matrices:
 \begin{equation*}
-    \Sigma_d^r := \{W\in\Omega| \text{rk}(W_L...W_1) = r\}
+    \Sigma_{d}^r := \{W\in\Omega| \text{rk}(W_L...W_1) = r\}
 \end{equation*}
-We can relate $\Sigma_d^r$ to the residual variety $\Sigma_{d-r}^0$:
+We can relate $\Sigma_{d}^r$ to the residual variety $\Sigma_{d-r}^0$:
 \begin{equation*}
     \Sigma_{d-r}^0 = \{Z_l\in\mathbb{R}^{d_l-r\times d_{l+1}-r}, 1\leq l \leq L| Z_L...Z_1 = 0\}
 \end{equation*}
 via the action of $GL(d) = \prod_{\ell=0}^L GL(d_{\ell})$ on $\Omega$:
 \begin{align*}
-    \Sigma_d^r = GL(d).\iota_r(\Sigma_{d-r}^0) \\
+    \Sigma_{d}^r = GL(d).\iota_r(\Sigma_{d-r}^0) \\
     g.W = (g_L W_L g_{L-1}^{-1}, \dots, g_1 W_1 g_0^{-1}) \\
     \iota_r(Z)_\ell = \begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}
 \end{align*}
-We will be interested in the following space of residuals with dimension vector $d=(d_0, d_1-r\dots,d_L-r)$:
+We will be interested in the space of residuals with dimension vector $d_r:=(d_0, d_1-r\dots,d_L-r)$:
 \[
-\Sigma^0_d
+\Sigma^0_{d_r}
 :=
 \left\{
 Z\in \mathcal Z
@@ -183,9 +186,9 @@ Z_L\cdots Z_1=0
 \]
 \end{definition}
 \begin{definition}
-Define the algebraic variety of residuals satisfying the cyclic vanishing conditions:
+Let $d_r:=(d_0, d_1-r\dots,d_L-r)$, define the algebraic variety of residuals satisfying the cyclic vanishing conditions:
 \[
-\Gamma_{d,XY}:= \Sigma^0_d\cap\Gamma_d^r
+\Gamma_{d_r,XY}:= \Sigma^0_{d_r}\cap\Gamma_{d}^r
 \]
 \end{definition}
 \begin{comment}
@@ -261,7 +264,7 @@ Finally set
 \mathcal X_{r,\sigma} \;:=\; \Sigma^{d-r}_0 \cap \Gamma_\sigma \;\subset\; \mathcal Z.
 \end{equation}
 \end{comment}
-\begin{definition}[Action of $G_d$] Define a group action of $G_d = \prod_{\ell=1}^{L-1} GL(d_\ell,\R)$ on $\Omega$ by:
+\begin{definition}[Action of $G_{\hid}$] Let $\dhid = (d_1, \dots, d_{L-1})$. Define a group action of $G_{\dhid} = \prod_{\ell=1}^{L-1} GL(d_\ell,\R)$ on $\Omega$ by:
 \begin{align*}
     g\cdot W = (W_Lg_{L-1}^{-1}, (g_\ell W_\ell g_{\ell-1}^{-1})_{2\leq \ell \leq L-1}, g_1W_1)
 \end{align*}
@@ -270,27 +273,27 @@ We have the equivalence relation is defined via the definition just above.
 \begin{proposition}
 From \cite{achour2024loss} proposition 9, proposition 10 and proof of proposition 10, appendix B.5 (gradient formulas), we can write the set of rank $r$ critical points of a DLN as the following algebraic variety:
 \begin{equation*}
-    \mathcal{C}_r = \{W\in \Omega| \exists Z\in\Gamma_{d,XY}, W_L \sim [U_S, U_QZ_L],  W_l \sim \begin{pmatrix} I_r & 0 \\
+    \mathcal{C}_r = \{W\in \Omega| \exists Z\in\Gamma_{d_r,XY}, W_L \sim [U_S, U_QZ_L],  W_l \sim \begin{pmatrix} I_r & 0 \\
                                                       0.  & Z_l      
                                         \end{pmatrix}, W_1 \sim [\Sigma_X^{-1}\Sigma_{XY}U_S, Z_1^{\top}]^{\top}\}
 \end{equation*} 
-In other words, $\mathcal{C}_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in a normal form of the DLN, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)\in \Gamma_{d,XY}$ such that there exists $g \in G_d$ with
+In other words, $\mathcal{C}_r \subset \Omega$ denote the set of rank-$r$ first-order critical points in a normal form of the DLN, i.e.\ the set described by the existence of residual blocks $Z = (Z_1, \dots, Z_L)\in \Gamma_{d_r,XY}$ such that there exists $g \in G_{\dhid}$ with
 \[
 W_L = [U_S,\, U_Q Z_L]g_{L-1}^{-1}, \qquad
 W_\ell = g_\ell\begin{pmatrix} I_r & 0 \\ 0 & Z_\ell \end{pmatrix}g_{\ell-1}^{-1} \quad (2\leq \ell \leq L-1), \qquad 
 W_1 = g_1\begin{pmatrix} U_S^\top \Sigma_{YX}\Sigma_X^{-1} \\ Z_1 \end{pmatrix}
 \]
 In particular when computing the value of a DLN at a point in $\mathcal{C}_r$ we recover proposition 2.5. Furthermore, when $r=d_L$, one has $U_Q=0$ and hence $\sigma=\Sigma_{XY}U_Q=0$.
-In this case the cyclic residual variety $\Gamma_{d,XY}$ reduces to the residual
+In this case the cyclic residual variety $\Gamma_{d_r,XY}$ reduces to the residual
 representation space of an equioriented type-$A$ quiver with dimension vector
 \[
-(d_0,d_1-d_L,\dots,d_{L-1}-d_L),
+d_r = (d_0,d_1-d_L,\dots,d_{L-1}-d_L),
 \]
 i.e. the corresponding stratification reduces to an affine-quiver stratification analogous to the treatment of the global-minimum
 stratification studied by Lehalleur--Rim\'anyi. In the remaining of the document we will be interested in the case $r<d_L$ where the closing arrow $\sigma$ is nonzero, i.e. the stratification of saddle points.
 \end{proposition}
 %------------------------------------------------------------
-\section{Orbits of Critical loci as orbits of $\Gamma_{d,XY}$}
+\section{Orbits of Critical loci as orbits of $\Gamma_{d_r,XY}$}
 %------------------------------------------------------------
 \begin{definition}[A gauge-fixed slice of rank-$r$ critical points.]
     Define the map $\iota:\mathcal Z\to \Omega$ by putting residual blocks on the diagonal:
@@ -319,137 +322,137 @@ Z_1
 \noindent
 Define the \emph{gauge-fixed critical slice}
 \begin{equation}\label{eq:Scrit-def}
- S_{r,\sigma} \;:=\; \iota(\Gamma_{d,XY}) \;\subset\; \Omega .
+ \mathcal{X}_{r} \;:=\; \iota(\Gamma_{d_r,XY}) \;\subset\; \Omega .
 \end{equation}
 
 \begin{definition}[Hidden-layer gauge group and its slice stabilizer.]
-Define the subgroup $H_{r,\sigma}\le G_d$ consisting of those hidden reparametrizations that preserve the block decomposition
+Define the subgroup $H_{r}\le G_{\dhid}$ consisting of those hidden reparametrizations that preserve the block decomposition
 $\R^{d_\ell}\cong \R^r\oplus \R^{d_\ell-r}$ for every hidden layer \emph{and} leave the endpoint embeddings
 \eqref{eq:endpoints-slice} invariant:
 \begin{equation}\label{eq:Hrsigma-def}
-H_{r,\sigma}
+H_{r}
 \;:=\;
 \left\{
-h=(h_1,\dots,h_{L-1})\in G_d \;\middle|\;
+h=(h_1,\dots,h_{L-1})\in G_{\dhid} \;\middle|\;
 h_\ell=
 \begin{pmatrix}
 A & 0\\
 0 & K_\ell
 \end{pmatrix},
 \ A\in GL(r,\R),\ K_\ell\in GL(d_\ell-r,\R),
-\ \text{and } h\cdot \mathcal S_{r,\sigma}=\mathcal S_{r,\sigma}
+\ \text{and } h\cdot \mathcal X_r =\mathcal X_r
 \right\}.
 \end{equation}
-(Equivalently: $H_{r,\sigma}$ is the setwise stabilizer of $\mathcal S_{r,\sigma}$ inside $G_d$).
+(Equivalently: $H_{r}$ is the setwise stabilizer of $\mathcal X_{r}$ inside $G_{\dhid}$).
 \noindent
-The induced action of $H_{r,\sigma}$ on $\mathcal Z$ is the residual base-change action:
+The induced action of $H_{r}$ on $\mathcal Z$ is the residual base-change action:
 for $h_\ell=\begin{psmallmatrix}A&0\\0&K_\ell\end{psmallmatrix}$ we set
 \begin{equation}\label{eq:Hrsigma-on-Z}
 (h\cdot Z)_\ell \;:=\; K_\ell\, Z_\ell\, K_{\ell-1}^{-1}
 \qquad (\ell=2,\dots,L-1),
 \end{equation}
-with the endpoint conventions for $\ell=1$ and $\ell=L$ determined by the action of $G_d$ over the fixed endpoint embeddings
+with the endpoint conventions for $\ell=1$ and $\ell=L$ determined by the action of $G_{\dhid}$ over the fixed endpoint embeddings
 \eqref{eq:endpoints-slice}.
-By construction, $\Gamma_{d,XY}\subset \mathcal Z$ is $H_{r,\sigma}$-stable (since
-$h\cdot \mathcal S_{r,\sigma}=\mathcal S_{r,\sigma}$).
+By construction, $\Gamma_{d_r,XY}\subset \mathcal Z$ is $H_{r}$-stable (since
+$h\cdot \mathcal X_{r}=\mathcal X_{r}$).
 \end{definition}
 \noindent
 \begin{proposition}\label{prop:orbit-saturation}
-The critical loci $\mathcal{C}_r$ is the orbit of the gauge-fixed critical slice $\mathcal{S}_{r,\sigma}$ by the hidden-layer gauge group $G_d$:
+The critical loci $\mathcal{C}_r$ is the orbit of the gauge-fixed critical slice $\mathcal{X}_{r}$ by the hidden-layer gauge group $G_{\dhid}$:
 \begin{equation}\label{eq:orbit-saturation}
-\mathcal{C}_r = G_d \cdot S_{r,\sigma}.
+\mathcal{C}_r = G_{\dhid} \cdot \mathcal{X}_{r}.
 \end{equation}
 \end{proposition}
 \noindent
 We prove this proposition in the appendix \ref{proof:orbit-saturation}
 \begin{proposition}\label{prop:parameters-as-bundle}
-    Define $\Phi \colon G_d \times \Gamma_{d,XY} \to \Omega$ by
+    Define $\Phi \colon G_{\dhid} \times \Gamma_{d_r,XY} \to \Omega$ by
 \begin{equation}
 \Phi(g, Z) := g \cdot \iota(Z),
 \end{equation}
-Then $\Phi(G_d \times \Gamma_{d,XY}) = \mathcal{C}_r$ and $\Phi$ is invariant under the right action of $H_{r,\sigma}$ on $G_d \times \Gamma_{d,XY}$ given by
+Then $\Phi(G_{\dhid} \times \Gamma_{d_r,XY}) = \mathcal{C}_r$ and $\Phi$ is invariant under the right action of $H_{r}$ on $G_{\dhid}   \times \Gamma_{d_r,XY}$ given by
 \begin{equation}
 (g, Z) \cdot h := (g h,\; h^{-1} \cdot Z).
 \end{equation}
 Hence $\Phi$ descends to a surjective map
 \[\
-\bar\Phi \colon G_d \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow \mathcal{C}_r.
+\bar\Phi \colon G_{\dhid} \times_{H_{r}} \Gamma_{d_r,XY} \longrightarrow \mathcal{C}_r.
 \]
 With 
 \begin{equation*}
-     G_d \times_{H_{r,\sigma}} \Gamma_{d,XY} := (G_d \times \Gamma_{d,XY}) / H_{r,\sigma}
+     G_{\dhid} \times_{H_{r}} \Gamma_{d_r,XY} := (G_{\dhid} \times \Gamma_{d_r,XY}) / H_{r}
 \end{equation*}
 \end{proposition}
 \noindent
 We prove this proposition in the appendix \ref{proof:parameters-as-bundle}.
 \begin{definition}
-Define the \emph{transporter into the slice} at a point $Z' \in \Gamma_{d,XY}$ by
+Define the \emph{transporter into the slice} at a point $Z' \in \Gamma_{d_r,XY}$ by
 \[
-\mathrm{Trans}_{G_d}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr)
-:= \bigl\{ g \in G_d : g \cdot \iota(Z') \in S_{r,\sigma} \bigr\}.
+\mathrm{Trans}_{G_{\dhid}}\!\bigl(\iota(Z'),\, \mathcal{X}_r\bigr)
+:= \bigl\{ g \in G_{\dhid} : g \cdot \iota(Z') \in \mathcal{X}_r \bigr\}.
 \]
 Define the \emph{principal slice locus}
-\[
-\Gamma_{d,XY}^{\circ} := \bigl\{ Z' \in \Gamma_{d,XY} \;\big|\;
-\mathrm{Trans}_{G_d}\!\bigl(\iota(Z'),\, S_{r,\sigma}\bigr) = H_{r,\sigma} \bigr\},
+\[\
+\Gamma_{d_r,XY}^{\circ} := \bigl\{ Z' \in \Gamma_{d_r,XY} \;\big|\;
+\mathrm{Trans}_{G_{\dhid}}\!\bigl(\iota(Z'),\, \mathcal{X}_r\bigr) = H_{r} \bigr\},
 \]
-and let $\mathcal{C}_r^{\circ} := \Phi(G_d \times \Gamma_{d,XY}^{\circ})$.
+and let $\mathcal{C}_r^{\circ} := \Phi(G_{\dhid} \times \Gamma_{d_r,XY}^{\circ})$.
 \end{definition}
 \begin{theorem}\label{thm:critical-bundle}
 The restriction
 \[
-\bar\Phi \colon G_d \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
+\bar\Phi \colon G_{\dhid} \times_{H_{r}} \Gamma_{d_r,XY}^{\circ}
 \xrightarrow{\;\sim\;} \mathcal{C}_r^{\circ}
 \]
 is a bijection.  In particular, on the principal slice locus one has the identification:
 \begin{equation}
-\mathcal{C}_r^{\circ} \;\cong\; G_d \times_{H_{r,\sigma}} \Gamma_{d,XY}^{\circ}
+\mathcal{C}_r^{\circ} \;\cong\; G_{\dhid} \times_{H_{r}} \Gamma_{d_r,XY}^{\circ}
 \qquad\text{(on the principal slice locus).}
 \end{equation}
 
 \medskip\noindent
 On the same principal slice locus,
 \begin{equation}
-\mathcal{C}_r^{\circ} / G_d \;\cong\; \Gamma_{d,XY}^{\circ} / H_{r,\sigma}.
+\mathcal{C}_r^{\circ} / G_{\dhid} \;\cong\; \Gamma_{d_r,XY}^{\circ} / H_{r}.
 \end{equation}
 \end{theorem}
 \noindent
 The proof of the latter theorem can be found appendix \ref{app:loci-cyclic}.
-We will use cyclic quiver representation theory to stratify $\Gamma_{d,XY}$ by rank data and then use the above bundle structure to stratify the critical loci $\mathcal C_r$.
-\begin{remark}[Why a rank-stratification of $\Gamma_{d,XY}$ does not lift naively to $\mathcal C_r$]
-A priori, the orbit decomposition of $\Gamma_{d,XY}$ by rank data does \emph{not} induce a disjoint decomposition of the critical locus $\mathcal C_r$ by the same labels. The reason is that Proposition~3.4 only provides a surjective map
+We will use cyclic quiver representation theory to stratify $\Gamma_{d_r,XY}$ by rank data and then use the above bundle structure to stratify the critical loci $\mathcal C_r$.
+\begin{remark}[Why a rank-stratification of $\Gamma_{d_r,XY}$ does not lift naively to $\mathcal C_r$]
+A priori, the orbit decomposition of $\Gamma_{d_r,XY}$ by rank data does \emph{not} induce a disjoint decomposition of the critical locus $\mathcal C_r$ by the same labels. The reason is that Proposition~3.4 only provides a surjective map
 \[
-\bar\Phi \colon G_d \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow \mathcal C_r,
+\bar\Phi \colon G_{\dhid} \times_{H_{r}} \Gamma_{d_r,XY} \longrightarrow \mathcal C_r,
 \]
-whereas injectivity is established only after restricting to the principal slice locus $\Gamma^\circ_{d,XY}$ in Theorem~3.6.
+whereas injectivity is established only after restricting to the principal slice locus $\Gamma^\circ_{d_r,XY}$ in Theorem~3.6.
 \noindent
-Concretely, let $O_{\rho,\sigma}, O_{\rho',\sigma} \subset \Gamma_{d,XY}$ be two distinct $G_\sigma$-orbits, corresponding to different rank strata. In order for these to define distinct strata in $\mathcal C_r$, one would need that
+Concretely, let $O_{\rho}, O_{\rho'} \subset \Gamma_{d_r,XY}$ be two distinct orbits, corresponding to different rank strata. In order for these to define distinct strata in $\mathcal C_r$, one would need that
 \[
-G_d \cdot \iota(O_{\rho,\sigma}) \cap G_d \cdot \iota(O_{\rho',\sigma}) = \varnothing
+G_{\dhid} \cdot \iota(O_{\rho}) \cap G_{\dhid} \cdot \iota(O_{\rho'}) = \varnothing
 \qquad\text{whenever } \rho \neq \rho'.
 \]
 However, this need not hold outside the principal slice locus. Indeed, it may happen that for some
-$Z \in O_{\rho,\sigma}$ and $Z' \in O_{\rho',\sigma}$ there exists $g \in G_d$ such that
+$Z \in O_{\rho}$ and $Z' \in O_{\rho'}$ there exists $g \in G_{\dhid}$ such that
 \[
 \iota(Z) = g \cdot \iota(Z'),
 \]
-even though $g \notin H_{r,\sigma}$. In that case, $\iota(Z)$ and $\iota(Z')$ represent the same point of
-$\mathcal C_r$, but $Z$ and $Z'$ are not related by the residual $H_{r,\sigma}$-action on $\Gamma_{d,XY}$.
-Thus distinct rank strata in the slice can collapse to the same point, or the same $G_d$-orbit, in
+even though $g \notin H_{r}$. In that case, $\iota(Z)$ and $\iota(Z')$ represent the same point of
+$\mathcal C_r$, but $Z$ and $Z'$ are not related by the residual $H_{r}$-action on $\Gamma_{d_r,XY}$.
+Thus distinct rank strata in the slice can collapse to the same point, or the same $G_{\dhid}$-orbit, in
 $\mathcal C_r$.
 \noindent
 Geometrically, the obstruction is the possible presence of \emph{extra transporter symmetries}
 \[
-\mathrm{Trans}_{G_d}\!\bigl(\iota(Z), S_{r,\sigma}\bigr) \supsetneq H_{r,\sigma},
+\mathrm{Trans}_{G_{\dhid}}\!\bigl(\iota(Z), \mathcal{X}_r\bigr) \supsetneq H_{r},
 \]
 which allow one to move between different slice representatives of the same critical point using
 hidden-layer gauge transformations that do not preserve the residual block decomposition. On the
 principal slice locus, by definition, no such extra symmetries occur, and one recovers a genuine
 identification
 \[
-\mathcal C_r^\circ \cong G_d \times_{H_{r,\sigma}} \Gamma^\circ_{d,XY}.
+\mathcal C_r^\circ \cong G_{\dhid} \times_{H_{r}} \Gamma^\circ_{d_r,XY}.
 \]
-Accordingly, the rank-stratification of $\Gamma^\circ_{d,XY}$ lifts faithfully to $\mathcal C_r^\circ$,
+Accordingly, the rank-stratification of $\Gamma^\circ_{d_r,XY}$ lifts faithfully to $\mathcal C_r^\circ$,
 but not, in general, to all of $\mathcal C_r$ without further refinement.
 \end{remark}
 \noindent
@@ -564,21 +567,21 @@ We identify the residual parameters defined in the setup with the quiver maps
 \]
 we now specialize the closing arrow by fixing
 \[
-\phi_0 = \sigma := \Sigma_{XY}U_Q : V_L \to V_0 .
+\phi_0 = \sigma := \Sigma_{XY}U_Q : \mathbb{R}^{d_L -r} \to \mathbb{R}^{d_0} .
 \]
 \noindent
 The algebraic variety relevant for the critical loci of the DLN is then
 \[
-\Gamma_{d,\sigma}=
-\Gamma_{d,L+1}\big|_{\phi_0=\sigma}.
+\Gamma_{d_r,\sigma}=
+\Gamma_{d_r,L+1}\big|_{\phi_0=\sigma}.
 \]
 And 
 \[
-\Gamma_{d,XY}=
-\Gamma_{d,\sigma}\big|_{\phi_l=Z_l \text{ for } l=1,\ldots,L}.
+\Gamma_{d_r,XY}=
+\Gamma_{d_r,\sigma}\big|_{\phi_l=Z_l \text{ for } l=1,\ldots,L}.
 \]
 \noindent
-Equivalently, $\Gamma_{d,XY}$ is the space of cyclic quiver representations
+Equivalently, $\Gamma_{d_r,XY}$ is the space of cyclic quiver representations
 satisfying the vanishing relations $d\mu_l=0$ with the distinguished arrow
 $\phi_0$ fixed to $\sigma$ and the $\phi_l$ for $l=1,\ldots,L$ identified with the residual parameters $Z_l$ of the DLN.
 \end{definition}
@@ -1965,11 +1968,11 @@ The algebraic variety \(\Gamma_{d,\sigma}\) admits the disjoint union decomposit
 \begin{equation}\label{eq:GammaXY_disjoint_union}
 \Gamma_{d,\sigma}
 =
-\bigsqcup_{\substack{r\in R_d^{\mathrm{orb}}\\ \operatorname{rank}(r)=\operatorname{rank}(\sigma)}}
-\mathcal O_{r,\sigma}.
+\bigsqcup_{\substack{\rho\in R_d^{\mathrm{orb}}\\ \operatorname{rank}(\rho)=\operatorname{rank}(\sigma)}}
+\mathcal O_{\rho,\sigma}.
 \end{equation}
 In particular, \(\Gamma_{d,\sigma}\) is stratified by \(G_\sigma\)-orbits indexed by cyclic rank patterns
-\(r\in R_d^{\mathrm{orb}}\) satisfying \(\operatorname{rank}(r)=\operatorname{rank}(\sigma)\).
+\(\rho\in R_d^{\mathrm{orb}}\) satisfying \(\operatorname{rank}(\rho)=\operatorname{rank}(\sigma)\). This stratification applies to stratify $\Gamma_{d_r,XY}$ by taking $d=d_r$.
 \end{theorem}
 \noindent
 We prove this theorem in the appendix \ref{proof:GammaXY_orbit_stratification}
@@ -1979,9 +1982,9 @@ For each cyclic admissible rank pattern $\rho$, define the corresponding lifted 
 \[
 \mathcal C_r^{(\rho)}
 :=
-\bar\Phi\!\bigl(G_h\times_{H_{r,\sigma}} O_{\rho,\sigma}\bigr)
+\bar\Phi\!\bigl(G_{\dhid}\times_{H_{r}} O_{\rho,\sigma}\bigr)
 =
-G_h\cdot \iota(O_{\rho,\sigma}) \subseteq \mathcal C_r.
+G_{\dhid}\cdot \iota(O_{\rho,\sigma}) \subseteq \mathcal C_r.
 \]
 The family $\{\mathcal C_r^{(\rho)}\}_\rho$ will be called the rank-pattern cover of $\mathcal C_r$:
 \begin{equation*}
@@ -1995,46 +1998,46 @@ For $W\in \mathcal C_r$, define its rank-support by
 \{\rho \mid W\in \mathcal C_r^{(\rho)}\}.
 \]
 Equivalently, $\rho\in \operatorname{Supp}_{\mathrm{rk}}(W)$ if and only if there exist
-$g\in G_h$ and $Z\in O_{\rho,\sigma}$ such that $W=g\cdot \iota(Z)$.
+$g\in G_{\dhid}$ and $Z\in O_{\rho,\sigma}$ such that $W=g\cdot \iota(Z)$.
 \end{definition}
 
 \begin{remark}
 In general, the subsets $\mathcal C_r^{(\rho)}$ need not be disjoint, since distinct rank strata in
-$\Gamma_{d,XY}$ may map to the same critical point under $\bar\Phi$. Thus the natural global lift of the
-rank-stratification of $\Gamma_{d,XY}$ is not a genuine partition of $\mathcal C_r$ by single rank patterns,
+$\Gamma_{d_r,XY}$ may map to the same critical point under $\bar\Phi$. Thus the natural global lift of the
+rank-stratification of $\Gamma_{d_r,XY}$ is not a genuine partition of $\mathcal C_r$ by single rank patterns,
 but rather a rank-pattern cover. On the principal locus, where $\bar\Phi$ is bijective, the rank-support is a singleton and this reduces to the
 usual rank-stratification.
 \end{remark}
 \begin{definition}[Rank-pattern stack pieces]
 Let
 \[
-\bar\Phi \colon G_h \times_{H_{r,\sigma}} \Gamma_{d,XY} \longrightarrow \mathcal C_r
+\bar\Phi \colon G_{\dhid} \times_{H_{r}} \Gamma_{d_r,XY} \longrightarrow \mathcal C_r
 \]
 be the surjective map of Proposition~3.4, and let
 \[
-\Gamma_{d,XY}
+\Gamma_{d_r,XY}
 =
 \bigsqcup_{\rho} O_{\rho,\sigma}
 \]
-be the orbit stratification of $\Gamma_{d,XY}$ by cyclic rank patterns from Theorem~5.21.
+be the orbit stratification of $\Gamma_{d_r,XY}$ by cyclic rank patterns from Theorem~5.21.
 \noindent
 For each admissible cyclic rank pattern $\rho$, define the corresponding stack piece by
 \[
 \mathfrak X_\rho
 :=
-\bigl[\,G_h \times O_{\rho,\sigma}\,/\,H_{r,\sigma}\,\bigr].
+\bigl[\,G_{\dhid} \times O_{\rho,\sigma}\,/\,H_{r}\,\bigr].
 \]
 Equivalently, $\mathfrak X_\rho$ is the quotient groupoid associated to the restriction of the
-right $H_{r,\sigma}$-action on $G_h\times \Gamma_{d,XY}$ to the invariant subset
-$G_h\times O_{\rho,\sigma}$.
+right $H_{r}$-action on $G_{\dhid}\times \Gamma_{d_r,XY}$ to the invariant subset
+$G_{\dhid}\times O_{\rho,\sigma}$.
 \noindent
 We also write
 \[
 \mathfrak X
 :=
-\bigl[\,G_h \times \Gamma_{d,XY}\,/\,H_{r,\sigma}\,\bigr].
+\bigl[\,G_{\dhid} \times \Gamma_{d_r,XY}\,/\,H_{r}\,\bigr].
 \]
-Then the decomposition of $\Gamma_{d,XY}$ induces a decomposition
+Then the decomposition of $\Gamma_{d_r,XY}$ induces a decomposition
 \[
 \mathfrak X
 =
@@ -2044,8 +2047,8 @@ Then the decomposition of $\Gamma_{d,XY}$ induces a decomposition
 
 \begin{remark}
 The decomposition above is disjoint on the parameter side because the strata
-$O_{\rho,\sigma}\subset \Gamma_{d,XY}$ are pairwise disjoint $G_\sigma$-orbits. Thus the ambiguity in
-lifting rank strata from $\Gamma_{d,XY}$ to $\mathcal C_r$ does not occur at the level of the stack
+$O_{\rho,\sigma}\subset \Gamma_{d_r,XY}$ are pairwise disjoint $G_\sigma$-orbits. Thus the ambiguity in
+lifting rank strata from $\Gamma_{d_r,XY}$ to $\mathcal C_r$ does not occur at the level of the stack
 $\mathfrak X$, but only after pushing forward along $\bar\Phi$.
 \end{remark}
 
@@ -2102,9 +2105,9 @@ rank-pattern stratification of $\Gamma_{d,XY}$.
 \begin{definition}[Presentation of a saddle]
 Let
 \[
-\bar\Phi \colon X=(G_h\times \Gamma_{d,XY})/H_{r,\sigma}\longrightarrow C_r
+\bar\Phi \colon X=(G_{\dhid}\times \Gamma_{d_r,XY})/H_{r}\longrightarrow \mathcal C_r
 \]
-be the surjective map to the critical locus. For a saddle \(W\in C_r\), a
+be the surjective map to the critical locus. For a saddle \(W\in \mathcal C_r\), a
 \emph{presentation} of \(W\) is an element of the fiber
 \[
 X_W:=\bar\Phi^{-1}(W).
@@ -2116,19 +2119,19 @@ such that
 \]
 that is, a way of writing \(W\) in the form
 \[
-W=g\cdot \iota(Z), \qquad g\in G_h,\; Z\in \Gamma_{d,XY},
+W=g\cdot \iota(Z), \qquad g\in G_{\dhid},\; Z\in \Gamma_{d_r,XY},
 \]
-modulo the \(H_{r,\sigma}\)-equivalence.
+modulo the \(H_{r}\)-equivalence.
 \end{definition}
 
 \begin{proposition}[Rank patterns distinguish different presentations]
-For each saddle \(W\in C_r\), the fiber \(X_W\) admits a stratification labelled by cyclic rank patterns:
+For each saddle \(W\in \mathcal C_r\), the fiber \(X_W\) admits a stratification labelled by cyclic rank patterns:
 \[
 X_W=\bigsqcup_{\rho} X_{W,\rho},
 \qquad
 X_{W,\rho}:=\{[g,Z]\in X_W \mid Z\in O_{\rho,\sigma}\},
 \]
-where the \(O_{\rho,\sigma}\subset \Gamma_{d,XY}\) are the strata indexed by
+where the \(O_{\rho,\sigma}\subset \Gamma_{d_r,XY}\) are the strata indexed by
 cyclic rank patterns \(\rho\).
 \\
 \noindent
@@ -2139,10 +2142,11 @@ of a saddle: if two presentations of \(W\) lie in different pieces
 distinguished combinatorially by their cyclic rank pattern data.
 \\
 \noindent
-Therefore, the fibers of \(\bar\Phi\), together with their decomposition into
+Therefore, \textbf{the fibers of \(\bar\Phi\), together with their decomposition into
 rank-pattern strata, provide a combinatorial description of saddles at the
-level of their presentations in $ X_W$.
+level of their presentations in $ X_W$}.
 \end{proposition}
+\begin{comment}
 \begin{definition}[Rank-support]
 For $W\in \mathcal C_r$, define its rank-support by
 \[
@@ -2154,7 +2158,7 @@ Equivalently,
 \[
 \operatorname{Supp}_{\mathrm{rk}}(W)
 =
-\{\rho \mid \exists\, [g,Z]\in G_h\times_{H_{r,\sigma}}\Gamma_{d,XY}
+\{\rho \mid \exists\, [g,Z]\in G_{\dhid}\times_{H_{r}}\Gamma_{d_r,XY}
 \text{ with } \bar\Phi([g,Z])=W \text{ and } Z\in O_{\rho,\sigma}\}.
 \]
 \end{definition}
@@ -2205,6 +2209,7 @@ refines the usual rank-pattern stratification on the principal locus and extends
 $\mathcal C_r$, including degenerate points where several rank patterns may occur in the same
 fiber.
 \end{remark}
+\end{comment}
 \section{Codimension of $\mathcal{C}_r$}
 \subsection{Relation with codimension of orbits}
 \begin{proposition}[Codimension of $\Gamma_{d,XY}$ via a largest cyclic-rank orbit]
